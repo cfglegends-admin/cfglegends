@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" fill="none">
+  <defs>
+    <pattern id="cfg-deco" x="0" y="0" width="240" height="240" patternUnits="userSpaceOnUse">
+      <g stroke="#D4AF37" stroke-width="0.6" fill="none" opacity="0.07">
+        <!-- Outer diamond -->
+        <path d="M120 12 L228 120 L120 228 L12 120 Z" />
+        <!-- Inner diamond -->
+        <path d="M120 44 L196 120 L120 196 L44 120 Z" />
+        <!-- Innermost diamond -->
+        <path d="M120 76 L164 120 L120 164 L76 120 Z" />
+        <!-- Center accent -->
+        <path d="M120 100 L140 120 L120 140 L100 120 Z" />
+        <!-- Cross axes -->
+        <path d="M120 12 L120 228" />
+        <path d="M12 120 L228 120" />
+        <!-- Corner diamonds (continue across tile borders) -->
+        <path d="M0 120 L12 108 L24 120 L12 132 Z" />
+        <path d="M216 120 L228 108 L240 120 L228 132 Z" />
+        <path d="M120 0 L132 12 L120 24 L108 12 Z" />
+        <path d="M120 216 L132 228 L120 240 L108 228 Z" />
+        <!-- Diagonal connecting lines -->
+        <path d="M44 120 L120 44 M196 120 L120 44 M44 120 L120 196 M196 120 L120 196" opacity="0.6" />
+        <!-- Small outer corner accents -->
+        <circle cx="0" cy="0" r="3" />
+        <circle cx="240" cy="0" r="3" />
+        <circle cx="0" cy="240" r="3" />
+        <circle cx="240" cy="240" r="3" />
+      </g>
+    </pattern>
+  </defs>
+  <rect width="240" height="240" fill="url(#cfg-deco)" />
+</svg>

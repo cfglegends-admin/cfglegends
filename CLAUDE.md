@@ -107,6 +107,10 @@ public/
 ❌ Kommentare, die erklären WAS der Code macht (nur WARUM, wenn nicht-offensichtlich)
 
 ## Aktueller Stand
-Phase: [TAG X — FOKUS]
-Letzte fertige Komponente: [...]
-Nächster Schritt: [...]
+Phase: Phase 1 abgeschlossen — Launch-Ready (23.04.2026)
+Fertige Komponenten: Header (+ MobileNav), Footer, Hero (Logo als Titel), Section-Wrapper, GameExplanation, SubjectsGrid, CardShowcase, LimitedCards, Downloads, MDX-Components, Calculator, ScrollToTop
+Fertige Seiten: Landing Page (komplett), /regeln (Regelwerk), /impressum (Platzhalter für persönliche Daten), /datenschutz (vollständig)
+Meta: Favicons, OG-Tags, Twitter-Cards, noindex
+Design: Gold-Metallic-Gradient auf Überschriften, Art-Deco-Pattern, Dark Theme
+Client Components: MobileNav, Calculator, ScrollToTop
+Nächste Phase: Phase 2 — Admin-Dashboard, Neon DB, Vercel Blob Uploads, News/Changelog, Animationen

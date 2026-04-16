@@ -1,0 +1,108 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-background: #0A0A0A;
+  --color-foreground: #F5F5F4;
+  --color-gold: #D4AF37;
+  --color-gold-bright: #E5C158;
+  --color-event: #1E3A8A;
+  --color-trap: #991B1B;
+  --color-muted: #27272A;
+  --color-muted-foreground: #A1A1AA;
+  --color-border: #3F3F46;
+  --color-card: #141414;
+  --color-card-foreground: #F5F5F4;
+  --color-popover: #141414;
+  --color-popover-foreground: #F5F5F4;
+  --color-primary: #D4AF37;
+  --color-primary-foreground: #0A0A0A;
+  --color-secondary: #27272A;
+  --color-secondary-foreground: #F5F5F4;
+  --color-accent: #27272A;
+  --color-accent-foreground: #F5F5F4;
+  --color-destructive: #991B1B;
+  --color-destructive-foreground: #F5F5F4;
+  --color-input: #3F3F46;
+  --color-ring: #D4AF37;
+
+  --font-display: var(--font-cinzel), serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+}
+
+@utility bg-pattern {
+  background-image: url("/assets/patterns/bg.svg");
+  background-repeat: repeat;
+  background-size: 240px 240px;
+}
+
+@utility text-gold-metallic {
+  background: linear-gradient(
+    180deg,
+    #BF953F 0%,
+    #FCF6BA 25%,
+    #D4AF37 40%,
+    #FBF5B7 55%,
+    #B38728 70%,
+    #AA771C 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+@layer components {
+  .nav-link {
+    position: relative;
+    transition: color 200ms ease;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-gold);
+    transition: width 300ms ease;
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    width: 100%;
+  }
+}
