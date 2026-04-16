@@ -2,54 +2,25 @@
 
 import { useEffect, useState, type KeyboardEvent } from "react";
 import { cn } from "@/lib/utils";
-
-const STORAGE_KEY = "cfg-legends-score";
-const STARTING_SCORE = 30;
-const ADJUSTMENTS = [-5, -1, 1, 5] as const;
-
-type PlayerKey = "player1" | "player2";
-
-interface PlayerState {
-  name: string;
-  score: number;
-}
-
-interface ScoreState {
-  player1: PlayerState;
-  player2: PlayerState;
-}
-
-const defaultState: ScoreState = {
-  player1: { name: "Spieler 1", score: STARTING_SCORE },
-  player2: { name: "Spieler 2", score: STARTING_SCORE },
-};
-
-function isScoreState(value: unknown): value is ScoreState {
-  if (!value || typeof value !== "object") return false;
-  const v = value as Record<string, unknown>;
-  const ok = (p: unknown) =>
-    !!p &&
-    typeof p === "object" &&
-    typeof (p as Record<string, unknown>).name === "string" &&
-    typeof (p as Record<string, unknown>).score === "number";
-  return ok(v.player1) && ok(v.player2);
-}
-
-function getScoreColor(score: number): string {
-  if (score <= 0) return "text-red-700 animate-pulse";
-  if (score <= 9) return "text-red-500";
-  if (score <= 19) return "text-yellow-400";
-  return "text-gold";
-}
+import {
+  ADJUSTMENTS,
+  SCORE_STORAGE_KEY,
+  STARTING_SCORE,
+  defaultScoreState,
+  getScoreColor,
+  isScoreState,
+  type PlayerKey,
+  type ScoreState,
+} from "@/lib/score";
 
 export function Calculator() {
-  const [state, setState] = useState<ScoreState>(defaultState);
+  const [state, setState] = useState<ScoreState>(defaultScoreState);
   const [isLoaded, setIsLoaded] = useState(false);
   const [editing, setEditing] = useState<PlayerKey | null>(null);
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(SCORE_STORAGE_KEY);
       if (raw) {
         const parsed: unknown = JSON.parse(raw);
         if (isScoreState(parsed)) {
@@ -65,7 +36,7 @@ export function Calculator() {
   useEffect(() => {
     if (!isLoaded) return;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem(SCORE_STORAGE_KEY, JSON.stringify(state));
     } catch {
       // ignore quota errors
     }

@@ -3,11 +3,6 @@ export interface Subject {
   icon: string;
 }
 
-export interface LimitedCard {
-  name: string;
-  maxCopies: number;
-}
-
 export interface ExampleCard {
   id: string;
   name: string;
@@ -36,11 +31,6 @@ export const subjects: Subject[] = [
   { name: "Sport", icon: "Dumbbell" },
   { name: "Französisch", icon: "Languages" },
   { name: "Geschichte", icon: "Landmark" },
-];
-
-export const limitedCards: LimitedCard[] = [
-  { name: "Mertens", maxCopies: 1 },
-  { name: "Drübert", maxCopies: 1 },
 ];
 
 export const exampleCards: ExampleCard[] = [

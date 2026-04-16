@@ -1,8 +1,19 @@
 import { ShieldAlert } from "lucide-react";
-import { limitedCards } from "@/lib/config";
+import { getLimitedCards } from "@/lib/actions/limits";
+import type { LimitedCard } from "@/lib/db/schema";
 import { cn } from "@/lib/utils";
 
-export function LimitedCards() {
+async function loadCards(): Promise<LimitedCard[] | null> {
+  try {
+    return await getLimitedCards();
+  } catch {
+    return null;
+  }
+}
+
+export async function LimitedCards() {
+  const cards = await loadCards();
+
   return (
     <div>
       <header className="mx-auto mb-8 max-w-3xl text-center md:mb-12">
@@ -15,15 +26,19 @@ export function LimitedCards() {
       </header>
 
       <div className="mx-auto max-w-2xl">
-        {limitedCards.length === 0 ? (
+        {cards === null ? (
+          <p className="font-body text-muted-foreground py-8 text-center text-base">
+            Limitierungsliste wird geladen…
+          </p>
+        ) : cards.length === 0 ? (
           <p className="font-body text-muted-foreground py-8 text-center text-base">
             Aktuell sind keine Karten limitiert.
           </p>
         ) : (
           <ul className="border-border overflow-hidden rounded-lg border">
-            {limitedCards.map((card, index) => (
+            {cards.map((card, index) => (
               <li
-                key={card.name}
+                key={card.id}
                 className={cn(
                   "flex items-center justify-between gap-4 px-5 py-4",
                   index % 2 === 0 ? "bg-muted" : "bg-muted/60",

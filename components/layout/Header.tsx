@@ -4,7 +4,8 @@ import { MobileNav } from "@/components/layout/MobileNav";
 
 const navItems = [
   { label: "Regeln", href: "/regeln" },
-  { label: "Rechner", href: "/#rechner" },
+  { label: "Rechner", href: "/rechner" },
+  { label: "News", href: "/#news" },
   { label: "Download", href: "/#download" },
 ];
 
