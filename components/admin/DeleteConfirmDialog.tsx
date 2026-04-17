@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useTransition, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -12,6 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 interface DeleteConfirmDialogProps {
   trigger: ReactNode;
@@ -29,18 +29,20 @@ export function DeleteConfirmDialog({
   confirmLabel = "Löschen",
 }: DeleteConfirmDialogProps) {
   const [open, setOpen] = useState(false);
-  const [pending, startTransition] = useTransition();
+  const [pending, setPending] = useState(false);
 
-  function handleConfirm(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-    startTransition(async () => {
+  async function handleConfirm() {
+    setPending(true);
+    try {
       await onConfirm();
       setOpen(false);
-    });
+    } catch {
+      setPending(false);
+    }
   }
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialog open={open} onOpenChange={(value) => !pending && setOpen(value)}>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -49,13 +51,15 @@ export function DeleteConfirmDialog({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel disabled={pending}>Abbrechen</AlertDialogCancel>
-          <AlertDialogAction
+          <Button
+            type="button"
             onClick={handleConfirm}
             disabled={pending}
+            variant="destructive"
             className="bg-red-500 text-white hover:bg-red-600"
           >
             {pending ? "Wird gelöscht …" : confirmLabel}
-          </AlertDialogAction>
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

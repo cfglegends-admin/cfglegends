@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Pencil, Plus } from "lucide-react";
 import { requireAdmin } from "@/lib/auth/session";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
-import { RowDeleteButton } from "@/components/admin/RowDeleteButton";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { Badge } from "@/components/ui/badge";
 import { deleteNews, getNews } from "@/lib/actions/news";
 import { formatDate } from "@/lib/format";
@@ -77,9 +77,9 @@ export default async function AdminNewsPage() {
                   <Pencil className="h-4 w-4" aria-hidden="true" />
                   Bearbeiten
                 </Link>
-                <RowDeleteButton
+                <DeleteButton
                   itemLabel={entry.title}
-                  action={deleteNews.bind(null, entry.id)}
+                  deleteAction={deleteNews.bind(null, entry.id)}
                 />
               </div>
             </li>

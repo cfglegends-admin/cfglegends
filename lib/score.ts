@@ -32,7 +32,10 @@ export function isScoreState(value: unknown): value is ScoreState {
 
 export function getScoreColor(score: number): string {
   if (score <= 0) return "text-red-700 animate-pulse";
-  if (score <= 9) return "text-red-500";
-  if (score <= 19) return "text-yellow-400";
-  return "text-gold";
+  if (score <= 4) return "text-red-600";
+  if (score <= 9) return "text-red-400";
+  if (score <= 14) return "text-orange-400";
+  if (score <= 19) return "text-yellow-300";
+  if (score <= 24) return "text-green-300";
+  return "text-emerald-400";
 }

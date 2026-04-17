@@ -107,9 +107,7 @@ public/
 ❌ Kommentare, die erklären WAS der Code macht (nur WARUM, wenn nicht-offensichtlich)
 
 ## Aktueller Stand
-Phase: Phase 2.3 abgeschlossen — Admin CRUD + DB-Integration
-Admin-Seiten: /admin/limits (CRUD), /admin/news (CRUD + Publish-Toggle), /admin/downloads (CRUD, URLs manuell)
-Öffentliche Seiten: Limitierungen, News, Downloads lesen aus Neon Postgres
-Statisch verbleibend: subjects (Fachsymbole) + exampleCards (Beispielkarten) in config.ts
-Neu auf Landing Page: News-Section (letzte 3 published)
-Nächster Schritt: Phase 2.4 — Vercel Blob Storage für echte Datei-Uploads, Animationen, Custom Domain
+Phase: Bugfix-Runde nach Phase 2.3
+Fixes: Delete-Funktion (Limits, News, Downloads), Score-Farbverlauf (grün→gelb→orange→rot), Hero-h1 sr-only, Gold-Metallic-Gradient auf h2s, Image-Sizes korrigiert
+Bekannter Test-Eintrag "Testkarte" gelöscht
+Nächster Schritt: Phase 2.4 — Vercel Blob Storage, Animationen, Domain
