@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { Download, Newspaper, ShieldAlert, Images, type LucideIcon } from "lucide-react";
+import {
+  Download,
+  Newspaper,
+  ShieldAlert,
+  Images,
+  Users,
+  History,
+  type LucideIcon,
+} from "lucide-react";
 import { count, eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { downloads, limitedCards, news, cards } from "@/lib/db/schema";
@@ -34,7 +42,7 @@ function StatCard({ href, icon: Icon, label, primary, detail }: StatCardProps) {
 }
 
 export default async function AdminDashboardPage() {
-  await requireAdmin();
+  const session = await requireAdmin();
 
   const [limitedCount] = await db.select({ value: count() }).from(limitedCards);
   const [newsTotal] = await db.select({ value: count() }).from(news);
@@ -87,6 +95,24 @@ export default async function AdminDashboardPage() {
           primary={`${downloadsTotal?.value ?? 0} Dateien`}
           detail={`${downloadsPublished?.value ?? 0} sichtbar`}
         />
+        {session.isMasterAdmin ? (
+          <>
+            <StatCard
+              href="/admin/accounts"
+              icon={Users}
+              label="Admins"
+              primary="Verwaltung"
+              detail="Konten erstellen und löschen"
+            />
+            <StatCard
+              href="/admin/audit"
+              icon={History}
+              label="Änderungslog"
+              primary="Audit"
+              detail="Alle Admin-Änderungen prüfen"
+            />
+          </>
+        ) : null}
       </div>
     </div>
   );

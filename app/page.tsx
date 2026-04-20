@@ -10,6 +10,15 @@ import { News } from "@/components/sections/News";
 import { CalculatorReveal } from "@/components/calculator/CalculatorReveal";
 import { getPublishedNews } from "@/lib/actions/news";
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "CFG Legends",
+  description: "Das Kartenspiel für die große Pause. Strategie, Lehrer und Lehrkraft-Punkte.",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://cfg-legends.vercel.app",
+  inLanguage: "de",
+};
+
 export default async function Home() {
   let newsEntries: Awaited<ReturnType<typeof getPublishedNews>> = [];
   try {
@@ -20,6 +29,10 @@ export default async function Home() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Hero />
       <Section id="spielerklaerung">
         <GameExplanation />

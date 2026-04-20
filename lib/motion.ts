@@ -58,3 +58,10 @@ export const viewportConfig = {
   once: true,
   margin: "-100px 0px -100px 0px" as const,
 }
+
+export function getDangerLevel(score: number): "safe" | "warn" | "critical" | "dead" {
+  if (score <= 0) return "dead"
+  if (score <= 4) return "critical"
+  if (score <= 9) return "warn"
+  return "safe"
+}

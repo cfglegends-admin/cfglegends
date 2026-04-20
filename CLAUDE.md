@@ -31,9 +31,18 @@ Ton: edel, prestigeträchtig (Art Deco, Wappen-Ästhetik), nicht spielerisch-bun
 
 ## Projektstruktur
 app/
-├── layout.tsx                Root-Layout (Fonts, Metadata, noindex)
-├── page.tsx                  Landing Page
+├── layout.tsx                Root-Layout (Fonts, Metadata, noindex, Manifest)
+├── page.tsx                  Landing Page (+ JSON-LD)
+├── not-found.tsx             Custom 404
+├── error.tsx                 Globale Error Boundary
+├── sitemap.ts                XML-Sitemap
 ├── regeln/page.tsx           Regelwerk (MDX)
+├── karten/
+│   ├── page.tsx              Galerie
+│   ├── loading.tsx           Skeleton Loading
+│   └── error.tsx             Galerie Error Boundary
+├── admin/
+│   └── error.tsx             Admin Error Boundary
 ├── impressum/page.tsx
 ├── datenschutz/page.tsx
 └── globals.css               Tailwind v4 @theme, Design-Tokens
@@ -45,7 +54,12 @@ components/
 
 lib/
 ├── config.ts                 Fachsymbole, Limitierungsliste, Beispielkarten
+├── hooks/use-focus-trap.ts   Focus-Trap-Hook für Modals
 └── utils.ts                  cn() helper
+
+public/
+├── manifest.json             PWA Web App Manifest
+└── robots.txt                Crawler-Regeln
 
 content/
 └── regelwerk.mdx
@@ -115,7 +129,7 @@ Erledigt:
 - framer-motion + LazyMotion, zentrale Motion-Primitives (lib/motion.ts)
 Animationen:
 - Hero: Logo mit Entry-Animation (1.6s epic) + konstantem Float (8s), staggered Untertitel/CTA
-- Hintergrund: 3-Ebenen-Parallax (deep gold spots + main pattern + drift 120s) + Opacity-Atmung + Gold-Vignette
+- Hintergrund: 3-Ebenen-Parallax (deep gold spots + main pattern + drift 90s) + Opacity-Atmung + Gold-Vignette, Pattern-Layer GPU-promoted via translateZ(0) + will-change für flüssigere Repaints
 - Sections: Keine eigenen Hintergründe mehr → durchgehendes Parallax-Pattern, SectionDivider als dezente Gold-Gradient-Trennung
 - Karten-Galerie + Landing-Karten: 3D-Tilt mit Spring-Physics + Cursor-folgender Gold-Shine, FLIP-Layout bei Filter-Änderung
 - Karten-Detail-Modal: Split-Layout (Karte links freistehend mit 3D-Tilt, Info rechts) via Portal + framer-motion
@@ -128,9 +142,26 @@ Animationen:
 - Bilder: FadeImage Lazy-Fade bei Load
 - CardTilt: hover-detection für Touch-Devices (canHover), maxTilt 12°, stiffness 150, mass 0.8
 - Reduced-Motion respektiert über MotionConfig + CSS-Fallback
-Fixes: Karten-Klick in Galerie repariert (lifted state: CardGrid verwaltet selectedCard, ein einzelnes Modal statt je eines pro Karte), Section-Abstand py-40 md:py-56, Fachsymbole verlinken zu /karten?fach=..., Parallax-Pattern durchgehend sichtbar (bg-background von /karten entfernt, Footer halbtransparent), Modal-Z-Index via inline style={zIndex:9999, isolation:"isolate"} (Tailwind v4 arbitrary z-[100] unzuverlässig), main z-index:1 statt z-10 (verhindert Stacking-Context-Konflikte mit Portals), Liquid-Glass-Ästhetik auf Modal (backdrop-filter blur + semi-transparente Gradients)
+Fixes: Karten-Klick in Galerie repariert (lifted state: CardGrid verwaltet selectedCard, ein einzelnes Modal statt je eines pro Karte), Section-Abstand mobil/desktop ausbalanciert (py-24 / md:py-36 / lg:py-48), Fachsymbole verlinken zu /karten?fach=..., Parallax-Pattern durchgehend sichtbar, Modal-Z-Index via inline style={zIndex:9999, isolation:"isolate"} (Tailwind v4 arbitrary z-[100] unzuverlässig), main z-index:1 statt z-10 (verhindert Stacking-Context-Konflikte mit Portals), Liquid-Glass-Ästhetik auf Modal (backdrop-filter blur + semi-transparente Gradients), Blob-Bild-Render-Fix über Next remotePatterns + bessere Upload-Fehlertexte
 Client Components: MotionProvider, ParallaxBackground, Reveal, StaggerContainer, StaggerItem, CardTilt, AnimatedNumber, FadeImage, Header, ConfirmDialog, SectionDivider
-Admin-Seiten: Dashboard, Limitierungen, News, Downloads, Karten
+Admin-Seiten: Dashboard, Limitierungen, News, Downloads, Karten, Admin-Konten, Änderungslog
+Admin-Auth: Mehrere Admin-Accounts via E-Mail + Passwort, Master-Admin-Rolle, Session-Ende beim Tab-Schließen (pagehide/beacon)
+Admin-Accounts: Master-Admin kann bestehende Accounts bearbeiten (E-Mail, Rolle, Passwort-Reset) mit Self-Lockout-Schutz
+Admin-Usability: Footer und öffentlicher Header auf `/admin` ausgeblendet, responsive Tab-Navigation mit horizontalem Scroll auf Mobile
+Admin-Audit: Login/Logout + CRUD-Änderungen in Karten, Limits, News, Downloads werden mit Account-Zuordnung geloggt
+Karten-Upload: Direktes Bild-Upload im Admin-Kartenformular via Vercel Blob (ohne GitHub-Zugriff), URL wird automatisch gesetzt
+Karten-Workflow: Nächste Kartennummer wird bei "Neue Karte" automatisch vorgeschlagen; Upload-Dateiname basiert auf Kartennummer (`cards/{nummer}.{ext}`) mit Nummern-Kollision-Check
+Layout: Footer zusätzlich auf `/rechner` ausgeblendet
+Mobile/Animation-Pass: Card-Modal mobile spacing verbessert, Rechner-Controls mit größeren Touch-Targets, SectionDivider mit subtiler cinematic Pulse-Animation, Parallax-Layer über gesamte Scroll-Höhe erweitert (inkl. sanfter Opacity/Scale-Atmung)
+Rechner-Polish: Lead-Glow, Ambient Lighting (Score-Farbe), Low-Score-Puls (warn/critical/dead), Name-Badge-Feedback, Victory-Overlay bei 0 Punkten mit Gold-Metallic-Titel, Konfetti-Regen (canvas-confetti), Swipe-Gestures auf Mobile (Swipe-Up/Down ±1/±5). Alle Effekte respektieren prefers-reduced-motion.
+Cursor-Trail: Goldener Schweif + dezente Partikel die bei Cursor-Bewegung erscheinen und nach 1.5s Stillstand gemächlich verblassen. Cursor-Glow zeigt metallisch-helles BG-Pattern im Radius um den Cursor mit kurzem Schweif (10 Trail-Punkte, 800ms max age), gleichgeschaltet mit Partikeln (400ms idle-delay + schneller Fade-Out synchron mit Partikel-Lebensdauer). Einzelner rAF-Loop für Glow + Partikel-Cleanup + Partikel-Position-Updates (erzwingt Re-Render für flüssige Interpolation). Nur auf Landing/Galerie/Regeln/Impressum/Datenschutz aktiv, nicht auf Rechner oder Admin. Gedämpft über CardTilt-Zonen (opacity *0.4), stark reduziert über SubjectsGrid-Items (opacity *0.2) für Lesbarkeit. Respektiert prefers-reduced-motion und Touch-Devices.
+Neue Komponenten: VictoryOverlay, CursorTrail, CursorTrailGate
+Neue Dependency: canvas-confetti
+Error Handling: Custom 404-Seite, globale + Galerie- + Admin-spezifische Error Boundaries, Skeleton Loading für Galerie
+Accessibility: Focus-Trap in CardDetailModal + ConfirmDialog (lib/hooks/use-focus-trap.ts), role="dialog" + aria-modal, aria-expanded auf MobileNav
+SEO: JSON-LD (WebSite) auf Landing Page, XML-Sitemap (app/sitemap.ts), robots.txt (/admin + /api blockiert)
+PWA: Web App Manifest (manifest.json) mit Theme-Color Gold, Standalone-Display
+Performance: BG-Pattern SVG via SVGO optimiert (180KB → 140KB, -22.5%), Pattern-Layer GPU-promoted (translateZ(0) + will-change)
 Öffentliche Seiten: Landing Page, /regeln, /rechner, /karten, /impressum, /datenschutz
-DB-Tabellen: limitedCards, news, downloads, cards
-Nächster Schritt: Vercel Blob Storage, Domain
+DB-Tabellen: limitedCards, news, downloads, cards, adminUsers, adminAuditLogs
+Nächster Schritt: Domain + produktive Blob-Konfiguration

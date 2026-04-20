@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import Link from "next/link";
+import { Upload } from "lucide-react";
 import { SubmitButton } from "@/components/admin/SubmitButton";
 import type { Card } from "@/lib/db/schema";
 import { subjects } from "@/lib/config";
 import { cn } from "@/lib/utils";
+import { uploadCardImage } from "@/lib/actions/uploads";
 
 interface CardFormProps {
   action: (formData: FormData) => void | Promise<void>;
@@ -19,6 +21,12 @@ const fieldInput =
 
 export function CardForm({ action, defaultValues, submitLabel }: CardFormProps) {
   const [type, setType] = useState<string>(defaultValues?.type || "lehrer");
+  const [cardNumber, setCardNumber] = useState<string>(
+    defaultValues?.cardNumber ? String(defaultValues.cardNumber) : ""
+  );
+  const [imageUrl, setImageUrl] = useState(defaultValues?.imageUrl ?? "");
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
   
   // Track selected subjects for Lehrer cards
   const initialSubjects = defaultValues?.subjects ? defaultValues.subjects.split(",") : [];
@@ -29,6 +37,39 @@ export function CardForm({ action, defaultValues, submitLabel }: CardFormProps) 
       prev.includes(fach) ? prev.filter(s => s !== fach) : [...prev, fach]
     );
   };
+
+  async function handleImageUpload(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const normalizedCardNumber = parseInt(cardNumber, 10);
+    if (!Number.isInteger(normalizedCardNumber) || normalizedCardNumber < 1) {
+      setUploadError("Bitte zuerst eine gültige Kartennummer setzen.");
+      return;
+    }
+
+    setUploading(true);
+    setUploadError(null);
+    const formData = new FormData();
+    formData.set("image", file);
+    formData.set("cardNumber", String(normalizedCardNumber));
+    if (defaultValues?.id) {
+      formData.set("cardId", String(defaultValues.id));
+    }
+
+    try {
+      const result = await uploadCardImage(formData);
+      if (result.error || !result.url) {
+        setUploadError(result.error ?? "Upload fehlgeschlagen.");
+      } else {
+        setImageUrl(result.url);
+      }
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : String(e);
+      setUploadError(`Serverfehler: ${message}`);
+    } finally {
+      setUploading(false);
+    }
+  }
 
   return (
     <form
@@ -61,9 +102,13 @@ export function CardForm({ action, defaultValues, submitLabel }: CardFormProps) 
             type="number"
             min={1}
             required
-            defaultValue={defaultValues?.cardNumber ?? ""}
+            value={cardNumber}
+            onChange={(event) => setCardNumber(event.target.value)}
             className={`${fieldInput} font-mono tabular-nums`}
           />
+          <p className="font-body text-muted-foreground mt-1 text-xs">
+            Neue Karten starten automatisch mit der nächsten freien Nummer.
+          </p>
         </div>
 
         <div>
@@ -113,12 +158,36 @@ export function CardForm({ action, defaultValues, submitLabel }: CardFormProps) 
               type="text"
               required
               placeholder="/cards/103.png"
-              defaultValue={defaultValues?.imageUrl ?? ""}
+              value={imageUrl}
+              onChange={(event) => setImageUrl(event.target.value)}
               className={fieldInput}
             />
             <p className="font-body text-muted-foreground mt-1 text-xs">
-              Muss mit /cards/ beginnen, Bild in /public/cards ablegen.
+              Entweder statischer Pfad oder URL aus dem Upload.
             </p>
+            <div className="mt-3">
+              <label
+                htmlFor="card-image-upload"
+                className="bg-background border-border text-muted-foreground hover:text-gold hover:border-gold/50 inline-flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-xs transition-colors"
+              >
+                <Upload className="h-3.5 w-3.5" aria-hidden="true" />
+                {uploading ? "Lade Bild hoch..." : "Bild hochladen"}
+              </label>
+              <input
+                id="card-image-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="sr-only"
+              />
+              {uploadError ? (
+                <p className="mt-2 text-xs text-red-400">{uploadError}</p>
+              ) : (
+                <p className="font-body text-muted-foreground mt-2 text-xs">
+                  Upload nutzt Vercel Blob und speichert z.B. als `cards/{cardNumber}.png`.
+                </p>
+              )}
+            </div>
           </div>
         </div>
 

@@ -6,6 +6,7 @@ import { m, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useFocusTrap } from "@/lib/hooks/use-focus-trap";
 import { CardTilt } from "@/components/motion/CardTilt";
 import { type Card } from "@/lib/db/schema";
 
@@ -34,6 +35,7 @@ interface CardDetailModalProps {
 
 export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
   const [mounted, setMounted] = useState(false);
+  const focusTrapRef = useFocusTrap(!!card);
   const isLehrer = card?.type === "lehrer";
 
   useEffect(() => {
@@ -63,7 +65,11 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
     <AnimatePresence>
       {card && (
         <div
-          className="fixed inset-0 flex items-center justify-center p-4 md:p-8"
+          ref={focusTrapRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={card ? `Karte: ${card.name}` : undefined}
+          className="fixed inset-0 flex items-center justify-center p-3 sm:p-4 md:p-8"
           style={{ zIndex: 9999, isolation: "isolate" }}
         >
           {/* Backdrop — heavy blur for depth-of-field effect */}
@@ -82,7 +88,10 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
           />
 
           {/* Split-Layout Container */}
-          <div className="relative flex w-full max-w-5xl items-stretch gap-6 md:gap-8" style={{ zIndex: 1 }}>
+          <div
+            className="relative flex w-full max-w-5xl items-stretch gap-3 md:gap-8"
+            style={{ zIndex: 1 }}
+          >
             {/* LEFT: Floating card with 3D tilt (desktop only) */}
             <m.div
               initial={{ opacity: 0, x: -40, scale: 0.9 }}
@@ -111,7 +120,7 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 40, scale: 0.95 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="relative flex-1 flex flex-col overflow-hidden rounded-2xl md:rounded-r-2xl md:rounded-l-none max-h-[85vh] border border-white/[0.08] shadow-2xl shadow-black/60"
+              className="relative flex max-h-[90vh] flex-1 flex-col overflow-hidden rounded-2xl border border-white/[0.08] shadow-2xl shadow-black/60 md:max-h-[85vh] md:rounded-r-2xl md:rounded-l-none"
               style={{
                 background: "linear-gradient(135deg, rgba(20, 20, 20, 0.85) 0%, rgba(30, 30, 30, 0.75) 100%)",
                 backdropFilter: "blur(40px) saturate(1.3)",
@@ -125,13 +134,13 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
               <button
                 onClick={onClose}
                 aria-label="Schließen"
-                className="absolute right-4 top-4 z-10 rounded-full p-2 text-white/50 hover:text-white hover:bg-white/10 transition-colors backdrop-blur-sm"
+                className="absolute right-3 top-3 z-10 rounded-full p-2 text-white/50 backdrop-blur-sm transition-colors hover:bg-white/10 hover:text-white md:right-4 md:top-4"
               >
                 <X className="h-5 w-5" />
               </button>
 
               {/* Mobile: card image inline */}
-              <div className="md:hidden p-6 pb-0 flex justify-center">
+              <div className="flex justify-center p-4 pb-0 md:hidden">
                 <div className="relative w-48 overflow-hidden rounded-xl shadow-lg shadow-black/40">
                   <Image
                     src={card.imageUrl}
@@ -147,11 +156,11 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
               </div>
 
               {/* Content */}
-              <div className="flex-1 overflow-y-auto p-6 md:p-10">
+              <div className="flex-1 overflow-y-auto p-4 pt-5 md:p-10">
                 <div className="mb-2 text-xs font-mono text-muted-foreground uppercase tracking-widest">
                   #{card.cardNumber.toString().padStart(3, "0")}
                 </div>
-                <h2 className="font-display text-3xl md:text-4xl font-semibold text-gold-metallic mb-4">
+                <h2 className="font-display text-gold-metallic mb-4 pr-10 text-2xl font-semibold md:text-4xl">
                   {card.name}
                 </h2>
 

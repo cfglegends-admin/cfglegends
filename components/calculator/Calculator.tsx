@@ -5,6 +5,7 @@ import { AnimatePresence, m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
+import { getDangerLevel } from "@/lib/motion";
 import {
   ADJUSTMENTS,
   SCORE_STORAGE_KEY,
@@ -81,20 +82,61 @@ export function Calculator() {
     { key: "player2", align: "right" },
   ];
 
+  const score1 = state.player1.score;
+  const score2 = state.player2.score;
+  const leader: "p1" | "p2" | "tie" = score1 > score2 ? "p1" : score2 > score1 ? "p2" : "tie";
+
+  function getAmbientColor(score: number): string {
+    if (score <= 0) return "rgba(185, 28, 28, 0.14)";
+    if (score <= 4) return "rgba(220, 38, 38, 0.10)";
+    if (score <= 9) return "rgba(239, 68, 68, 0.07)";
+    if (score <= 14) return "rgba(251, 146, 60, 0.06)";
+    if (score <= 19) return "rgba(234, 179, 8, 0.05)";
+    if (score <= 24) return "rgba(134, 239, 172, 0.05)";
+    return "rgba(52, 211, 153, 0.06)";
+  }
+
   return (
     <div className="bg-muted border-border border-t-gold rounded-2xl border border-t-2 p-6 md:p-8">
       <div className="grid grid-cols-2">
         {players.map(({ key, align }) => {
           const player = state[key];
           const isLeft = align === "left";
+          const leading =
+            leader === "tie"
+              ? "tie"
+              : leader === (key === "player1" ? "p1" : "p2")
+                ? "yes"
+                : "no";
+          const danger = getDangerLevel(player.score);
           return (
             <div
               key={key}
               className={cn(
-                "flex flex-col gap-4 px-2 md:px-4",
-                isLeft ? "border-border items-start border-r text-left" : "items-end text-right"
+                "relative flex flex-col gap-4 px-2 md:px-4",
+                isLeft ? "border-border items-start border-r text-left" : "items-end text-right",
+                danger === "warn" && "danger-warn",
+                danger === "critical" && "danger-critical",
+                danger === "dead" && "danger-dead"
               )}
             >
+              <m.div
+                className="pointer-events-none absolute inset-0 -z-20"
+                animate={{
+                  background: `radial-gradient(ellipse 80% 70% at 50% 50%, ${getAmbientColor(player.score)} 0%, transparent 70%)`,
+                }}
+                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <m.div
+                className="pointer-events-none absolute inset-0 -z-10"
+                animate={{ opacity: leader === "tie" ? 0.25 : leading === "yes" ? 0.7 : 0 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                  background:
+                    "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(212,175,55,0.14) 0%, rgba(212,175,55,0.05) 40%, transparent 75%)",
+                }}
+              />
+
               {editing === key ? (
                 <input
                   autoFocus

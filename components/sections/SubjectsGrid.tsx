@@ -23,6 +23,8 @@ export function SubjectsGrid() {
           <StaggerItem key={subject.name}>
             <Link
               href={`/karten?fach=${encodeURIComponent(subject.name)}`}
+              data-bg-glow="off"
+              data-subjects-grid-item=""
               className="group bg-muted border-border hover:border-gold/60 flex flex-col items-center gap-2 rounded-lg border p-4 transition-all duration-300 hover:bg-gold/10 hover:-translate-y-1 hover:shadow-[0_0_0_1px_var(--color-gold)]"
             >
               <subject.icon className="text-foreground group-hover:text-gold h-10 w-10 transition-colors duration-300 group-hover:scale-110" />

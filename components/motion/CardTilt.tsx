@@ -71,6 +71,7 @@ export function CardTilt({ children, className, maxTilt = 12 }: CardTiltProps) {
         transformPerspective: 1200,
       }}
       className={cn("group", className)}
+      data-card-tilt=""
     >
       <div className="h-full" style={{ transform: "translateZ(30px)" }}>{children}</div>
 

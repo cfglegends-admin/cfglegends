@@ -51,6 +51,7 @@ export function MobileNav() {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
         aria-label="Navigation öffnen"
+        aria-expanded={open}
         className="text-foreground hover:text-gold inline-flex h-10 w-10 items-center justify-center rounded-md md:hidden"
       >
         <Menu className="h-6 w-6" aria-hidden="true" />

@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useScroll, useMotionValueEvent, m } from "framer-motion"
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 import { MobileNav } from "@/components/layout/MobileNav"
 
 const navItems = [
@@ -15,12 +16,17 @@ const navItems = [
 ]
 
 export function Header() {
+  const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const { scrollY } = useScroll()
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 20)
   })
+
+  if (pathname.startsWith("/admin")) {
+    return null
+  }
 
   return (
     <m.header

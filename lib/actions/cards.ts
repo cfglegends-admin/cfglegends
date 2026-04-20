@@ -5,6 +5,7 @@ import { asc, desc, eq, SQL, sql, or, ilike } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { cards, type Card, type NewCard } from "@/lib/db/schema";
 import { requireAdmin } from "@/lib/auth/session";
+import { writeAuditLog } from "@/lib/actions/audit";
 
 interface CardFilters {
   type?: string;
@@ -85,6 +86,13 @@ export async function getCardById(id: number): Promise<Card | null> {
   return row ?? null;
 }
 
+export async function getNextCardNumber(): Promise<number> {
+  await requireAdmin();
+  const [row] = await db.select({ maxNumber: sql<number>`max(${cards.cardNumber})` }).from(cards);
+  const currentMax = Number(row?.maxNumber ?? 0);
+  return currentMax + 1;
+}
+
 function parseFormData(formData: FormData): NewCard {
   const name = String(formData.get("name") ?? "").trim();
   const cardNumberStr = String(formData.get("cardNumber") ?? "");
@@ -140,25 +148,44 @@ function revalidate() {
 export async function createCard(formData: FormData): Promise<void> {
   await requireAdmin();
   const data = parseFormData(formData);
-  await db.insert(cards).values(data);
+  const [created] = await db.insert(cards).values(data).returning();
+  await writeAuditLog({
+    entityType: "cards",
+    entityId: created.id,
+    action: "create",
+    summary: `Karte erstellt: ${created.name} (#${created.cardNumber})`,
+  });
   revalidate();
 }
 
 export async function updateCard(id: number, formData: FormData): Promise<void> {
   await requireAdmin();
   const data = parseFormData(formData);
-  
+
   await db
     .update(cards)
     .set({ ...data, updatedAt: new Date() })
     .where(eq(cards.id, id));
-  
+  await writeAuditLog({
+    entityType: "cards",
+    entityId: id,
+    action: "update",
+    summary: `Karte aktualisiert: ${data.name} (#${data.cardNumber})`,
+  });
+
   revalidate();
 }
 
 export async function deleteCard(id: number): Promise<void> {
   await requireAdmin();
+  const card = await getCardById(id);
   await db.delete(cards).where(eq(cards.id, id));
+  await writeAuditLog({
+    entityType: "cards",
+    entityId: id,
+    action: "delete",
+    summary: `Karte gelöscht: ${card?.name ?? `ID ${id}`}`,
+  });
   revalidate();
 }
 

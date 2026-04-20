@@ -4,6 +4,7 @@ import { m, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import { createPortal } from "react-dom"
 import { cn } from "@/lib/utils"
+import { useFocusTrap } from "@/lib/hooks/use-focus-trap"
 
 interface ConfirmDialogProps {
   open: boolean
@@ -26,6 +27,8 @@ export function ConfirmDialog({
   cancelLabel = "Abbrechen",
   variant = "default",
 }: ConfirmDialogProps) {
+  const focusTrapRef = useFocusTrap(open)
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden"
@@ -56,7 +59,7 @@ export function ConfirmDialog({
   return createPortal(
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 flex items-center justify-center p-4" style={{ zIndex: 9999, isolation: "isolate" }}>
+        <div ref={focusTrapRef} role="dialog" aria-modal="true" aria-label={title} className="fixed inset-0 flex items-center justify-center p-4" style={{ zIndex: 9999, isolation: "isolate" }}>
           <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

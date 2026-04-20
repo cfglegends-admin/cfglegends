@@ -60,5 +60,5 @@ export const subjects: Subject[] = [
 export const exampleCards: ExampleCard[] = [
   { id: "103", name: "Mensa-Team", type: "ereignis", image: "/cards/103.png" },
   { id: "120", name: "Feueralarm", type: "falle", image: "/cards/120.png" },
-  { id: "47", name: "Fächerkarte", type: "lehrer", image: "/cards/47.png" },
+  { id: "47", name: "Herr Zuber", type: "lehrer", image: "/cards/47.png" },
 ];

@@ -28,6 +28,20 @@ export default function LoginPage() {
         </div>
 
         <form action={formAction} className="flex flex-col gap-4">
+          <label className="font-body text-foreground/80 text-sm" htmlFor="email">
+            E-Mail
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoFocus
+            autoComplete="email"
+            placeholder="admin@schule.de"
+            className="bg-background border-border text-foreground placeholder:text-muted-foreground focus-visible:border-gold focus-visible:ring-gold rounded-lg border p-3 text-base focus-visible:ring-2 focus-visible:outline-none"
+          />
+
           <label className="font-body text-foreground/80 text-sm" htmlFor="password">
             Passwort
           </label>
@@ -36,7 +50,6 @@ export default function LoginPage() {
             name="password"
             type="password"
             required
-            autoFocus
             autoComplete="current-password"
             placeholder="Passwort eingeben"
             className="bg-background border-border text-foreground placeholder:text-muted-foreground focus-visible:border-gold focus-visible:ring-gold rounded-lg border p-3 text-base focus-visible:ring-2 focus-visible:outline-none"

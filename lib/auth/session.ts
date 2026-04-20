@@ -4,10 +4,16 @@ import { getIronSession, type SessionOptions } from "iron-session";
 
 export interface SessionData {
   isAdmin: boolean;
+  adminId?: number;
+  adminEmail?: string;
+  isMasterAdmin?: boolean;
 }
 
 export const defaultSession: SessionData = {
   isAdmin: false,
+  adminId: undefined,
+  adminEmail: undefined,
+  isMasterAdmin: false,
 };
 
 export const sessionOptions: SessionOptions = {
@@ -17,7 +23,6 @@ export const sessionOptions: SessionOptions = {
     secure: process.env.NODE_ENV === "production",
     httpOnly: true,
     sameSite: "lax" as const,
-    maxAge: 60 * 60 * 24 * 7,
   },
 };
 
@@ -25,7 +30,10 @@ export async function getSession() {
   const cookieStore = await cookies();
   const session = await getIronSession<SessionData>(cookieStore, sessionOptions);
   if (!session.isAdmin) {
-    session.isAdmin = defaultSession.isAdmin;
+    session.isAdmin = false;
+    session.adminId = undefined;
+    session.adminEmail = undefined;
+    session.isMasterAdmin = false;
   }
   return session;
 }
@@ -34,6 +42,14 @@ export async function requireAdmin() {
   const session = await getSession();
   if (!session.isAdmin) {
     redirect("/admin/login");
+  }
+  return session;
+}
+
+export async function requireMasterAdmin() {
+  const session = await requireAdmin();
+  if (!session.isMasterAdmin) {
+    redirect("/admin");
   }
   return session;
 }

@@ -1,8 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Instagram } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export function Footer() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/admin") || pathname.startsWith("/rechner")) {
+    return null;
+  }
+
   return (
     <footer className="relative z-10 border-border border-t bg-background/60 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">

@@ -17,7 +17,7 @@ export function AdminPageHeader({ title, description, action }: AdminPageHeaderP
           <p className="font-body text-muted-foreground text-sm">{description}</p>
         )}
       </div>
-      {action && <div className="shrink-0">{action}</div>}
+      {action && <div className="w-full sm:w-auto sm:shrink-0">{action}</div>}
     </header>
   );
 }

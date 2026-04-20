@@ -10,7 +10,7 @@ interface SectionProps {
 export function Section({ id, className, children }: SectionProps) {
   return (
     <section id={id} className={cn("relative", className)}>
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-40 md:py-56">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 sm:px-6 md:py-36 lg:px-8 lg:py-48">
         {children}
       </div>
     </section>

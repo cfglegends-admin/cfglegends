@@ -44,14 +44,14 @@ export default async function AdminCardsPage(props: AdminCardsPageProps) {
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link
               href="/admin/cards/import"
-              className="bg-muted border-border font-display hover:border-gold inline-flex h-10 items-center justify-center gap-2 rounded-lg border px-4 text-sm font-semibold tracking-wide transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              className="bg-muted border-border font-display hover:border-gold inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border px-4 text-sm font-semibold tracking-wide transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:w-auto"
             >
               <Upload className="h-4 w-4" aria-hidden="true" />
               Bulk-Import
             </Link>
             <Link
               href="/admin/cards/new"
-              className="bg-gold text-background hover:bg-gold-bright font-display inline-flex h-10 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright"
+              className="bg-gold text-background hover:bg-gold-bright font-display inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright sm:w-auto"
             >
               <Plus className="h-4 w-4" aria-hidden="true" />
               Neue Karte

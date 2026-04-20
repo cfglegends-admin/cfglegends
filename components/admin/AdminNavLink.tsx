@@ -20,8 +20,10 @@ export function AdminNavLink({ href, children, exact = false }: AdminNavLinkProp
       href={href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "font-body text-sm font-medium transition-colors",
-        active ? "text-gold" : "text-muted-foreground hover:text-gold"
+        "font-body inline-flex h-9 shrink-0 items-center rounded-md px-3 text-sm font-medium transition-colors",
+        active
+          ? "bg-gold/15 text-gold border-gold/40 border"
+          : "text-muted-foreground hover:text-gold hover:bg-background/60"
       )}
     >
       {children}

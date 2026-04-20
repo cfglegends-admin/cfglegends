@@ -5,6 +5,7 @@ import { asc, eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { limitedCards, type LimitedCard } from "@/lib/db/schema";
 import { requireAdmin } from "@/lib/auth/session";
+import { writeAuditLog } from "@/lib/actions/audit";
 
 export async function getLimitedCards(): Promise<LimitedCard[]> {
   return db.select().from(limitedCards).orderBy(asc(limitedCards.name));
@@ -40,7 +41,13 @@ function revalidate() {
 export async function createLimitedCard(formData: FormData): Promise<void> {
   await requireAdmin();
   const data = parseFormData(formData);
-  await db.insert(limitedCards).values(data);
+  const [created] = await db.insert(limitedCards).values(data).returning();
+  await writeAuditLog({
+    entityType: "limits",
+    entityId: created.id,
+    action: "create",
+    summary: `Limitierung erstellt: ${created.name} (max ${created.maxCopies})`,
+  });
   revalidate();
 }
 
@@ -51,11 +58,24 @@ export async function updateLimitedCard(id: number, formData: FormData): Promise
     .update(limitedCards)
     .set({ ...data, updatedAt: new Date() })
     .where(eq(limitedCards.id, id));
+  await writeAuditLog({
+    entityType: "limits",
+    entityId: id,
+    action: "update",
+    summary: `Limitierung aktualisiert: ${data.name} (max ${data.maxCopies})`,
+  });
   revalidate();
 }
 
 export async function deleteLimitedCard(id: number): Promise<void> {
   await requireAdmin();
+  const row = await getLimitedCardById(id);
   await db.delete(limitedCards).where(eq(limitedCards.id, id));
+  await writeAuditLog({
+    entityType: "limits",
+    entityId: id,
+    action: "delete",
+    summary: `Limitierung gelöscht: ${row?.name ?? `ID ${id}`}`,
+  });
   revalidate();
 }
