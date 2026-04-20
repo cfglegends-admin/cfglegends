@@ -15,6 +15,7 @@ type NavItem = { label: string; href: string };
 
 const navItems: NavItem[] = [
   { label: "Regeln", href: "/regeln" },
+  { label: "Karten", href: "/karten" },
   { label: "Rechner", href: "/rechner" },
   { label: "News", href: "/#news" },
   { label: "Download", href: "/#download" },

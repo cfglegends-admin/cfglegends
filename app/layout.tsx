@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Inter, Geist_Mono } from "next/font/google";
+import { MotionProvider } from "@/components/providers/MotionProvider";
+import { ParallaxBackground } from "@/components/layout/ParallaxBackground";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
@@ -80,10 +82,13 @@ export default function RootLayout({
   return (
     <html lang="de" className={cn("dark", cinzel.variable, inter.variable, geistMono.variable)}>
       <body className="bg-background text-foreground font-body flex min-h-screen flex-col antialiased">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <ScrollToTop />
+        <MotionProvider>
+          <ParallaxBackground />
+          <Header />
+          <main className="relative flex-1">{children}</main>
+          <Footer />
+          <ScrollToTop />
+        </MotionProvider>
       </body>
     </html>
   );

@@ -17,6 +17,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
                 <AdminNavLink href="/admin" exact>
                   Dashboard
                 </AdminNavLink>
+                <AdminNavLink href="/admin/cards">Karten</AdminNavLink>
                 <AdminNavLink href="/admin/limits">Limitierungen</AdminNavLink>
                 <AdminNavLink href="/admin/news">News</AdminNavLink>
                 <AdminNavLink href="/admin/downloads">Downloads</AdminNavLink>

@@ -107,7 +107,30 @@ public/
 ❌ Kommentare, die erklären WAS der Code macht (nur WARUM, wenn nicht-offensichtlich)
 
 ## Aktueller Stand
-Phase: Bugfix-Runde nach Phase 2.3
-Fixes: Delete-Funktion (Limits, News, Downloads), Score-Farbverlauf (grün→gelb→orange→rot), Hero-h1 sr-only, Gold-Metallic-Gradient auf h2s, Image-Sizes korrigiert
-Bekannter Test-Eintrag "Testkarte" gelöscht
-Nächster Schritt: Phase 2.4 — Vercel Blob Storage, Animationen, Domain
+Phase: Senior Frontend Animation-Pass abgeschlossen
+Erledigt:
+- Fachsymbole auf Inline-SVGs (currentColor) umgestellt
+- Vollständige Karten-Galerie mit Datenbankanbindung, Bulk-Import und öffentlicher Galerie `/karten`
+- Galerie: Getestet und funktionsfähig (Filter, Suche, Sortierung, Detail-Modal, Admin CRUD)
+- framer-motion + LazyMotion, zentrale Motion-Primitives (lib/motion.ts)
+Animationen:
+- Hero: Logo mit Entry-Animation (1.6s epic) + konstantem Float (8s), staggered Untertitel/CTA
+- Hintergrund: 3-Ebenen-Parallax (deep gold spots + main pattern + drift 120s) + Opacity-Atmung + Gold-Vignette
+- Sections: Keine eigenen Hintergründe mehr → durchgehendes Parallax-Pattern, SectionDivider als dezente Gold-Gradient-Trennung
+- Karten-Galerie + Landing-Karten: 3D-Tilt mit Spring-Physics + Cursor-folgender Gold-Shine, FLIP-Layout bei Filter-Änderung
+- Karten-Detail-Modal: Split-Layout (Karte links freistehend mit 3D-Tilt, Info rechts) via Portal + framer-motion
+- Calculator: Animierter Number-Counter + Scale-Pulse bei Score-Änderung + Button-Tap-Feedback
+- ConfirmDialog-Komponente (Portal + framer-motion, ersetzt window.confirm im Calculator)
+- Motion-Timings cinematisch (durations.cinematic 1.2s, durations.epic 1.6s, ease: [0.22,1,0.36,1])
+- Header: Scroll-aware Opacity + Blur (0.5s transition)
+- Nav-Links: Gold-Underline-Slide on Hover
+- Buttons: Shine-Sweep on Hover (btn-gold Klasse, 1.2s)
+- Bilder: FadeImage Lazy-Fade bei Load
+- CardTilt: hover-detection für Touch-Devices (canHover), maxTilt 12°, stiffness 150, mass 0.8
+- Reduced-Motion respektiert über MotionConfig + CSS-Fallback
+Fixes: Karten-Klick in Galerie repariert (lifted state: CardGrid verwaltet selectedCard, ein einzelnes Modal statt je eines pro Karte), Section-Abstand py-40 md:py-56, Fachsymbole verlinken zu /karten?fach=..., Parallax-Pattern durchgehend sichtbar (bg-background von /karten entfernt, Footer halbtransparent), Modal-Z-Index via inline style={zIndex:9999, isolation:"isolate"} (Tailwind v4 arbitrary z-[100] unzuverlässig), main z-index:1 statt z-10 (verhindert Stacking-Context-Konflikte mit Portals), Liquid-Glass-Ästhetik auf Modal (backdrop-filter blur + semi-transparente Gradients)
+Client Components: MotionProvider, ParallaxBackground, Reveal, StaggerContainer, StaggerItem, CardTilt, AnimatedNumber, FadeImage, Header, ConfirmDialog, SectionDivider
+Admin-Seiten: Dashboard, Limitierungen, News, Downloads, Karten
+Öffentliche Seiten: Landing Page, /regeln, /rechner, /karten, /impressum, /datenschutz
+DB-Tabellen: limitedCards, news, downloads, cards
+Nächster Schritt: Vercel Blob Storage, Domain

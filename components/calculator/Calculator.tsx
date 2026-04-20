@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState, type KeyboardEvent } from "react";
+import { AnimatePresence, m } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import {
   ADJUSTMENTS,
   SCORE_STORAGE_KEY,
@@ -17,6 +20,7 @@ export function Calculator() {
   const [state, setState] = useState<ScoreState>(defaultScoreState);
   const [isLoaded, setIsLoaded] = useState(false);
   const [editing, setEditing] = useState<PlayerKey | null>(null);
+  const [resetOpen, setResetOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -59,10 +63,7 @@ export function Calculator() {
     setState((prev) => ({ ...prev, [player]: { ...prev[player], name } }));
   };
 
-  const resetScores = () => {
-    if (typeof window !== "undefined" && !window.confirm("Beide Punktestände auf 30 zurücksetzen?")) {
-      return;
-    }
+  const handleReset = () => {
     setState((prev) => ({
       player1: { ...prev.player1, score: STARTING_SCORE },
       player2: { ...prev.player2, score: STARTING_SCORE },
@@ -120,16 +121,24 @@ export function Calculator() {
               )}
 
               {isLoaded ? (
-                <span
-                  aria-live="polite"
-                  aria-label={`${player.name}: ${player.score} Lehrkraft-Punkte`}
-                  className={cn(
-                    "font-mono text-6xl font-bold tabular-nums sm:text-7xl md:text-8xl",
-                    getScoreColor(player.score)
-                  )}
-                >
-                  {player.score}
-                </span>
+                <div className="relative">
+                  <AnimatePresence mode="wait">
+                    <m.span
+                      key={player.score}
+                      initial={{ scale: 1.3, opacity: 0.5 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      aria-live="polite"
+                      aria-label={`${player.name}: ${player.score} Lehrkraft-Punkte`}
+                      className={cn(
+                        "font-mono text-6xl font-bold tabular-nums sm:text-7xl md:text-8xl inline-block",
+                        getScoreColor(player.score)
+                      )}
+                    >
+                      <AnimatedNumber value={player.score} />
+                    </m.span>
+                  </AnimatePresence>
+                </div>
               ) : (
                 <div
                   aria-hidden="true"
@@ -142,9 +151,11 @@ export function Calculator() {
                   const isMinus = delta < 0;
                   const disabled = isMinus && player.score === 0;
                   return (
-                    <button
+                    <m.button
                       key={delta}
                       type="button"
+                      whileTap={{ scale: 0.92 }}
+                      transition={{ duration: 0.1 }}
                       onClick={() => adjust(key, delta)}
                       disabled={disabled}
                       aria-label={`${player.name} ${delta > 0 ? `+${delta}` : delta}`}
@@ -157,7 +168,7 @@ export function Calculator() {
                       )}
                     >
                       {delta > 0 ? `+${delta}` : delta}
-                    </button>
+                    </m.button>
                   );
                 })}
               </div>
@@ -169,12 +180,22 @@ export function Calculator() {
       <div className="mt-8 flex justify-center">
         <button
           type="button"
-          onClick={resetScores}
+          onClick={() => setResetOpen(true)}
           className="font-body text-muted-foreground hover:text-foreground hover:border-foreground/40 border-border rounded-md border px-4 py-2 text-sm"
         >
           Neues Spiel
         </button>
       </div>
+
+      <ConfirmDialog
+        open={resetOpen}
+        onClose={() => setResetOpen(false)}
+        onConfirm={handleReset}
+        title="Neues Spiel starten?"
+        description="Beide Spieler werden auf 30 Lehrkraft-Punkte zurückgesetzt. Die Spielernamen bleiben erhalten."
+        confirmLabel="Neu starten"
+        cancelLabel="Abbrechen"
+      />
     </div>
   );
 }

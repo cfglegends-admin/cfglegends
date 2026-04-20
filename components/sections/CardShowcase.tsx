@@ -1,6 +1,12 @@
+"use client"
+
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { exampleCards, type ExampleCard } from "@/lib/config";
 import { cn } from "@/lib/utils";
+import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion/Reveal";
+import { CardTilt } from "@/components/motion/CardTilt";
 
 const typeLabels: Record<ExampleCard["type"], string> = {
   lehrer: "Lehrer",
@@ -17,32 +23,35 @@ const typeBadgeStyles: Record<ExampleCard["type"], string> = {
 export function CardShowcase() {
   return (
     <div>
-      <header className="mx-auto mb-8 max-w-3xl text-center md:mb-12">
-        <h2 className="font-display text-gold-metallic text-3xl font-semibold tracking-wide md:text-4xl">
-          Karten
-        </h2>
-        <p className="font-body text-foreground/85 mt-6 text-base md:text-lg">
-          Über 100 einzigartige Karten — Lehrer, Ereignisse und Fallen.
-        </p>
-      </header>
+      <Reveal>
+        <header className="mx-auto mb-8 max-w-3xl text-center md:mb-12">
+          <h2 className="font-display text-gold-metallic text-3xl font-semibold tracking-wide md:text-4xl">
+            Karten
+          </h2>
+          <p className="font-body text-foreground/85 mt-6 text-base md:text-lg">
+            Über 100 einzigartige Karten — Lehrer, Ereignisse und Fallen.
+          </p>
+        </header>
+      </Reveal>
 
-      <ul className="-mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-4 sm:px-6 md:mx-0 md:justify-center md:gap-8 md:overflow-visible md:px-0">
+      <StaggerContainer className="-mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-4 sm:px-6 md:mx-0 md:justify-center md:gap-8 md:overflow-visible md:px-0">
         {exampleCards.map((card) => (
-          <li
+          <StaggerItem
             key={card.id}
             className="flex w-[78vw] max-w-[300px] shrink-0 snap-center flex-col gap-4 md:w-[280px]"
           >
-            <div className="bg-muted relative aspect-[924/1316] w-full overflow-hidden rounded-lg shadow-lg shadow-black/50 select-none [pointer-events:none]">
+            <CardTilt className="overflow-hidden rounded-lg shadow-lg shadow-black/50">
               <Image
                 src={card.image}
                 alt={`Karte ${card.name}`}
-                fill
+                width={924}
+                height={1316}
                 draggable={false}
                 quality={85}
                 sizes="(max-width: 640px) 80vw, (max-width: 1024px) 33vw, 300px"
-                className="object-cover"
+                className="w-full h-auto select-none pointer-events-none"
               />
-            </div>
+            </CardTilt>
             <div className="flex items-center justify-between gap-3">
               <span className="font-display text-foreground text-base font-semibold tracking-wide">
                 {card.name}
@@ -56,9 +65,21 @@ export function CardShowcase() {
                 {typeLabels[card.type]}
               </span>
             </div>
-          </li>
+          </StaggerItem>
         ))}
-      </ul>
+      </StaggerContainer>
+
+      <Reveal delay={0.2}>
+        <div className="mt-8 flex justify-center md:mt-12">
+          <Link
+            href="/karten"
+            className="text-gold hover:text-gold-bright font-body inline-flex items-center gap-2 text-base font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright"
+          >
+            Alle Karten ansehen
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </Reveal>
     </div>
   );
 }

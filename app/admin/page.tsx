@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Download, Newspaper, ShieldAlert, type LucideIcon } from "lucide-react";
+import { Download, Newspaper, ShieldAlert, Images, type LucideIcon } from "lucide-react";
 import { count, eq } from "drizzle-orm";
 import { db } from "@/lib/db";
-import { downloads, limitedCards, news } from "@/lib/db/schema";
+import { downloads, limitedCards, news, cards } from "@/lib/db/schema";
 import { requireAdmin } from "@/lib/auth/session";
 
 interface StatCardProps {
@@ -47,6 +47,11 @@ export default async function AdminDashboardPage() {
     .select({ value: count() })
     .from(downloads)
     .where(eq(downloads.published, true));
+  const [cardsTotal] = await db.select({ value: count() }).from(cards);
+  const [cardsPublished] = await db
+    .select({ value: count() })
+    .from(cards)
+    .where(eq(cards.published, true));
 
   return (
     <div>
@@ -54,7 +59,14 @@ export default async function AdminDashboardPage() {
         Dashboard
       </h1>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          href="/admin/cards"
+          icon={Images}
+          label="Karten"
+          primary={String(cardsTotal?.value ?? 0)}
+          detail={`${cardsPublished?.value ?? 0} veröffentlicht`}
+        />
         <StatCard
           href="/admin/limits"
           icon={ShieldAlert}

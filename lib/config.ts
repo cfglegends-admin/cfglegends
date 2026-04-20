@@ -1,6 +1,30 @@
+import type { ComponentType, SVGProps } from "react";
+import {
+  AstronomieIcon,
+  BiologieIcon,
+  ChemieIcon,
+  DeutschIcon,
+  EnglischIcon,
+  ErdkundeIcon,
+  EwIcon,
+  FranzoesischIcon,
+  GeschichteIcon,
+  InfoIcon,
+  KunstIcon,
+  LateinIcon,
+  MatheIcon,
+  MusikIcon,
+  PhiloIcon,
+  PhysikIcon,
+  ReligionIcon,
+  SowiIcon,
+  SpanischIcon,
+  SportIcon,
+} from "@/components/icons";
+
 export interface Subject {
   name: string;
-  icon: string;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
 }
 
 export interface ExampleCard {
@@ -11,30 +35,30 @@ export interface ExampleCard {
 }
 
 export const subjects: Subject[] = [
-  { name: "Philo", icon: "Brain" },
-  { name: "Info", icon: "Cpu" },
-  { name: "Deutsch", icon: "BookOpen" },
-  { name: "EW", icon: "Sprout" },
-  { name: "Kunst", icon: "Palette" },
-  { name: "Astronomie", icon: "Telescope" },
-  { name: "Biologie", icon: "Microscope" },
-  { name: "Chemie", icon: "FlaskConical" },
-  { name: "Englisch", icon: "Languages" },
-  { name: "Erdkunde", icon: "Globe" },
-  { name: "Latein", icon: "Scroll" },
-  { name: "Mathe", icon: "Calculator" },
-  { name: "Musik", icon: "Music" },
-  { name: "Physik", icon: "Atom" },
-  { name: "Religion", icon: "BookHeart" },
-  { name: "SoWi", icon: "Users" },
-  { name: "Spanisch", icon: "Languages" },
-  { name: "Sport", icon: "Dumbbell" },
-  { name: "Französisch", icon: "Languages" },
-  { name: "Geschichte", icon: "Landmark" },
+  { name: "Philo", icon: PhiloIcon },
+  { name: "Info", icon: InfoIcon },
+  { name: "Deutsch", icon: DeutschIcon },
+  { name: "EW", icon: EwIcon },
+  { name: "Kunst", icon: KunstIcon },
+  { name: "Astronomie", icon: AstronomieIcon },
+  { name: "Biologie", icon: BiologieIcon },
+  { name: "Chemie", icon: ChemieIcon },
+  { name: "Englisch", icon: EnglischIcon },
+  { name: "Erdkunde", icon: ErdkundeIcon },
+  { name: "Latein", icon: LateinIcon },
+  { name: "Mathe", icon: MatheIcon },
+  { name: "Musik", icon: MusikIcon },
+  { name: "Physik", icon: PhysikIcon },
+  { name: "Religion", icon: ReligionIcon },
+  { name: "SoWi", icon: SowiIcon },
+  { name: "Spanisch", icon: SpanischIcon },
+  { name: "Sport", icon: SportIcon },
+  { name: "Französisch", icon: FranzoesischIcon },
+  { name: "Geschichte", icon: GeschichteIcon },
 ];
 
 export const exampleCards: ExampleCard[] = [
   { id: "103", name: "Mensa-Team", type: "ereignis", image: "/cards/103.png" },
   { id: "120", name: "Feueralarm", type: "falle", image: "/cards/120.png" },
-  { id: "128", name: "Fächerkarte", type: "lehrer", image: "/cards/128.png" },
+  { id: "47", name: "Fächerkarte", type: "lehrer", image: "/cards/47.png" },
 ];

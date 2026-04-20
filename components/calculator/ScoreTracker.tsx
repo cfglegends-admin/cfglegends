@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Maximize, Minimize, RotateCcw, Sun, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import {
   ADJUSTMENTS,
   SCORE_STORAGE_KEY,
@@ -23,6 +24,7 @@ export function ScoreTracker() {
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenSupported, setFullscreenSupported] = useState(false);
+  const [resetOpen, setResetOpen] = useState(false);
   const wakeLockRef = useRef<WakeLockSentinel | null>(null);
 
   useEffect(() => {
@@ -125,10 +127,7 @@ export function ScoreTracker() {
     setState((prev) => ({ ...prev, [player]: { ...prev[player], name } }));
   };
 
-  const resetScores = () => {
-    if (typeof window !== "undefined" && !window.confirm("Beide Punktestände auf 30 zurücksetzen?")) {
-      return;
-    }
+  const handleReset = () => {
     setState((prev) => ({
       player1: { ...prev.player1, score: STARTING_SCORE },
       player2: { ...prev.player2, score: STARTING_SCORE },
@@ -286,7 +285,7 @@ export function ScoreTracker() {
 
         <button
           type="button"
-          onClick={resetScores}
+          onClick={() => setResetOpen(true)}
           aria-label="Neues Spiel"
           className="text-muted-foreground hover:text-gold border-border hover:border-gold inline-flex h-8 w-8 items-center justify-center rounded-md border bg-muted/60 backdrop-blur-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright"
         >
@@ -301,6 +300,16 @@ export function ScoreTracker() {
           <X className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>
+
+      <ConfirmDialog
+        open={resetOpen}
+        onClose={() => setResetOpen(false)}
+        onConfirm={handleReset}
+        title="Neues Spiel starten?"
+        description="Beide Spieler werden auf 30 Lehrkraft-Punkte zurückgesetzt. Die Spielernamen bleiben erhalten."
+        confirmLabel="Neu starten"
+        cancelLabel="Abbrechen"
+      />
     </div>
   );
 }

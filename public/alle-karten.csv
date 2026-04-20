@@ -1,0 +1,217 @@
+Kartennummer;Name;Typ;Seltenheit;Ansage;Chill;Fächer;Effekt;Bild-URL
+1;Herr Mertens;lehrer;golden;10;0;Biologie,Chemie;Die ultimative Verantwortung
+Solange diese Karte offen liegt, können deine anderen Lehrer nicht durch gegnerische Ereigniskarten in den Ruhestand geschickt werden. Einmal pro Spielzug, wenn ein Effekt aktiviert wird: Zahle 3 Lehrkraft, annulliere ihn.;/cards/1.png
+2;Frau Drübert;lehrer;golden;10;0;Chemie,Mathe;Haushaltskontrolle
+Wenn du diese Karte einstellst: Dein Gegner wirft zufällig 1 Karte ab. Falls diese offene Karte von deinem Feld in den Ruhestand geschickt würde: Du kannst sie in dein Deck zurückmischen, ziehe 1 Karte.;/cards/2.png
+3;Frau Bühne;lehrer;normal;3;7;Kunst;Initiative
+Du kannst 1 anderen School's-Out-Lehrer von deiner Hand im Chillmodus einstellen. Einmal pro Zug: Wähle 1 Lehrer auf dem Feld, ändere seinen Modus.;/cards/3.png
+4;Herr Noack;lehrer;normal;3;7;Mathe,Religion;Rückendeckung
+Wenn du diese Karte einstellst: Du erhältst +2 Lehrkraft. Einmal pro Spielzug, wenn ein anderer School's-Out-Lehrer den du kontrollierst, durch Kampf in den Ruhestand geschickt würde: Du kannst stattdessen seinen Modus ändern.;/cards/4.png
+5;Herr Pfeiffer;lehrer;normal;9;1;Sport,Geschichte;Durchführung
+Solange du 2 andere School's-Out-Lehrer mit unterschiedlichen Namen kontrollierst, kann diese Karte in deiner Prüfungsphase 1 zusätzlichen Angriff auf eine Lehrerkarte durchführen. Wenn diese Karte einen gegnerische Lehrer durch Kampf in den Ruhestand schickt: Du kannst 1 offenen Lehrer deines Gegners in den Chillmodus ändern.;/cards/5.png
+6;Frau Mattern;lehrer;normal;3;7;Deutsch,Erdkunde,SoWi,Spanisch;Akquise
+Wenn du diese Karte einstellst: Nimm 1 School's-Out-Lehrer von deinem Deck oder Ruhestand auf die Hand, außer Frau Mattern. Einmal pro Zug: Falls du einen anderen School's-Out-Lehrer kontrollierst, erhält 1 Lehrer, den du kontrollierst, bis zum Ende des Zuges +2 Ansage.;/cards/6.png
+7;Frau Kottmann;lehrer;normal;7;3;Mathe,Physik;Bücherausgabe
+Wenn du diese Karte einstellst: Ziehe 1 Karte, dann lege 1 Karte ab. Einmal pro Zug, wenn einer deiner Oberstufe-Lehrer kämpft: Wähle 1 anderen offene Oberstufe-Lehrer, den du kontrollierst. Falls die gewählte Karte 20 oder mehr Dienstjahre hat, kann die kämpfende Karte in diesem Kampf nicht durch Kampf in den Ruhestand geschickt werden und erhält +2 Ansage.;/cards/7.png
+8;Herr Israel;lehrer;normal;5;5;Latein,Mathe;Abiturzulassung
+Wenn du diese Karte einstellst: Nimm 1 Abiturklausurplan oder Kursumwahl von deinem Deck auf die Hand. Solange diese Karte offen liegt, können gegnerische Lehrer mit 4 oder weniger Ansage nicht angreifen.;/cards/8.png
+9;Frau Grote;lehrer;normal;7;3;Englisch,Religion,Sport;Abituraufsicht
+Wenn du diese Karte einstellst: Du kannst 1 Abiturklausurplan, Kursumwahl oder Mündliche Nachprüfung in deinem Ruhestand auf die Hand nehmen. Einmal pro Zug, wenn ein gegnerischer Lehrer mit 6 oder weniger Ansage einen Angriff erklärt: Annulliere den Angriff.;/cards/9.png
+10;Frau Kehls;lehrer;normal;8;2;Latein,Spanisch;Individuelle Förderung
+Wenn du diese Karte einstellst: Du kannst 1 anderen eigenen Lehrer auf die Hand zurückgeben. Falls du dies tust, nimm 1 Oberstufe-Lehrer von deinem Deck auf die Hand. Einmal pro Zug: Wähle 1 anderen offenen Oberstufe-Lehrer, den du kontrollierst. Er erhält bis zum Ende des Zuges +2 Ansage.;/cards/10.png
+11;Frau Wattke;lehrer;normal;3;7;Biologie;Nachschreibtermin
+Wenn du diese Karte einstellst: Du kannst Mündliche Nachprüfung direkt von deinem Deck setzen. Sie kann in diesem Zug nicht aktiviert werden. Solange diese Karte offen im Chillmodus liegt, kann dein Gegner in jeder Prüfungsphase nur mit 1 Lehrer mit 7 oder mehr Ansage angreifen.;/cards/11.png
+12;Herr Müller;lehrer;normal;3;7;Englisch,Mathe;Klausurplanung
+Wenn du diese Karte einstellst: Schaue dir die obersten 3 Karten deines Decks an. Nimm 1 Oberstufe-Lehrer oder 1 Ereigniskarte darunter auf die Hand. Lege die restlichen Karten in beliebiger Reihenfolge unter dein Deck. Einmal pro Zug: Wähle 1 offenen Lehrer auf dem Feld mit 6 oder weniger Ansage, er kann bis zum Ende des nächsten Zuges nicht angreifen.;/cards/12.png
+13;Frau Wyneken;lehrer;normal;8;2;SoWi,Sport,Französisch;Beratungsgespräch
+Wenn du diese Karte einstellst: Du kannst 1 anderen Oberstufe-Lehrer deinem Ruhestand auf die Hand nehmen. Falls du dies tust, wirf 1 Karte ab. Einmal pro Zug: Wähle 1 anderen offenen Oberstufe-Lehrer, der du kontrollierst. Bis zum Ende des nächsten gegnerischen Zuges erhält er +2 Chill. Falls er in dieser Zeit durch Kampf in den Ruhestand geschickt würde, nimm ihn zurück auf die Hand.;/cards/13.png
+14;Frau Mumm;lehrer;normal;7;3;Deutsch,Sport;Mittelstufenkonferenz
+Solange diese Karte offen liegt, können offene Lehrer mit 7 oder mehr Ansage nicht direkt angreifen. Wenn dein Gegner den Effekt eines offenen Lehrers mit 7 oder mehr Ansage aktiviert: Du kannst diese Karte von deiner Hand abwerfen, jene Karte erhält bis zum Ende des Zuges -4 Ansage.;/cards/14.png
+15;Frau Götsch;lehrer;normal;6;4;Biologie,Englisch;Kurswahl
+Wenn diese Karte eingestellt wird: Ziehe 1 Karte, dann lege 1 Karte ab. Einmal pro Spielzug: Wenn eine deiner offenen Lehrer in den Chillmodus geändert wird, kannst du 1 anderen offenen Lehrer wählen, bis zum Ende des Zuges kann er nicht angreifen.;/cards/15.png
+16;Herr Siebrandt;lehrer;normal;7;3;Deutsch,Kunst;Kursumwahl
+Wenn du diese Karte einstellst: Wähle 1 anderen offenen Lehrer, den du kontrollierst, und 1 Lehrer mit einem anderen Namen in deinem Ruhestand. Nimm die offene Karte auf die Hand. Falls du dies tust, stelle die gewählte Karte aus deinem Ruhestand im selben Modus ein. Ihre Effekte sind bis zum Ende des Zuges annulliert. Einmal pro Zug: Du kannst 1 Karte abwerfen, ändere den Modus von 1 Lehrer auf dem Feld.;/cards/16.png
+17;Frau Boeddinghaus;lehrer;normal;6;4;Chemie,Mathe;Sicherheitsbegehung
+Wenn du diese Karte einstellst: Ziehe 1 Karte, dann lege 1 Karte ab. Einmal pro Spielzug, wenn dein Gegner eine Lehrerkarte einstellt: Du kannst jene Karte in den Chillmodus ändern.;/cards/17.png
+18;Herr Hillringhaus;lehrer;normal;5;5;Mathe,Physik;Digitales Klassenbuch
+Wenn du diese Karte einstellst: Schaue dir die obersten 6 Karten deines Decks an. Nimm 1 Verwaltung-Lehrer oder 1 Falle darunter auf die Hand. Lege die restlichen Karten in beliebiger Reihenfolge unter dein Deck. Einmal in deinem Zug: Decke 1 verdeckte Karte des Gegners auf. Falls es eine Falle ist, kann sie in diesem Zug nicht aktiviert werden.;/cards/18.png
+19;Frau Schmitz-Wimmer;lehrer;normal;5;5;Latein,Mathe;Jugend präsentiert Finale
+Wenn diese Karte eingestellt wird: Wähle 1 Lehrer, den du kontrollierst. Bis zum Ende des nächsten gegnerischen Zuges kann er nicht Ziel gegnerischer Effekte werden und erhält +1 Ansage. Falls deine eingestellten Lehrer zusammen mindestens 50 Dienstjahre zählen, ziehe 1 Karte.;/cards/19.png
+20;Herr Hübschen;lehrer;normal;7;3;Mathe,Physik;Vertretung
+Wenn du diese Karte einstellst: Wähle 1 offenen Lehrer deines Gegners und 1 Lehrer in seinem Ruhestand. Schicke die offene Lehrerkarte in den Ruhestand. Falls du dies tust, stellt dein Gegner den gewählten Lehrer im Chillmodus ein. Seine Effekte sind bis zum Ende des Zuges annulliert. Wenn du diese Karte einstellst: Du kannst Antrag abgelehnt direkt von deinem Deck setzen.;/cards/20.png
+21;Frau Furkert;lehrer;normal;5;5;Deutsch,Erdkunde;Sicherer Start
+Wenn diese Karte eingestellt wird: Lege 1 Entwicklungsmarke auf 1 anderen Lehrer, den du kontrollierst. Lehrer mit Entwicklungsmarke erhalten +1 Ansage und +1 Chill. Einmal pro Spielzug: Wenn ein Lehrer mit Entwicklungsmarke durch Kampf in den Ruhestand gehen würde, entferne stattdessen 1 Entwicklungsmarke von ihm und ändere ihn in den Chillmodus.;/cards/21.png
+22;Herr Leermann;lehrer;normal;9;1;Erdkunde,Sport;Talentscouting
+Wenn diese Karte eingestellt wird: Du kannst 1 Lehrkraft zahlen, aktiviere Sponsorenlauf direkt von deinem Deck. Einmal pro Spielzug, wenn ein anderer Bewegung-Lehrer einen Kampf gewinnt: Stelle 1 Bewegung-Lehrer mit 6 oder weniger Ansage von deiner Hand im offenen Chillmodus ein.;/cards/22.png
+23;Frau Jütz;lehrer;normal;7;3;Sport;Motivation
+Wenn diese Karte eingestellt wird: Lege 2 Rundenpunkte auf Sponsorenlauf. Einmal pro Spielzug: Du kannst 2 Rundenpunkte von Sponsorenlauf entfernen, stelle 1 Lehrer mit 5 oder weniger Ansage von deiner Hand im Ansagemodus ein.;/cards/23.png
+24;Frau Bielor;lehrer;normal;4;6;Biologie,Spanisch;Zumba
+Wenn diese Karte eingestellt wird: Ändere den Modus von bis zu 2 offenen Lehrern. Einmal pro Spielzug, wenn ein Lehrer seinen Modus ändert: Wähle 1 Bewegung-Lehrer. Im Ansagemodus erhält er +2 Ansage bis zum Ende des Zuges. Im Chillmodus erhält er +2 Chill bis zum Ende des nächsten gegnerischen Zuges.;/cards/24.png
+25;Frau Mosbach;lehrer;normal;6;4;Biologie,Sport;Staffellauf
+Wenn diese Karte durch Kampf in den Ruhestand geschickt wird: Stelle 1 Bewegung-Lehrer mit 5 oder weniger Ansage von deiner Hand im Ansagemodus ein und lege 1 Rundenpunkt auf Sponsorenlauf.;/cards/25.png
+26;Herr Spira;lehrer;normal;5;5;Erdkunde,Mathe,Sport;Sporthelfer
+Wenn diese Karte eingestellt wird: Lege 1 Rundenpunkt auf Sponsorenlauf. Wenn einer deiner Bewegung-Lehrer kämpft: Du kannst diese Karte von deiner Hand abwerfen, jene Karte kann in diesem Kampf nicht in den Ruhestand geschickt werden. Lege danach 1 Rundenpunkt auf Sponsorenlauf.;/cards/26.png
+27;Herr Cleve;lehrer;normal;4;6;Astronomie,Mathe,Physik;Dachbeobachtung
+Wenn du diese Karte einstellst: Du kannst 1 offenen MINT-Lehrer, den du kontrollierst, in den Chillmodus ändern. Falls du dies tust, ziehe 1 Karte. Solange diese Karte offen im Chillmodus liegt, erhalten deine anderen Astronomie-Lehrer +1 Chill.;/cards/27.png
+28;Herr Happe;lehrer;normal;7;3;Philo,Astronomie,Mathe,Physik;Physikshow
+Wenn du diese Karte einstellst: Wähle 1 Lehrer auf dem Feld, ändere seinen Modus. Falls in diesem Zug ein Lehrer seinen Modus geändert hat, erhält diese Karte bis zum Ende des Zuges einmalig +2 Ansage. Wenn diese Karte eine Lehrerkarte im Chillmodus angreift und ihre Ansage höher ist als deren Chill, verliert dein Gegner Lehrkraft in Höhe der Differenz.;/cards/28.png
+29;Herr Winkhaus;lehrer;normal;6;4;Astronomie,Mathe,Physik;Sternwartenleitung
+Wenn du diese Karte einstellst: Du kannst Sternwarte direkt von deinem Deck offen in deine Hintergrundreihe legen. Solange Sternwarte offen in deiner Hintergrundreihe liegt, erhält diese Karte +2 Ansage und kann nicht durch gegnerische Ereigniskarten in den Ruhestand geschickt werden. Einmal pro Zug: Du kannst 1 Karte von deiner Hand unter dein Deck legen, ziehe 1 Karte.;/cards/29.png
+30;Herr Holbeck;lehrer;normal;6;4;Mathe,Geschichte;Subtraktion
+Einmal pro Spielzug, wenn dein Gegner den Effekt eines offenen Lehrers aktiviert: Du kannst 1 Karte von deiner Hand in den Ruhestand legen, annulliere den Effekt. Du kannst jeden Effekt von Herr Holbeck nur einmal pro Zug verwenden.;/cards/30.png
+31;Herr Bukow;lehrer;normal;4;6;Biologie,Erdkunde;Schülerforschungszentrum
+Wenn du diese Karte einstellst: Du kannst 1 MINT-Lehrer in deinem Ruhestand wählen, mische sie in dein Deck zurück. Falls du dies tust, ziehe 1 Karte. Solange diese Karte offen im Chillmodus liegt, können deine anderen MINT-Lehrer nicht durch gegnerische Ereigniskarten in den Ruhestand geschickt werden.;/cards/31.png
+32;Frau Brill;lehrer;normal;8;2;Englisch,Spanisch;Madrid-Austausch
+Falls in diesem Zug einer deiner Europa-Lehrer auf deine Hand zurückgegeben wurde, kannst du diese Karte von deiner Hand im Ansagemodus einstellen. Wenn du diese Karte einstellst: Wähle 1 offenen Lehrer auf dem Feld mit 6 oder weniger Ansage, gib ihn auf die Hand zurück.;/cards/32.png
+33;Herr Bigalke;lehrer;normal;6;4;Spanisch,Französisch;DELE
+Wenn du diese Karte einstellst: Du kannst 1 anderen Europa-Lehrer, den du kontrollierst, auf die Hand zurückgeben. Falls du dies tust, stelle 1 Europa-Lehrer mit einem anderen Namen von deiner Hand im selben Modus ein. Einmal pro Spielzug, wenn einer deiner Europa-Lehrer durch einen deiner Effekte auf die Hand zurückgegeben wird: Wähle 1 offenen Lehrer deines Gegners mit weniger Dienstjahren als diese Karte, gib ihn auf die Hand zurück.;/cards/33.png
+34;Frau Granger;lehrer;normal;3;7;EW,Englisch;Speaking Time
+Wenn diese Karte eingestellt wird: Sieh dir die obersten 3 Karten deines Decks an. Du kannst 1 Europa- oder Englisch-Lehrer darunter auf die Hand nehmen. Lege den Rest unter dein Deck.;/cards/34.png
+35;Frau Klinkhammer;lehrer;normal;5;5;Englisch,Französisch;Austauschmappe
+Wenn diese Karte eingestellt wird: Du kannst 1 Europa- oder 1 Lehrer mit Fremdsprache von deinem Deck auf die Hand nehmen. Einmal pro Spielzug, wenn du einen Europa-Lehrer einstellst: Du erhältst +2 Lehrkraft.;/cards/35.png
+36;Frau Zarnikow;lehrer;normal;6;4;Englisch,Musik,Spanisch;Sprachwechsel
+Wenn diese Karte eingestellt wird: Du kannst 1 Spanisch- oder Europa-Lehrer von deiner Hand im offenen Chillmodus einstellen. Einmal pro Spielzug, wenn einer deiner Europa-Lehrer eingestellt wird: Du erhältst +1 Lehrkraft.;/cards/36.png
+37;Frau Morin;lehrer;normal;6;4;Deutsch,Französisch;Austauschprogramm
+Wenn diese Karte eingestellt wird: Du kannst 1 Europa-Lehrer oder 1 Lehrer mit Fremdsprache von deinem Deck auf die Hand nehmen. Einmal pro Spielzug, wenn einer deiner Europa-Lehrer auf die Hand zurückgegeben wird: Du erhältst +2 Lehrkraft.;/cards/37.png
+38;Frau Jülicher-Böker;lehrer;normal;6;4;Englisch,Französisch;Europa-Schulen
+Einmal pro Spielzug, wenn einer deiner Europa-Lehrer Ziel eines Angriffs oder Effekts wird: Du kannst ihn auf die Hand zurückgeben. Falls du dies tust, stelle 1 anderen Europa-Lehrer mit einem anderen Namen von deiner Hand im offenen Chillmodus ein. Falls die Summe der Dienstjahre deiner offenen Europa-Lehrer 30 oder mehr beträgt, kannst du die neue Karte stattdessen im Ansagemodus einstellen.;/cards/38.png
+39;Frau Hinz;lehrer;normal;6;4;Englisch,Geschichte;Bilingualer Unterricht
+Wenn diese Karte durch den Effekt eines Europa-Lehrers eingestellt wird: Ziehe 1 Karte, dann lege 1 Karte ab. Einmal pro Zug: Wähle 1 Europa-Lehrer, den du kontrollierst. Liegt er im Ansagemodus, erhält er bis zum Ende des Zuges +2 Ansage. Liegt er im Chillmodus, erhält er bis zum Ende des nächsten gegnerischen Zuges +2 Chill.;/cards/39.png
+40;Frau Aksu;lehrer;normal;4;6;Englisch,Geschichte;Geschichte bilingual
+Wenn diese Karte eingestellt wird: Wähle 1 offenen Lehrer auf dem Feld, seine Ansage und Chill werden bis zum Ende des Zuges vertauscht. Einmal pro Spielzug: Wenn eine deiner Karten auf die Hand zurückkehrt, kannst du 1 Karte ziehen und dann 1 Karte ablegen.;/cards/40.png
+41;Herr Goecke;lehrer;normal;7;3;Englisch,Erdkunde;Hongkong-Austausch
+Falls in diesem Zug einer deiner Europa-Lehrer durch einen Effekt auf die Hand zurückgegeben wurde, kannst du diese Karte von deiner Hand im Ansagemodus einstellen. Wenn du diese Karte einstellst: Wähle 1 offenen Lehrer auf dem Feld mit 6 oder weniger Ansage, gib ihn auf die Hand zurück. Wenn diese Karte durch den Effekt eines Europa-Lehrer auf die Hand zurückgegeben wird: Du kannst 1 Europa-Lehrer mit einem anderen Namen von deiner Hand im Chillmodus einstellen.;/cards/41.png
+42;Frau Roberts;lehrer;normal;6;4;Englisch,Geschichte;Erasmus+
+Wenn du diese Karte einstellst: Nimm 1 Europa-Lehrer mit einem anderen Namen von deinem Deck auf die Hand.;/cards/42.png
+43;Frau Hübner;lehrer;normal;8;2;Deutsch,SoWi,Französisch;DELF
+Wenn du diese Karte einstellst: Wähle 1 Europa-Lehrer, den du kontrollierst. Bis zum Ende des nächsten gegnerischen Zuges erhält er +2 Ansage und kann nicht Ziel gegnerischer Ereigniskarten werden. Wenn diese Karte durch den Effekt eines Europa-Lehrers auf die Hand zurückgegeben wird: Du kannst 1 Karte ziehen und dann 1 Karte ablegen.;/cards/43.png
+44;Frau Arnold;lehrer;normal;6;4;Philo,Deutsch;Coaching
+Wenn diese Karte eingestellt wird: Wähle 1 anderen Lehrer, den du kontrollierst. Er erhält bis zum Ende des nächsten gegnerischen Zuges +1 Ansage und +1 Chill. Wenn eine deiner offenen Lehrer Ziel eines Angriffs oder Effekts wird: Du kannst diese Karte von deiner Hand abwerfen, gib jenen Lehrer auf die Hand zurück und ziehe 1 Karte.;/cards/44.png
+45;Frau Plätzer;lehrer;normal;7;3;Deutsch,Religion;Schulseelsorge
+Wenn du diese Karte einstellst: Du erhältst +2 Lehrkraft. Wenn dein Gegner dir durch Kampf oder einen Karteneffekt Lehrkraft abziehen würde: Du kannst diese Karte von deiner Hand abwerfen, ändere 1 offenen Lehrer auf dem Feld in den Chillmodus. Reduziere dann diesen Schaden auf 0.;/cards/45.png
+46;Herr Urban;lehrer;normal;5;5;Philo,Info,Deutsch,EW;KI-Übernahme
+Wenn dein Gegner den Effekt eines offenen Lehrers aktiviert oder einen Angriff erklärt: Du kannst diese Karte von deiner Hand abwerfen, annulliere ihren Effekt und übernimm den Lehrer bis zum Ende desselben Zuges im Chillmodus. Gib ihn danach ihrem Besitzer im Chillmodus zurück.;/cards/46.png
+47;Herr Zuber;lehrer;normal;5;5;SoWi,Sport;Digitale Blume
+Wenn diese Karte eingestellt wird: Wähle bis zu 2 andere offene Lehrer mit unterschiedlichen Fachsymbolen, die du kontrollierst. Eine erhält +2 Ansage, die andere +2 Chill bis zum Ende des nächsten gegnerischen Zuges. Wenn dein Gegner den Effekt eines offenen Lehrers aktiviert: Du kannst diese Karte von deiner Hand abwerfen, falls du 4 verschiedene Fachsymbole unter deinen offenen Lehrern kontrollierst, annulliere den Effekt.;/cards/47.png
+48;Herr Sellin;lehrer;normal;6;4;Info,Mathe,Geschichte;Digitalisierungsbeauftragung
+Wenn du diese Karte einstellst: Du kannst 1 Karte abwerfen, nimm 1 Digitalisierung-Lehrer von deinem Deck auf die Hand. Einmal pro Spielzug, wenn dein Gegner einen Angriff erklärt oder den Effekt eines offenen Lehrers aktiviert: Wähle 1 offenen Lehrer, den du kontrollierst. Falls er mehr Dienstjahre hat als die gegnerische Karte, wird die Ansage der gegnerischen Karte bis zum Ende des Zuges halbiert. Runde auf.;/cards/48.png
+49;Frau Piechota;lehrer;normal;3;7;Deutsch,SoWi;Digitale Mündigkeit
+Einmal pro Spielzug, wenn dein Gegner eine Ereigniskarte aktiviert oder eine Karte verdeckt setzt: Du kannst diese Karte von deiner Hand abwerfen oder, falls sie offen auf deinem Feld liegt, sie in den Chillmodus ändern, annulliere die Wirkung der Karte und schicke sie in den Ruhestand.;/cards/49.png
+50;Herr Daniels;lehrer;normal;5;5;Info,Mathe,Physik;Digitalisierungskonzept
+Wenn du diese Karte einstellst: Nimm 1 Digitalisierung-Lehrer oder WLAN-Ausfall von deinem Deck auf die Hand. Lege danach 1 Karte von deiner Hand unter dein Deck. Einmal pro beliebigem Spielzug, wenn eine Ereigniskarte aktiviert wird: Du kannst 1 Karte abwerfen, wähle 1 offene Lehrerkarte auf dem Feld. Ändere ihren Modus oder annulliere ihre Effekte bis zum Ende des Zuges.;/cards/50.png
+51;Herr Pick;lehrer;normal;6;4;Info,Deutsch,Biologie;Homepage
+Wenn du diese Karte einstellst: Decke 1 verdeckte Karte auf dem Feld auf. Falls es eine Falle ist, kann sie in diesem Zug nicht aktiviert werden. Einmal pro beliebigem Spielzug, wenn eine Karte auf dem Feld aufgedeckt wird: Du kannst 1 Karte ziehen und dann 1 Karte abwerfen.;/cards/51.png
+52;Herr Wefes;lehrer;normal;5;5;Englisch,SoWi;Wissensorganisation
+Wenn du diese Karte einstellst: Schaue dir die obersten 3 Karten deines Decks an. Ordne sie in beliebiger Reihenfolge. Du kannst anschließend 1 davon auf die Hand nehmen, falls es ein Lehrer mit 10 oder weniger Dienstjahren ist, und legst 1 Karte von deiner Hand unter dein Deck. Einmal pro Spielzug, wenn dein Gegner den Effekt eines offenen Lehrers mit weniger Dienstjahren als diese Karte aktiviert: Du kannst jene Karte in den Chillmodus ändern.;/cards/52.png
+53;Herr Schreiber;lehrer;normal;6;4;Englisch,SoWi,Sport;Klimaparlament
+Wenn diese Karte eingestellt wird: Mische 1 Lehrer aus deinem Ruhestand in dein Deck, ziehe 1 Karte. Einmal pro Spielzug, wenn eine deiner Karten aus dem Ruhestand zurückkehrt: Wähle 1 offenen Lehrer auf dem Feld, er erhält bis zum Ende des Zuges -2 Ansage.;/cards/53.png
+54;Frau Schaller-Picard;lehrer;normal;3;7;Biologie,Musik,Religion;Klimaparlament
+Wenn diese Karte in den Ruhestand geschickt wird: Du kannst sie einmal pro Spiel im Chillmodus wieder einstellen. Einmal pro Spielzug, wenn eine deiner Karten aus dem Ruhestand auf deine Hand oder auf dein Feld zurückkehrt: Du erhältst +2 Lehrkraft.;/cards/54.png
+55;Frau Efthymiadou;lehrer;normal;7;3;Biologie,Englisch;Nachhaltige Wende
+Wenn diese Karte eingestellt wird: Nimm 1 BNE-Lehrer aus deinem Ruhestand auf die Hand. Einmal pro Spielzug: Wenn eine deiner Karten aus dem Ruhestand zurückkehrt, wähle 1 offenen Lehrer. Falls diese Karte mehr Dienstjahre hat, ändere sie in den Chillmodus. Andernfalls erhält sie -2 Ansage.;/cards/55.png
+56;Frau Voßkühler;lehrer;normal;6;4;Kunst;StreetArt
+Solange du Herr Roth kontrollierst, können deine BetHa-Lehrer kein Ziel gegnerischer Ereignis- und Fallenkarten werden. Falls du einen anderen Lehrer mit dem Fach Kunst kontrollierst, erhältst du am Ende deines Zuges +1 Lehrkraft.;/cards/56.png
+57;Herr Roth;lehrer;normal;6;4;Deutsch,SoWi;Bis zum Schluss
+Wenn diese Karte eingestellt wird: Gib 1 offenen Lehrer mit 6 oder weniger Ansage auf die Hand zurück. Solange diese Karte offen liegt, kannst du einmal pro Spielzug, wenn dein Gegner den Effekt eines offenen Lehrers aktiviert und du 3 oder mehr Handkarten hast, 1 Karte abwerfen, ändere jene Karte in den Chillmodus.;/cards/57.png
+58;Herr Kruskic;lehrer;normal;4;6;Chemie,Englisch;Pyrotechnik
+Wenn diese Karte eingestellt wird: Schicke 1 verdeckte Karte deines Gegners in den Ruhestand. Falls es eine Falle war, verliert dein Gegner 2 Lehrkraft. Wenn dein Gegner eine Ereigniskarte aktiviert oder eine Karte verdeckt setzt: Du kannst diese Karte von deiner Hand abwerfen, 1 offener Lehrer erhält bis zum Ende des Zuges -3 Ansage.;/cards/58.png
+59;Frau Ditgens;lehrer;normal;3;7;Musik;Einschulungsmusik
+Wenn diese Karte eingestellt wird: Du erhältst +2 Lehrkraft. Einmal pro Spielzug, wenn einer deiner Lehrer Ziel eines Angriffs wird: Du kannst diese Karte von deiner Hand abwerfen, ändere deinen Lehrer in den Chillmodus.;/cards/59.png
+60;Herr Gessner;lehrer;normal;2;8;Musik;Orchesterprobe
+Solange diese Karte offen im Chillmodus liegt: Alle Musik-und-Bühne-Lehrer, die du kontrollierst, erhalten +1 Ansage. Einmal pro Zug, wenn dein Gegner einen Angriff erklärt: Du kannst diese Karte von deiner Hand abwerfen, der Angriff wird annulliert.;/cards/60.png
+61;Frau Brockmann;lehrer;normal;5;5;Musik;Musical
+Wenn diese Karte eingestellt wird: Wähle bis zu 2 offene Lehrer, die du kontrollierst. Sie erhalten bis zum Ende des nächsten gegnerischen Zuges +1 Ansage und +1 Chill. Wenn einer deiner Lehrer seinen Modus ändert: Du kannst 1 Karte ziehen, dann 1 Karte ablegen.;/cards/61.png
+62;Herr Spill-Hartung;lehrer;normal;5;5;Deutsch,Musik;Rhythmusgefühl
+Wenn diese Karte eingestellt wird: Ändere den Modus von bis zu 2 deiner Lehrer. Einmal pro Spielzug, wenn einer deiner Lehrer ihren Modus ändert: Du kannst 1 Karte ziehen, dann 1 Karte ablegen.;/cards/62.png
+63;Frau Jung;lehrer;normal;5;5;Englisch,Latein,Musik,Spanisch;Pop
+Wenn diese Karte eingestellt wird: Ziehe 1 Karte, dann lege 1 Karte ab. Falls die abgelegte Karte ein Lehrer war, erhält 1 offener Lehrer, den du kontrollierst, bis zum Ende des Zuges +2 Ansage.;/cards/63.png
+64;Frau Bischop;lehrer;normal;7;3;Englisch,Erdkunde;Irish Dance
+Wenn diese Karte eingestellt wird: Ändere den Modus von 1 offenen Lehrer. Einmal pro Spielzug, wenn ein Lehrer seinen Modus ändert: Diese Karte erhält bis zum Ende des Zuges +2 Ansage. Falls sie dadurch 9 oder mehr Ansage hat, kann sie beim Angriff auf einen Lehrer im Chillmodus direkt Schaden in Höhe der Differenz zufügen.;/cards/64.png
+65;Herr Beichl;lehrer;normal;4;6;Englisch,SoWi;Vielfalts-AG
+Wenn diese Karte eingestellt wird: Du kannst Schule ohne Rassismus direkt von deinem Deck offen in deine Hintergrundreihe legen. Falls Schule ohne Rassismus offen liegt, erhalten offene gegnerische Lehrer mit 7 oder mehr Ansage -2 Ansage und +2 Chill. Wenn dein Gegner den Effekt eines offenen Lehrers mit 7 oder mehr Ansage aktiviert: Du kannst diese Karte von deiner Hand abwerfen, ändere jene Karte in den Chillmodus.;/cards/65.png
+66;Frau Wissemann;lehrer;normal;4;6;Spanisch,Sport;Antidiskriminierungsarbeit
+Wenn diese Karte eingestellt wird: Falls Schule ohne Rassismus offen in deiner Hintergrundreihe liegt, ziehe 1 Karte. Einmal pro Spielzug, wenn ein gegnerischer Lehrer durch einen deiner Effekte in den Chillmodus geändert wird: Du kannst 1 Karte ziehen, dann 1 Karte ablegen.;/cards/66.png
+67;Frau Tenter;lehrer;normal;6;4;Kunst,Sport;Safe Space
+Wenn diese Karte eingestellt wird: Falls Schule ohne Rassismus offen in deiner Hintergrundreihe liegt, wähle 1 offenen gegnerischen Lehrer, ändere seinen Modus. Einmal pro Zug, wenn dein Gegner eine Ereignis- oder Fallenkarte aktiviert, die einen deiner Lehrer betrifft: Du kannst diese Karte von deiner Hand abwerfen, annulliere den Effekt.;/cards/67.png
+68;Frau Bünger;lehrer;normal;4;6;Biologie,Erdkunde,Sport;FerienWerk
+Wenn diese Karte eingestellt wird und du Frau Tenter oder Frau Wissemann kontrollierst: Ziehe 2 Karten, dann lege 1 Karte ab. Einmal pro Zug: Wenn einer deiner Lehrer in den Ruhestand geschickt wird, kannst du 1 Karte vom Ruhestand deines Gegners aus dem Spiel entfernen.;/cards/68.png
+69;Frau Jaite;lehrer;normal;6;4;Deutsch,Latein;Gleichstellung
+Wenn diese Karte in den Ruhestand geschickt wird, kannst du eine Karte mit identischen Ansage- und Chillwerten direkt von deinem Deck einstellen.;/cards/69.png
+70;Frau Janura;lehrer;normal;4;6;Englisch,Religion;Ying
+Wenn diese Karte eingestellt wird: Du kannst Herr Janura von deiner Hand oder aus deinem Ruhestand im Chillmodus einstellen. Solange du Herr Janura kontrollierst, erhalten beide +4 Ansage. Einmal pro Spielzug: Wenn eine deiner Janura-Karten Ziel eines Angriffs oder Effekts wird, kannst du 1 Karte abwerfen, gib eine Janura-Karte auf die Hand zurück.;/cards/70.png
+71;Herr Janura;lehrer;normal;4;6;Philo,Info,Geschichte;Yang
+Wenn diese Karte eingestellt wird: Du kannst Frau Janura von deiner Hand im Chillmodus einstellen. Einmal pro Zug: Falls du Frau Janura kontrollierst, wähle 1 offenen Lehrer, seine Ansage und Chill werden bis zum Ende des Zuges vertauscht. Wenn Frau Janura das Feld verlässt: Du kannst 1 Karte ziehen, dann 1 Karte ablegen.;/cards/71.png
+72;Frau Windgasse;lehrer;normal;7;3;EW,Englisch;Unterrichtsbesuch
+Wenn diese Karte eingestellt wird: Du kannst 1 Lehrer mit 5 oder weniger Ansage von deiner Hand im Chillmodus einstellen. Einmal pro Spielzug: Wenn ein anderer Lehrer, den du kontrollierst und der weniger Dienstjahre als diese Karte hat, in den Ruhestand gehen würde, gib sie stattdessen auf die Hand zurück.;/cards/72.png
+73;Frau Orth;lehrer;normal;5;5;Deutsch,Sport;Praxissemester
+Wenn diese Karte eingestellt wird: Nimm 1 Lehrer mit 10 oder weniger Dienstjahren von deinem Deck auf die Hand. Einmal pro Spielzug: Wenn du einen Lehrer mit 5 oder weniger Ansage (außer Frau Orth) einstellst, darf jener Lehrer in diesem Zug zwei Mal angreifen.;/cards/73.png
+74;Frau Sonntag;lehrer;normal;7;3;Deutsch,Englisch,Religion;Orientierung
+Falls dein Gegner mehr Lehrer kontrolliert als du, darfst du in deinem Unterricht 1 zusätzliche Lehrerkarte im Chillmodus einstellen. Einmal pro Zug, wenn du einen Lehrer im Chillmodus einstellst: Du kannst 1 anderen offenen Lehrer, den du kontrollierst, in den Chillmodus drehen.;/cards/74.png
+75;Frau Heller;lehrer;normal;7;3;Englisch,SoWi;Tagesordnung
+Wenn diese Karte eingestellt wird: Sieh dir die Hand deines Gegners an. Wähle 1 Ereignis- oder Fallenkarte daraus, bis zum Ende des nächsten gegnerischen Zuges kann dein Gegner keine Karte mit demselben Namen spielen oder setzen.;/cards/75.png
+76;Frau Linnartz;lehrer;normal;5;5;Biologie,Englisch;Mehrheitsbeschluss
+Zu Beginn deiner Pause: Wähle 1 Beschluss. Er gilt bis zum Ende des gegnerischen Zuges:
+1) Direkte Angriffe sind nicht erlaubt.
+2) Jeder Spieler kann nur mit 1 Lehrer angreifen.
+3) Lehrer mit 8 oder mehr Ansage können ihre Effekte nicht aktivieren.;/cards/76.png
+77;Herr Bünger;lehrer;normal;3;7;SoWi,Sport;Beschlussvorlage
+Wenn diese Karte eingestellt wird: Nimm 1 Ereignis- oder Fallenkarte aus deinem Ruhestand auf die Hand. Falls es eine dauerhafte Ereigniskarte war, kannst du sie stattdessen offen in deine Hintergrundreihe legen.;/cards/77.png
+78;Frau Brüning;lehrer;normal;7;3;EW,Spanisch;Babysitter-AG
+Wenn diese Karte eingestellt wird: Nimm 1 Lehrer mit 5 oder weniger Ansage aus deinem Ruhestand auf die Hand. Einmal pro Spielzug: Wenn einer deiner Lehrer mit 5 oder weniger Ansage Ziel eines Angriffs wird, kannst du 1 Karte abwerfen, ändere jenen Lehrer in den Chillmodus.;/cards/78.png
+79;Frau Harms;lehrer;normal;8;2;Deutsch,EW;Erziehung
+Wenn diese Karte eingestellt wird: Wähle 1 offenen gegnerischen Lehrer, er kann im nächsten gegnerischen Zug nicht angreifen und seine Effekte nicht aktivieren. Nimm außerdem einen Lehrer mit dem Fach Erziehungswissenschaft vom Deck auf deine Hand auf.;/cards/79.png
+80;Frau Wallerath;lehrer;normal;7;3;Deutsch,Englisch;Korrektur
+Wenn diese Karte eingestellt wird: Ziehe 1 Karte, dann lege 1 Karte von deiner Hand unter dein Deck. Einmal pro Spielzug, wenn Kampfwerte verglichen werden: Du kannst bei 1 beteiligten Lehrer Ansage und Chill bis zum Ende des Zuges vertauschen.;/cards/80.png
+81;Frau Wirtz;lehrer;normal;4;6;Deutsch,Kunst;Bibliotheksrecherche
+Wenn diese Karte eingestellt wird: Mische bis zu 2 Karten aus deinem Ruhestand in dein Deck. Einmal pro Zug: Du kannst 1 Karte aus deinem Ruhestand unter dein Deck legen, ziehe 1 Karte, dann wirf 1 Karte ab.;/cards/81.png
+82;Frau Ilaender;lehrer;normal;4;6;Deutsch,SoWi;Ergänzung
+Wenn diese Karte eingestellt wird: Du darfst in diesem Zug 1 zusätzlichen Lehrer mit 4 oder weniger Ansage einstellen. Einmal pro Spielzug, wenn einer deiner Lehrer auf deine Hand zurückgegeben wird: Du kannst diese Karte in den Chillmodus ändern.;/cards/82.png
+83;Frau Ruhmann;lehrer;normal;6;4;Religion,Französisch;Erste Hilfe
+Wenn einer deiner Lehrer durch Kampf in den Ruhestand gehen würde: Du kannst diese Karte von deiner Hand abwerfen, ändere jenen Lehrer stattdessen in den Chillmodus. Wenn diese Karte eingestellt wird: Du erhältst +2 Lehrkraft.;/cards/83.png
+84;Frau Vianden;lehrer;normal;7;3;Kunst,Englisch;Renaissance
+Wenn diese Karte eingestellt wird: Wähle 1 offenen Lehrer auf dem Feld, diese erhält bis zum Ende des Zuges die Ansage und den Chill-Wert eines anderen offenen Lehrers auf dem Feld. Du kannst diesen Effekt nur einmal pro Zug verwenden.;/cards/84.png
+85;Herr Harms;lehrer;normal;5;5;Englisch,Sport;Fachleitung
+Wenn diese Karte eingestellt wird: Wähle 1 offenen Lehrer, den du kontrollierst, er erhält bis zum Ende des Zuges +2 Ansage. Einmal pro Spielzug, wenn du einen Englisch-Lehrer einstellst: Ziehe 1 Karte.;/cards/85.png
+86;Herr Gebauer;lehrer;normal;6;4;Deutsch,Religion,Geschichte;Gamification
+Zu Beginn deiner Pause: Nenne deinem Gegner 1 Ziel für diesen Zug:
+1) Stelle 1 Lehrerkarte ein. 2) Aktiviere 1 Ereignis- oder Fallenkarte. 3) Schicke 1 gegnerischen Lehrer durch Kampf in den Ruhestand. Wenn du dein gewähltes Ziel in diesem Zug erfüllst, wähle direkt danach 1 Belohnung: 1) Ziehe 1 Karte. 2) Stelle 1 zusätzliche Lehrerkarte mit 4 oder weniger Ansage im Chillmodus ein. 3) 1 offenen Lehrer, den du kontrollierst, darf in diesem Zug einen zusätzlichen Angriff durchführen.;/cards/86.png
+87;Frau Neumann;lehrer;normal;7;3;Erdkunde,Mathe;Koordinaten
+Wenn diese Karte eingestellt wird: Sieh dir die obersten 3 Karten eines Decks an und lege sie in beliebiger Reihenfolge zurück. Einmal pro Spielzug: Du kannst die oberste Karte deines Decks aufdecken, ist es ein Lehrer, erhältst du +1 Lehrkraft. Andernfalls lege sie unter dein Deck.;/cards/87.png
+88;Frau Hoffmann;lehrer;normal;8;2;Deutsch,Religion,Geschichte;Insta-Debatte
+Wenn einer deiner Lehrer durch einen Karteneffekt auf deine Hand zurückgegeben wird: Du kannst diese Karte ohne Tribut von deiner Hand offen im Ansagemodus einstellen. Falls die zurückgegebene Karte ein Jugend-debattiert-Lehrer war, ziehe 1 Karte, dann wirf 1 Karte ab. Du kannst diesen Effekt nur einmal pro Zug verwenden.;/cards/88.png
+89;Frau Gottschalk;lehrer;normal;3;7;Philo,Englisch;Schlussplädoyer
+Am Ende deines Zuges, falls in diesem Zug 1 oder mehr deiner Jugend-debattiert-Lehrer vom Chillmodus aufgedeckt oder durch einen Karteneffekt auf deine Hand zurückgegeben wurden: Wähle 1 Effekt: 1. Dein Gegner legt die obersten 2 Karten seines Decks in den Ruhestand. 2. Drehe 1 offenen Jugend-debattiert-Lehrer, den du kontrollierst, in den verdeckten Chillmodus. Du kannst den Effekt nur einmal pro Zug verwenden.;/cards/89.png
+90;Herr Schneider;lehrer;normal;7;3;Deutsch,Mathe;Verschriftlichung
+Wenn diese Karte eingestellt wird: Decke die obersten 3 Karten deines Decks auf. Du kannst 1 Jugend-debattiert-Lehrer darunter auf die Hand nehmen. Lege den Rest in beliebiger Reihenfolge unter dein Deck. Falls du Herrn Kamphoff kontrollierst, kannst du stattdessen 1 Jugend debattiert-Lehrer darunter direkt im offenen Chillmodus einstellen. Du kannst diesen Effekt nur einmal pro Zug verwenden.;/cards/90.png
+91;Frau Hinkers;lehrer;normal;3;7;Deutsch,Religion;Zwischenfrage
+Wenn 1 anderer Jugend-debattiert-Lehrer, den du kontrollierst, als Angriffsziel gewählt wird: Du kannst das Angriffsziel auf diese Karte ändern. Wird diese Karte dadurch vom Chillmodus aufgedeckt, annulliere den Angriff. Danach kannst du 1 offenen Jugend-debattiert-Lehrer, den du kontrollierst, in den verdeckten Chillmodus drehen. Du kannst diesen Effekt von Frau Hinkers nur einmal pro Zug verwenden.;/cards/91.png
+92;Herr Kamphoff;lehrer;normal;0;10;Philo,Deutsch,Religion,Geschichte;Konter
+Wenn diese Karte aufgedeckt wird: Gib den angreifenden Lehrer auf die Hand zurück. Sein Besitzer legt die obersten 2 Karten seines Decks in den Ruhestand. Einmal pro Zug: Du kannst 1 anderen Lehrer, den du kontrollierst, auf die Hand zurückgeben, ändere diese Karte in den verdeckten Chillmodus.;/cards/92.png
+93;Elternsprechtag;ereignis;normal;;;;Solange der Elternsprechtag läuft, sind die Werte von Ansage und Chill vertauscht.;/cards/93.png
+94;CertiLingua;ereignis;normal;;;;Wähle 1 Europa-Lehrer oder 1 Lehrer mit Fremdsprache, den du kontrollierst. Bis zum Ende des nächsten gegnerischen Zuges erhält er +3 Ansage und kann nicht Ziel gegnerischer Ereigniskarten werden. Falls dieser Lehrer in diesem Zug durch einen deiner Effekte auf die Hand zurückgegeben wird, ziehe 1 Karte.;/cards/94.png
+95;Schule ohne Rassismus;ereignis;normal;;;;Offene gegnerische Lehrer mit 6 oder mehr Ansage erhalten -2 Ansage und +1 Chill. Einmal pro Spielzug: Wenn dein Gegner den Effekt eines solchen Lehrers aktiviert, kannst du 1 Karte abwerfen, ändere ihn in den Chillmodus.;/cards/95.png
+96;Ausbildung am CFG;ereignis;normal;;;;Stelle 1 Lehrer mit 5 oder weniger Ansage von deiner Hand im verdeckten Chillmodus ein. Falls du ihn zu Beginn deines nächsten Zuges in den Ansage-Modus änderst, ziehe 1 Karte.;/cards/96.png
+97;Abiturklausurplan;ereignis;normal;;;;Solange diese Karte offen in deiner Hintergrundreihe liegt, erhalten deine Oberstufe-Lehrer +2 Ansage. Einmal pro Zug: Falls die Summe der Dienstjahre deiner offenen Oberstufe-Lehrer 45 oder mehr beträgt, kannst du 1 Karte ziehen und dann 1 Karte ablegen.;/cards/97.png
+98;Sponsorenlauf;ereignis;normal;;;;Wenn diese Karte aktiviert wird: Lege 2 Rundenpunkte auf diese Karte. Immer wenn einer deiner Bewegung-Lehrer einen Kampf gewinnt oder direkt Schaden zufügt: Lege 1 Rundenpunkt auf diese Karte. Einmal pro Zug: Du kannst 4 Rundenpunkte von dieser Karte entfernen, wähle: 1) 1 Bewegung-Lehrer, den du kontrollierst, erhält bis zum Ende des Zuges +3 Ansage und kann in diesem Zug einmal zusätzlich angreifen. 2) Du erhältst +5 Lehrkraft.;/cards/98.png
+99;Kursumwahl;ereignis;normal;;;;Wähle 1 Oberstufe-Lehrer von deiner Hand und 1 Oberstufe-Lehrer aus deinem Ruhestand. Tausche die beiden Karten miteinander. Falls du einen offenen Lehrer mit 20 oder mehr Dienstjahren kontrollierst, kannst du anschließend 1 Karte ziehen und dann 1 Karte ablegen.;/cards/99.png
+100;Ordnungsmaßnahme;ereignis;normal;;;;Wähle 1 offenen Lehrer im Ansagemodus auf dem Feld und schicke ihn in den Ruhestand.;/cards/100.png
+101;Vertretungsplan;ereignis;normal;;;;Wähle 1 Lehrer in deinem Ruhestand. Stelle ihn im Chillmodus ein, aber seine Effekte sind für diesen Zug annulliert.;/cards/101.png
+102;Sternwarte;ereignis;normal;;;;Solange diese Karte offen in deiner Hintergrundreihe liegt, erhalten deine Astronomie-Lehrer +2 Ansage und +2 Chill. Einmal pro Zug: Falls du einen Astronomie-Lehrer kontrollierst, kannst du 1 Karte von deiner Hand unter dein Deck legen, ziehe 1 Karte.;/cards/102.png
+103;Mensa-Team;ereignis;normal;;;;Du bekommst Unterstützung vom Mensa-Team und in jedem deiner Züge, jetzt beginnend, +2 Lehrkraft.;/cards/103.png
+104;Debattenprüfung;ereignis;normal;;;;Wenn diese Karte aktiviert wird: Du kannst 1 Jugend-debattiert-Lehrer von deinem Deck auf die Hand nehmen. Einmal pro Spielzug, wenn 1 deiner Jugend-debattiert-Lehrer durch einen Effekt auf die Hand zurückgegeben wird: Du kannst 1 Karte ziehen.;/cards/104.png
+105;Frau Kappe;ereignis;normal;;;;Nimm 1 Fallenkarte oder 1 Ereigniskarte von deinem Deck auf die Hand.;/cards/105.png
+106;Frau Lettmann;ereignis;normal;;;;Nimm 1 Lehrer mit 6 oder weniger Ansage von deinem Deck auf die Hand.;/cards/106.png
+107;Hausmeister-Team;ereignis;normal;;;;Wähle 1 Karte in einer Hintergrundreihe und zerstöre sie.;/cards/107.png
+108;Zeugniskonferenz;ereignis;normal;;;;Ziehe 2 Karten, dann lege 1 Karte in den Ruhestand. Falls du keinen Lehrer auf dem Feld kontrollierst, ziehe stattdessen 3 Karten und lege 1 Karte in den Ruhestand.;/cards/108.png
+109;Kollegiumsausflug;ereignis;normal;;;;Schicke alle offenen Lehrer im Ansagemodus in den Ruhestand. Kein Spieler kann in diesem Zug angreifen.;/cards/109.png
+110;Antrag abgelehnt;falle;normal;;;;Wenn dein Gegner den Effekt eines Lehrers aktiviert, der in diesem Zug eingestellt wurde, oder mit ihm angreift: Annulliere den Effekt oder Angriff und ändere jene Karte in den Chillmodus.;/cards/110.png
+111;Lehrerratsprotokoll;falle;normal;;;;Wenn dein Gegner in demselben Zug einen zweiten Lehrer einstellt oder einen zweiten Angriff erklärt: Annulliere diese Aktion.;/cards/111.png
+112;LGBTQIA+;falle;normal;;;;Wenn dein Gegner einen Angriff erklärt oder den Effekt eines offenen Lehrers mit 7 oder mehr Ansage aktiviert: Jene Karte erhält -3 Ansage und +1 Chill. Ändere sie außerdem in den Chillmodus.;/cards/112.png
+113;Unterrichtsstörung;falle;normal;;;;Wenn dein Gegner einen Angriff erklärt: Wähle 1 offenen Lehrer auf dem Feld, seine Ansage wird bis zum Ende des Zuges halbiert. Runde auf.;/cards/113.png
+114;WLAN-Ausfall;falle;normal;;;;Aktiviere diese Karte nur, wenn dein Gegner mehr offene Lehrer kontrolliert als du. Ändere alle offenen Lehrer auf dem Feld in den Chillmodus. Bis zum Beginn deines nächsten Zuges kann kein Spieler Ereigniskarten aktivieren oder den Modus eines Lehrers ändern.;/cards/114.png
+115;Lehrermangel;falle;normal;;;;Wenn einer deiner Lehrer durch Kampf in den Ruhestand geschickt würde: Gib ihn stattdessen auf die Hand zurück.;/cards/115.png
+116;Mündliche Nachprüfung;falle;normal;;;;Wenn einer deiner Lehrer durch Kampf in den Ruhestand geschickt würde: Er wird nicht in den Ruhestand geschickt. Ändere stattdessen seinen Modus in den Chillmodus. Seine Effekte sind bis zum Ende des Zuges annulliert.;/cards/116.png
+117;Überraschungstest;falle;normal;;;;Wenn dein Gegner einen Lehrer einstellt: Annulliere seinen Effekt bis zum Ende dieses Zuges.;/cards/117.png
+118;Nachsitzen;falle;normal;;;;Wenn dein Gegner einen Lehrer einstellt: Alle gegnerischen Lehrer wechseln in den Chillmodus und bleiben darin, bis du 2 offene Lehrer kontrollierst. Lege diese Karte dann in den Ruhestand.;/cards/118.png
+119;Pensionszwang;falle;normal;;;;Wenn dein Gegner eine Karte aus seinem Ruhestand auf die Hand nimmt oder einstellt: Annulliere den Effekt. Entferne bis zu 3 Karten im Ruhestand deines Gegners aus dem Spiel.;/cards/119.png
+120;Feueralarm;falle;normal;;;;Wenn dein Gegner mit einem Lehrer 7+ Ansage angreift: Gib den angreifenden Lehrer und 1 anderen offenen Lehrer deines Gegners auf die Hand zurück.;/cards/120.png
