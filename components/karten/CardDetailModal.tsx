@@ -22,6 +22,8 @@ const typeBadgeStyles: Record<string, string> = {
   falle: "bg-red-500/15 text-red-300 border-red-500/30",
 };
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 interface CardDetailModalProps {
   card: Card | null;
   onClose: () => void;
@@ -68,9 +70,8 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
           {/* Backdrop */}
           <m.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            animate={{ opacity: 1, transition: { duration: 0.35, ease: EASE } }}
+            exit={{ opacity: 0, transition: { duration: 0.3, ease: EASE } }}
             onClick={onClose}
             className="absolute inset-0"
             style={{
@@ -80,22 +81,28 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
             }}
           />
 
-          {/* Desktop: Split-Layout — feste Höhe, beide Kinder füllen sie */}
+          {/* Desktop: Split-Layout */}
           <div
             className="relative hidden md:flex w-full max-w-4xl items-stretch justify-center gap-6"
             style={{ zIndex: 1, height: "min(80vh, 700px)" }}
           >
-            {/* LEFT: Karte — Höhe vom Container, Breite aus aspectRatio */}
+            {/* LEFT: Karte — explizite Breite via calc(), Safari-safe */}
             <m.div
               initial={{ opacity: 0, x: -40, scale: 0.9 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: -40, scale: 0.9 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+              animate={{
+                opacity: 1, x: 0, scale: 1,
+                transition: { duration: 0.4, ease: EASE },
+              }}
+              exit={{
+                opacity: 0, x: -40, scale: 0.9,
+                transition: { duration: 0.3, ease: EASE },
+              }}
               className="shrink-0 self-stretch"
+              style={{ width: "calc(min(80vh, 700px) * 59 / 86)" }}
             >
               <CardTilt maxTilt={14} className="h-full">
                 <div
-                  className="relative h-full overflow-hidden rounded-2xl shadow-2xl shadow-black/60 border border-gold/20"
+                  className="relative h-full w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/60 border border-gold/20"
                   style={{ aspectRatio: "59 / 86" }}
                 >
                   <Image
@@ -111,13 +118,18 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
               </CardTilt>
             </m.div>
 
-            {/* RIGHT: Liquid-Glass Info-Box — füllt restliche Breite + volle Höhe */}
+            {/* RIGHT: Liquid-Glass Info-Box */}
             <m.div
               initial={{ opacity: 0, x: 40, scale: 0.95 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: 40, scale: 0.95 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="relative flex flex-1 flex-col overflow-hidden rounded-2xl border border-white/10"
+              animate={{
+                opacity: 1, x: 0, scale: 1,
+                transition: { duration: 0.4, ease: EASE },
+              }}
+              exit={{
+                opacity: 0, x: 40, scale: 0.95,
+                transition: { duration: 0.3, ease: EASE },
+              }}
+              className="relative flex flex-1 flex-col overflow-hidden rounded-2xl border border-white/10 min-w-0"
               style={{
                 maxWidth: 480,
                 background: "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
@@ -148,7 +160,6 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                   {card.name}
                 </h2>
 
-                {/* Type + Rarity Badges */}
                 <div className="flex flex-wrap gap-2 mb-5">
                   <span
                     className={cn(
@@ -165,7 +176,6 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                   )}
                 </div>
 
-                {/* Lehrer-Stats */}
                 {card.type === "lehrer" && (card.ansage !== null || card.chill !== null) && (
                   <div className="grid grid-cols-2 gap-2 mb-4">
                     {card.ansage !== null && (
@@ -183,7 +193,6 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                   </div>
                 )}
 
-                {/* Dienstjahre + Archetype */}
                 {(card.archetype || (card.dienstjahre !== null && card.dienstjahre !== undefined)) && (
                   <div className="mb-4 space-y-1.5">
                     {card.archetype && (
@@ -201,7 +210,6 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                   </div>
                 )}
 
-                {/* Subjects */}
                 {card.subjects && card.subjects.trim() && (
                   <div className="mb-4">
                     <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">Fächer</div>
@@ -218,7 +226,6 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                   </div>
                 )}
 
-                {/* Effect Text */}
                 {card.effect && card.effect.trim() && (
                   <div className="rounded-lg bg-white/5 border-l-2 border-gold p-3 text-sm leading-relaxed text-foreground/90 backdrop-blur-sm">
                     {card.effect}
@@ -233,7 +240,7 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
             className="relative flex md:hidden w-full h-full flex-col"
             style={{ zIndex: 1 }}
           >
-            {/* Close-Button — fixed oben rechts im Modal, immer sichtbar */}
+            {/* Close-Button — fixed oben rechts, immer sichtbar */}
             <button
               onClick={onClose}
               aria-label="Schließen"
@@ -245,11 +252,17 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
 
             {/* Scrollbarer Content-Bereich */}
             <div className="flex-1 overflow-y-auto overscroll-contain px-4 pb-8 pt-12">
-              {/* Karten-Bild — prominenter (w-56) */}
+              {/* Karten-Bild */}
               <m.div
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                animate={{
+                  opacity: 1, y: 0, scale: 1,
+                  transition: { duration: 0.35, ease: EASE },
+                }}
+                exit={{
+                  opacity: 0, y: -10, scale: 0.95,
+                  transition: { duration: 0.3, ease: EASE },
+                }}
                 className="mx-auto mb-5 w-56"
               >
                 <div
@@ -271,9 +284,14 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
               {/* Info-Box */}
               <m.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+                animate={{
+                  opacity: 1, y: 0,
+                  transition: { duration: 0.35, ease: EASE, delay: 0.08 },
+                }}
+                exit={{
+                  opacity: 0, y: 20,
+                  transition: { duration: 0.3, ease: EASE },
+                }}
                 className="relative rounded-2xl border border-white/10 overflow-hidden"
                 style={{
                   background: "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",

@@ -1,21 +1,21 @@
 import sharp from "sharp";
 
-const SQUARE_SOURCE = "public/assets/logo.png";
+const SQUARE_SOURCE = "public/assets/logo-static.png";
 const WIDE_SOURCE = "public/assets/logo-wide.png";
 
 async function generate() {
   await sharp(SQUARE_SOURCE)
-    .resize(180, 180, { fit: "contain", background: { r: 10, g: 10, b: 10, alpha: 1 } })
+    .resize(180, 180, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .png()
     .toFile("public/apple-touch-icon.png");
 
   await sharp(SQUARE_SOURCE)
-    .resize(32, 32, { fit: "contain", background: { r: 10, g: 10, b: 10, alpha: 1 } })
+    .resize(32, 32, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .png()
     .toFile("public/favicon-32x32.png");
 
   await sharp(SQUARE_SOURCE)
-    .resize(16, 16, { fit: "contain", background: { r: 10, g: 10, b: 10, alpha: 1 } })
+    .resize(16, 16, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .png()
     .toFile("public/favicon-16x16.png");
 

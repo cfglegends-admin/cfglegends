@@ -175,4 +175,7 @@ Karten-Galerie Final:
 - Mobile: gestapeltes Layout, Info-Box scrollt intern mit maxHeight 60vh
 Neue Dateien: scripts/normalize-cards.sh
 Backup: public/cards-backup/ (Originale)
+Fix (Cross-Browser): CardDetailModal Desktop-Layout nutzt calc()-basierte Kartenbreite (calc(min(80vh,700px)*59/86)) statt implizite aspect-ratio-Breite — behebt Safari WebKit Flex + aspect-ratio Bug.
+Fix (Animation): Exit-Animationen in Modal getrennt von Enter-Transitions — Delays nur für Enter-Stagger, Exit immer synchron (0.3s ohne Delay).
+Fix (CardTilt): translateZ(30px) entfernt + Gold-Glow-Overlay nach children verschoben — behebt Safari 3D-Rendering und macht Shimmer sichtbar.
 Nächster Schritt: Domain + produktive Blob-Konfiguration
