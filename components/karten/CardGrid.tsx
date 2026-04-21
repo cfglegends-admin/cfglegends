@@ -60,44 +60,44 @@ export function CardGrid({ cards }: CardGridProps) {
               <button
                 type="button"
                 onClick={() => setSelectedCard(card)}
-                className="group w-full cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-xl"
+                className="group block w-full cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
               >
-                <div className="flex flex-col gap-3 rounded-xl transition-all duration-300">
-                  <CardTilt className="relative">
-                    <div className="bg-muted relative aspect-[924/1316] w-full overflow-hidden rounded-lg shadow-lg shadow-black/50 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-gold/20 group-hover:shadow-xl group-focus-visible:-translate-y-1 group-focus-visible:ring-2 group-focus-visible:ring-gold group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background">
-                      <div className="absolute inset-0 z-10 border-2 border-transparent transition-colors duration-300 group-hover:border-gold/50 rounded-lg pointer-events-none" />
-                      <FadeImage
-                        src={card.imageUrl}
-                        alt={`Karte ${card.name}`}
-                        fill
-                        draggable={false}
-                        quality={85}
-                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                        className="object-cover select-none pointer-events-none"
-                      />
-                    </div>
-                  </CardTilt>
+                <CardTilt className="relative">
+                  <div
+                    className="relative w-full overflow-hidden rounded-2xl border border-transparent shadow-lg shadow-black/50 transition-all duration-500 ease-out group-hover:border-gold/40 group-hover:shadow-xl group-hover:shadow-gold/15 group-hover:-translate-y-1"
+                    style={{ aspectRatio: "59 / 86" }}
+                  >
+                    <FadeImage
+                      src={card.imageUrl}
+                      alt={`Karte ${card.name}`}
+                      fill
+                      draggable={false}
+                      quality={85}
+                      sizes="(max-width: 640px) 45vw, (max-width: 768px) 30vw, (max-width: 1024px) 22vw, 18vw"
+                      className="object-cover select-none pointer-events-none"
+                    />
+                  </div>
+                </CardTilt>
 
-                  <div className="px-1">
-                    <div className="flex items-start justify-between gap-2 mb-1.5">
-                      <span className="font-display text-foreground text-sm md:text-base font-semibold tracking-wide line-clamp-1 group-hover:text-gold transition-colors">
-                        {card.name}
-                      </span>
-                    </div>
+                <div className="mt-3 px-1">
+                  <div className="flex items-start justify-between gap-2 mb-1.5">
+                    <span className="font-display text-foreground text-sm md:text-base font-semibold tracking-wide line-clamp-1 group-hover:text-gold transition-colors duration-300">
+                      {card.name}
+                    </span>
+                  </div>
 
-                    <div className="flex items-center justify-between">
-                       <span className="font-mono text-muted-foreground text-xs">
-                          #{card.cardNumber.toString().padStart(3, '0')}
-                       </span>
-                       <span
-                        className={cn(
-                          "font-body inline-flex items-center rounded-full border px-1.5 py-0.5 text-[10px] md:text-xs font-medium",
-                          typeBadgeStyles[card.type] || "border-border text-muted-foreground bg-background"
-                        )}
-                      >
-                        {typeLabels[card.type] || card.type}
-                      </span>
-                    </div>
+                  <div className="flex items-center justify-between">
+                     <span className="font-mono text-muted-foreground text-xs">
+                        #{card.cardNumber.toString().padStart(3, '0')}
+                     </span>
+                     <span
+                      className={cn(
+                        "font-body inline-flex items-center rounded-full border px-1.5 py-0.5 text-[10px] md:text-xs font-medium",
+                        typeBadgeStyles[card.type] || "border-border text-muted-foreground bg-background"
+                      )}
+                    >
+                      {typeLabels[card.type] || card.type}
+                    </span>
                   </div>
                 </div>
               </button>

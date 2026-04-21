@@ -166,4 +166,13 @@ PWA: Web App Manifest (manifest.json) mit Theme-Color Gold, Standalone-Display
 Performance: BG-Pattern SVG via SVGO optimiert (180KB → 140KB, -22.5%), Pattern-Layer GPU-promoted (translateZ(0) + will-change)
 Öffentliche Seiten: Landing Page, /regeln, /rechner, /karten, /impressum, /datenschutz
 DB-Tabellen: limitedCards, news, downloads, cards, adminUsers, adminAuditLogs
+Karten-Galerie Final:
+- PNGs normalisiert via ImageMagick (trim + resize 1742×2539, keine transparenten Ränder)
+- Grid-Cards: rounded-2xl + aspectRatio 59/86 + object-cover, dezenter gold Hover-Border, shadow-gold/15 Hover-Glow
+- Modal Desktop: Karte links + Liquid-Glass Info-Box rechts, beide aspectRatio 59/86 + width 340px → exakt gleich hoch
+- Info-Box asymmetrisch gerundet (rechts rund, links scharf), backdrop-filter blur(24px) saturate(180%)
+- Conditional Rendering: Stats nur wenn vorhanden, Fächer nur wenn gesetzt, Effect nur wenn nicht leer
+- Mobile: gestapeltes Layout, Info-Box scrollt intern mit maxHeight 60vh
+Neue Dateien: scripts/normalize-cards.sh
+Backup: public/cards-backup/ (Originale)
 Nächster Schritt: Domain + produktive Blob-Konfiguration

@@ -18,7 +18,7 @@ export default function KartenLoading() {
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 md:gap-6">
           {Array.from({ length: 15 }).map((_, i) => (
             <div key={i} className="flex flex-col gap-3">
-              <div className="aspect-[924/1316] w-full animate-pulse rounded-lg bg-muted" />
+              <div className="w-full animate-pulse rounded-lg bg-muted" style={{ aspectRatio: "59 / 86" }} />
               <div className="px-1">
                 <div className="mb-1.5 h-4 w-3/4 animate-pulse rounded bg-muted" />
                 <div className="flex items-center justify-between">

@@ -40,17 +40,21 @@ export function CardShowcase() {
             key={card.id}
             className="flex w-[78vw] max-w-[300px] shrink-0 snap-center flex-col gap-4 md:w-[280px]"
           >
-            <CardTilt className="overflow-hidden rounded-lg shadow-lg shadow-black/50">
-              <Image
-                src={card.image}
-                alt={`Karte ${card.name}`}
-                width={924}
-                height={1316}
-                draggable={false}
-                quality={85}
-                sizes="(max-width: 640px) 80vw, (max-width: 1024px) 33vw, 300px"
-                className="w-full h-auto select-none pointer-events-none"
-              />
+            <CardTilt className="relative">
+              <div
+                className="relative w-full overflow-hidden rounded-2xl border border-transparent shadow-lg shadow-black/50 transition-all duration-500 ease-out group-hover:border-gold/40 group-hover:shadow-xl group-hover:shadow-gold/15"
+                style={{ aspectRatio: "59 / 86" }}
+              >
+                <Image
+                  src={card.image}
+                  alt={`Karte ${card.name}`}
+                  fill
+                  draggable={false}
+                  quality={85}
+                  sizes="(max-width: 640px) 80vw, (max-width: 1024px) 33vw, 300px"
+                  className="object-cover select-none pointer-events-none"
+                />
+              </div>
             </CardTilt>
             <div className="flex items-center justify-between gap-3">
               <span className="font-display text-foreground text-base font-semibold tracking-wide">

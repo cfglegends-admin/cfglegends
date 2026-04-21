@@ -73,12 +73,13 @@ export function CardTilt({ children, className, maxTilt = 12 }: CardTiltProps) {
       className={cn("group", className)}
       data-card-tilt=""
     >
-      <div className="h-full" style={{ transform: "translateZ(30px)" }}>{children}</div>
-
-      <m.div
-        className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ background: glowBackground }}
-      />
+      <div className="relative h-full">
+        {children}
+        <m.div
+          className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{ background: glowBackground }}
+        />
+      </div>
     </m.div>
   )
 }
