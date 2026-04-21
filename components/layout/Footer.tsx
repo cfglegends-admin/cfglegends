@@ -18,13 +18,13 @@ export function Footer() {
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-3">
               <Image
-                src="/assets/logo.png"
+                src="/assets/logo-static.png"
                 alt=""
-                width={40}
-                height={40}
+                width={48}
+                height={48}
                 quality={80}
-                sizes="40px"
-                className="h-10 w-10"
+                sizes="48px"
+                className="h-12 w-12"
               />
               <span className="font-display text-foreground text-base font-semibold tracking-wide">
                 CFG Legends

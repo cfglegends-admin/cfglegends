@@ -41,13 +41,13 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3" aria-label="CFG Legends — Startseite">
           <Image
-            src="/assets/logo.png"
+            src="/assets/logo-static.png"
             alt=""
-            width={48}
-            height={48}
+            width={56}
+            height={56}
             quality={80}
-            sizes="48px"
-            className="h-10 w-10 md:h-11 md:w-11"
+            sizes="56px"
+            className="h-12 w-12 md:h-14 md:w-14"
           />
           <span className="font-display text-foreground text-base font-semibold tracking-wide md:text-lg">
             CFG Legends

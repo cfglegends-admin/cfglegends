@@ -1,9 +1,9 @@
 "use client"
 
 import { m } from "framer-motion"
-import Image from "next/image"
 import Link from "next/link"
 import { durations, easings } from "@/lib/motion"
+import { HeroLogo } from "./HeroLogo"
 
 export function Hero() {
   return (
@@ -20,31 +20,7 @@ export function Hero() {
       <div className="relative z-10 flex flex-col items-center gap-8 px-4 text-center">
         <h1 className="sr-only">CFG Legends — Das Kartenspiel für die große Pause</h1>
 
-        <m.div
-          initial={{ opacity: 0, scale: 0.8, y: -30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: durations.epic, ease: easings.heavy }}
-        >
-          <m.div
-            animate={{ y: [0, -12, 0] }}
-            transition={{
-              duration: 8,
-              ease: "easeInOut",
-              repeat: Infinity,
-            }}
-          >
-            <Image
-              src="/assets/logo.png"
-              alt="CFG Legends Wappen"
-              width={600}
-              height={600}
-              priority
-              quality={90}
-              sizes="(max-width: 768px) 288px, (max-width: 1024px) 384px, 448px"
-              className="h-72 w-72 md:h-96 md:w-96 lg:h-[28rem] lg:w-[28rem]"
-            />
-          </m.div>
-        </m.div>
+        <HeroLogo />
 
         <m.p
           initial={{ opacity: 0, y: 20 }}
