@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { useTransition, useRef, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import { subjects } from "@/lib/config";
@@ -10,16 +10,14 @@ export function CardFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const currentType = searchParams.get("type") || "all";
   const currentFach = searchParams.get("fach") || "all";
   const currentSort = searchParams.get("sort") || "number";
   const currentQ = searchParams.get("q") || "";
 
-  // Debounced search
-  let searchTimeout: NodeJS.Timeout;
-  
-  const updateParams = (updates: Record<string, string | null>) => {
+  const updateParams = useCallback((updates: Record<string, string | null>) => {
     const params = new URLSearchParams(searchParams.toString());
     
     Object.entries(updates).forEach(([key, value]) => {
@@ -33,15 +31,15 @@ export function CardFilters() {
     startTransition(() => {
       router.push(`?${params.toString()}`, { scroll: false });
     });
-  };
+  }, [searchParams, startTransition, router]);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
+    if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
+    searchTimeoutRef.current = setTimeout(() => {
       updateParams({ q: value });
     }, 300);
-  };
+  }, [updateParams]);
 
   return (
     <div className="bg-muted/50 border-border mb-8 flex flex-col gap-4 rounded-xl border p-4 sm:flex-row sm:items-center sm:justify-between">

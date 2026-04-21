@@ -7,6 +7,14 @@ import { easings } from "@/lib/motion"
 
 const LOGO_SIZES = "(max-width: 768px) 384px, (max-width: 1024px) 520px, 640px"
 
+const BLUR = {
+  static: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAKlBMVEVMaXG5iTq4gymnizeseC6yei+qcyO+hi2oaxvTo0WYXReDURiqcSLJlTpZkZRqAAAADXRSTlMAHTYLjHBk9+iE3YDGqtU5sQAAAAlwSFlzAAAomgAAKJoBFzohsgAAADVJREFUeJxNy7kNACAMBMHz/4D7bxeJBDaZaIEvkQt5lRFAFjNpBNY90coQzZhWAdjXcn7vAR1AAOuyhdrnAAAAAElFTkSuQmCC",
+  main: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAHlBMVEXCjz6wdi3EjjmqcyS5fynLkCqDURihaB2dYhjKljoPIe4GAAAACXRSTlMBU0Zq9jaA1OyO66DwAAAACXBIWXMAACiaAAAomgEXOiGyAAAALklEQVR4nG2LMRIAMAiDoonV/P/DPacuZYEF4ENm5jpkKzba6g2OPARQPIf1ngsOYQCBEU5nfQAAAABJRU5ErkJggg==",
+  crown: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAACVBMVEVMaXHFmEDQp0FoLawvAAAAA3RSTlMAHDwzbuUEAAAACXBIWXMAACiaAAAomgEXOiGyAAAAFUlEQVR4nGNgQAKMjFCaiQnKIhoAAAHmAAlx5MymAAAAAElFTkSuQmCC",
+  iconsLeft: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAABlBMVEVMaXGsfjY0OMT4AAAAAnRSTlMAKTQhVVQAAAAJcEhZcwAAKJoAACiaARc6IbIAAAAUSURBVHicY2DADRgZ0RkMcAY6AAAA/QAGaNgAVAAAAABJRU5ErkJggg==",
+  iconsRight: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAABlBMVEVMaXGicixvcV+EAAAAAnRSTlMAKEMmZcIAAAAJcEhZcwAAKJoAACiaARc6IbIAAAASSURBVHicY2AgBBgZMRhYlAEAAOAABi0gwioAAAAASUVORK5CYII=",
+} as const
+
 export function HeroLogo() {
   const prefersReduced = useReducedMotion()
   const [canHover, setCanHover] = useState(false)
@@ -71,6 +79,8 @@ export function HeroLogo() {
           priority
           quality={90}
           sizes={LOGO_SIZES}
+          placeholder="blur"
+          blurDataURL={BLUR.static}
           className="h-96 w-96 md:h-[32rem] md:w-[32rem] lg:h-[40rem] lg:w-[40rem]"
         />
       </div>
@@ -122,6 +132,8 @@ export function HeroLogo() {
                 priority
                 quality={90}
                 sizes={LOGO_SIZES}
+                placeholder="blur"
+                blurDataURL={BLUR.iconsLeft}
                 className="object-contain select-none pointer-events-none"
                 draggable={false}
               />
@@ -142,6 +154,8 @@ export function HeroLogo() {
                 priority
                 quality={90}
                 sizes={LOGO_SIZES}
+                placeholder="blur"
+                blurDataURL={BLUR.iconsRight}
                 className="object-contain select-none pointer-events-none"
                 draggable={false}
               />
@@ -166,6 +180,8 @@ export function HeroLogo() {
                 priority
                 quality={90}
                 sizes={LOGO_SIZES}
+                placeholder="blur"
+                blurDataURL={BLUR.main}
                 className="object-contain select-none pointer-events-none"
                 draggable={false}
               />
@@ -190,6 +206,8 @@ export function HeroLogo() {
                 priority
                 quality={90}
                 sizes={LOGO_SIZES}
+                placeholder="blur"
+                blurDataURL={BLUR.crown}
                 className="object-contain select-none pointer-events-none"
                 draggable={false}
               />

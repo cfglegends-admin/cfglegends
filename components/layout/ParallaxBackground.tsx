@@ -150,10 +150,23 @@ export function ParallaxBackground() {
         el.style.setProperty("--glowMask", transparentMask)
       }
 
-      // Particle cleanup + force re-render for smooth position interpolation
+      // Particle movement and cleanup — particles move continuously
       setParticles((prev) => {
         if (prev.length === 0) return prev
-        return prev.filter((p) => now - p.createdAt <= 1500)
+        
+        // Update particle positions continuously
+        const updated = prev.map(p => ({
+          ...p,
+          x: p.x + p.vx * 16.67 / 1000, // ~60fps timestep
+          y: p.y + p.vy * 16.67 / 1000,
+        }))
+        
+        // Cleanup old particles
+        const next = updated.filter((p) => now - p.createdAt <= 1500)
+        if (next.length === prev.length && next.every((p, i) => p.x === prev[i]?.x && p.y === prev[i]?.y)) {
+          return prev // No re-render if positions unchanged
+        }
+        return next
       })
 
       raf = requestAnimationFrame(tick)
@@ -353,16 +366,14 @@ export function ParallaxBackground() {
             const lifeProgress = age / 1500
             const opacity = Math.sin(lifeProgress * Math.PI) * 0.7
             const scale = 0.6 + Math.sin(lifeProgress * Math.PI) * 0.4
-            const currentX = p.x + p.vx * age / 1000
-            const currentY = p.y + p.vy * age / 1000
 
             return (
               <div
                 key={p.id}
                 style={{
                   position: 'fixed',
-                  left: currentX,
-                  top: currentY,
+                  left: p.x,
+                  top: p.y,
                   width: p.size,
                   height: p.size,
                   transform: `translate(-50%, -50%) scale(${scale})`,

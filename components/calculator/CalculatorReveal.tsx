@@ -1,9 +1,16 @@
 "use client"
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Maximize2 } from "lucide-react";
-import { Calculator } from "./Calculator";
 import { Reveal } from "@/components/motion/Reveal";
+
+const Calculator = dynamic(() => import("./Calculator").then(m => m.Calculator), {
+  ssr: false,
+  loading: () => (
+    <div className="mx-auto w-full max-w-lg rounded-2xl bg-muted/50 border border-border animate-pulse" style={{ height: 320 }} />
+  ),
+});
 
 export function CalculatorReveal() {
   return (

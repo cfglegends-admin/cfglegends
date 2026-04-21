@@ -237,21 +237,24 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
 
           {/* Mobile: scrollbares vertikales Layout */}
           <div
-            className="relative flex md:hidden w-full h-full flex-col"
-            style={{ zIndex: 1 }}
+            className="relative flex md:hidden w-full flex-col"
+            style={{ zIndex: 1, height: "100dvh" }}
           >
             {/* Close-Button — fixed oben rechts, immer sichtbar */}
             <button
               onClick={onClose}
               aria-label="Schließen"
-              className="fixed right-4 top-4 z-20 rounded-full bg-black/50 p-2.5 text-white/70 backdrop-blur-sm transition-colors hover:text-gold active:scale-95"
-              style={{ zIndex: 10000 }}
+              className="fixed z-20 rounded-full bg-black/50 p-2.5 text-white/70 backdrop-blur-sm transition-colors hover:text-gold active:scale-95"
+              style={{ zIndex: 10000, top: "max(1rem, env(safe-area-inset-top, 1rem))", right: "max(1rem, env(safe-area-inset-right, 1rem))" }}
             >
               <X className="h-5 w-5" />
             </button>
 
             {/* Scrollbarer Content-Bereich */}
-            <div className="flex-1 overflow-y-auto overscroll-contain px-4 pb-8 pt-12">
+            <div
+              className="flex-1 overflow-y-auto overscroll-contain px-4 pb-8 pt-12"
+              style={{ WebkitOverflowScrolling: "touch", paddingBottom: "max(2rem, env(safe-area-inset-bottom, 2rem))" }}
+            >
               {/* Karten-Bild */}
               <m.div
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
