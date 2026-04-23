@@ -78,13 +78,11 @@ export default function DatenschutzPage() {
         </a>
       </p>
 
-      <h2 className={headingTwo}>7. Reichweitenmessung (Vercel Analytics)</h2>
+      <h2 className={headingTwo}>7. Reichweiten- und Performance-Messung (Vercel)</h2>
       <p className={paragraph}>
-        Wir nutzen Vercel Analytics zur anonymisierten Auswertung der Website-Zugriffe (z. B.
-        Seitenaufrufe, Ladezeiten). Dabei werden <strong>keine Cookies</strong> gesetzt und
-        IP-Adressen vor der Speicherung kryptografisch unkenntlich gemacht (Hashing). Ein
-        Rückschluss auf Ihre Person ist ausgeschlossen. Rechtsgrundlage ist unser berechtigtes
-        Interesse (Art. 6 Abs. 1 lit. f DSGVO) an der Optimierung der Website.
+        Wir nutzen <strong>Vercel Analytics</strong> zur anonymisierten Auswertung der Website-Zugriffe (z. B. Seitenaufrufe) sowie <strong>Vercel Speed Insights</strong> zur Messung der technischen Performance (z. B. Ladezeiten auf Endgeräten). 
+        Dabei werden <strong>keine Cookies</strong> gesetzt und IP-Adressen vor der Speicherung kryptografisch unkenntlich gemacht (Hashing). Ein Rückschluss auf Ihre Person ist ausgeschlossen. 
+        Rechtsgrundlage ist unser berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO) an der technischen Optimierung und bedarfsgerechten Gestaltung unserer Website.
       </p>
 
       <h2 className={headingTwo}>8. Ihre Rechte</h2>
