@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const revalidate = 300; // Cache für 5 Minuten
+
 interface KartenPageProps {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }
