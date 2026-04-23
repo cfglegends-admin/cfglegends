@@ -31,29 +31,29 @@ export default function ImpressumPage() {
       <h2 className="font-display text-gold mt-12 mb-6 text-2xl font-semibold tracking-wide md:text-3xl">
         Angaben gemäß § 5 TMG
       </h2>
-      <p className={paragraph}>Tjark Schulte</p>
-      <p className={paragraph}>Ahrstraße 34</p>
+      <p className={paragraph}>{process.env.NEXT_PUBLIC_SITE_OWNER}</p>
+      <p className={paragraph}>{process.env.NEXT_PUBLIC_SITE_ADDRESS_STREET}</p>
       <p className="font-body text-foreground mb-6 text-base leading-relaxed md:text-lg">
-        42117 Wuppertal
+        {process.env.NEXT_PUBLIC_SITE_ADDRESS_CITY}
       </p>
 
       <h2 className="font-display text-gold mt-12 mb-6 text-2xl font-semibold tracking-wide md:text-3xl">
         Kontakt
       </h2>
       <p className={paragraph}>
-        Telefon: +49 (0) 123 4567890 {/* Hier deine/eine Nummer eintragen */}
+        Telefon: {process.env.NEXT_PUBLIC_SITE_PHONE}
       </p>
       <p className="font-body text-foreground mb-6 text-base leading-relaxed md:text-lg">
-        E-Mail: admin@cfglegends.de
+        E-Mail: {process.env.NEXT_PUBLIC_SITE_EMAIL}
       </p>
 
       <h2 className="font-display text-gold mt-12 mb-6 text-2xl font-semibold tracking-wide md:text-3xl">
         Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
       </h2>
-      <p className={paragraph}>Tjark Schulte</p>
-      <p className={paragraph}>Ahrstraße 34</p>
+      <p className={paragraph}>{process.env.NEXT_PUBLIC_SITE_OWNER}</p>
+      <p className={paragraph}>{process.env.NEXT_PUBLIC_SITE_ADDRESS_STREET}</p>
       <p className="font-body text-foreground mb-6 text-base leading-relaxed md:text-lg">
-        42117 Wuppertal
+        {process.env.NEXT_PUBLIC_SITE_ADDRESS_CITY}
       </p>
 
       <h2 className="font-display text-gold mt-12 mb-6 text-2xl font-semibold tracking-wide md:text-3xl">

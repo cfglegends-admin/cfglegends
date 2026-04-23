@@ -33,10 +33,10 @@ export default function DatenschutzPage() {
       </h1>
 
       <h2 className={headingTwo}>1. Verantwortlicher</h2>
-      <p className={paragraphTight}>Tjark Schulte</p>
-      <p className={paragraphTight}>Ahrstraße 34</p>
-      <p className={paragraphTight}>42117 Wuppertal</p>
-      <p className={paragraph}>E-Mail: admin@cfglegends.de</p>
+      <p className={paragraphTight}>{process.env.NEXT_PUBLIC_SITE_OWNER}</p>
+      <p className={paragraphTight}>{process.env.NEXT_PUBLIC_SITE_ADDRESS_STREET}</p>
+      <p className={paragraphTight}>{process.env.NEXT_PUBLIC_SITE_ADDRESS_CITY}</p>
+      <p className={paragraph}>E-Mail: {process.env.NEXT_PUBLIC_SITE_EMAIL}</p>
 
       <h2 className={headingTwo}>2. Allgemeines zur Datenverarbeitung</h2>
       <p className={paragraph}>
