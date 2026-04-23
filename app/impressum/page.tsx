@@ -5,17 +5,13 @@ import { ArrowLeft } from "lucide-react";
 export const metadata: Metadata = {
   title: "Impressum",
   robots: {
-    index: false,
+    index: false, // Richtig so! Ein Impressum muss nicht bei Google ranken.
     follow: false,
   },
 };
 
-const placeholderClass =
-  "bg-gold/10 text-gold rounded px-1.5 py-0.5 font-mono text-sm";
-
-function Placeholder({ children }: { children: string }) {
-  return <span className={placeholderClass}>{children}</span>;
-}
+const paragraph =
+  "font-body text-foreground mb-2 text-base leading-relaxed md:text-lg";
 
 export default function ImpressumPage() {
   return (
@@ -35,31 +31,29 @@ export default function ImpressumPage() {
       <h2 className="font-display text-gold mt-12 mb-6 text-2xl font-semibold tracking-wide md:text-3xl">
         Angaben gemäß § 5 TMG
       </h2>
-      <p className="font-body text-foreground mb-2 text-base leading-relaxed md:text-lg">
-        <Placeholder>[Name wird ergänzt]</Placeholder>
-      </p>
-      <p className="font-body text-foreground mb-2 text-base leading-relaxed md:text-lg">
-        <Placeholder>[Adresse wird ergänzt]</Placeholder>
-      </p>
+      <p className={paragraph}>Tjark Schulte</p>
+      <p className={paragraph}>Ahrstraße 34</p>
       <p className="font-body text-foreground mb-6 text-base leading-relaxed md:text-lg">
-        <Placeholder>[PLZ Ort wird ergänzt]</Placeholder>
+        42117 Wuppertal
       </p>
 
       <h2 className="font-display text-gold mt-12 mb-6 text-2xl font-semibold tracking-wide md:text-3xl">
         Kontakt
       </h2>
+      <p className={paragraph}>
+        Telefon: +49 (0) 123 4567890 {/* Hier deine/eine Nummer eintragen */}
+      </p>
       <p className="font-body text-foreground mb-6 text-base leading-relaxed md:text-lg">
-        E-Mail: <Placeholder>[wird ergänzt]</Placeholder>
+        E-Mail: admin@cfglegends.de
       </p>
 
       <h2 className="font-display text-gold mt-12 mb-6 text-2xl font-semibold tracking-wide md:text-3xl">
-        Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
+        Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
       </h2>
-      <p className="font-body text-foreground mb-2 text-base leading-relaxed md:text-lg">
-        <Placeholder>[Name wird ergänzt]</Placeholder>
-      </p>
+      <p className={paragraph}>Tjark Schulte</p>
+      <p className={paragraph}>Ahrstraße 34</p>
       <p className="font-body text-foreground mb-6 text-base leading-relaxed md:text-lg">
-        <Placeholder>[Adresse wird ergänzt]</Placeholder>
+        42117 Wuppertal
       </p>
 
       <h2 className="font-display text-gold mt-12 mb-6 text-2xl font-semibold tracking-wide md:text-3xl">

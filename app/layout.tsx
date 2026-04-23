@@ -5,6 +5,7 @@ import { ParallaxBackground } from "@/components/layout/ParallaxBackground";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
+import { Analytics } from "@vercel/analytics/react";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import FloatingButton from "@/components/ui/FloatingButton";
@@ -96,6 +97,7 @@ export default function RootLayout({
             <FloatingButton />
           </div>
         </MotionProvider>
+        <Analytics />
       </body>
     </html>
   );

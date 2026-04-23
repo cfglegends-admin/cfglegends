@@ -164,7 +164,7 @@ Accessibility: Focus-Trap in CardDetailModal + ConfirmDialog (lib/hooks/use-focu
 SEO: JSON-LD (WebSite) auf Landing Page, XML-Sitemap (app/sitemap.ts), robots.txt (/admin + /api blockiert)
 PWA: Web App Manifest (manifest.json) mit Theme-Color Gold, Standalone-Display
 Performance: BG-Pattern SVG via SVGO optimiert (180KB → 140KB, -22.5%), Pattern-Layer GPU-promoted (translateZ(0) + will-change)
-Öffentliche Seiten: Landing Page, /regeln, /rechner, /karten, /impressum, /datenschutz
+Öffentliche Seiten: Landing Page, /regeln, /rechner, /karten, /, /datenschutz
 DB-Tabellen: limitedCards, news, downloads, cards, adminUsers, adminAuditLogs
 Karten-Galerie Final:
 - PNGs normalisiert via ImageMagick (trim + resize 1742×2539, keine transparenten Ränder)

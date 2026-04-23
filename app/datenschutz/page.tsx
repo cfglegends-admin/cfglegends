@@ -14,6 +14,8 @@ const headingTwo =
   "font-display text-gold mt-12 mb-6 text-2xl font-semibold tracking-wide md:text-3xl";
 const paragraph =
   "font-body text-foreground mb-6 text-base leading-relaxed md:text-lg";
+const paragraphTight =
+  "font-body text-foreground mb-2 text-base leading-relaxed md:text-lg";
 
 export default function DatenschutzPage() {
   return (
@@ -31,11 +33,10 @@ export default function DatenschutzPage() {
       </h1>
 
       <h2 className={headingTwo}>1. Verantwortlicher</h2>
-      <p className={paragraph}>
-        <span className="bg-gold/10 text-gold rounded px-1.5 py-0.5 font-mono text-sm">
-          [Name und Kontaktdaten werden ergänzt — siehe Impressum]
-        </span>
-      </p>
+      <p className={paragraphTight}>Tjark Schulte</p>
+      <p className={paragraphTight}>Ahrstraße 34</p>
+      <p className={paragraphTight}>42117 Wuppertal</p>
+      <p className={paragraph}>E-Mail: admin@cfglegends.de</p>
 
       <h2 className={headingTwo}>2. Allgemeines zur Datenverarbeitung</h2>
       <p className={paragraph}>
@@ -77,14 +78,23 @@ export default function DatenschutzPage() {
         </a>
       </p>
 
-      <h2 className={headingTwo}>7. Ihre Rechte</h2>
+      <h2 className={headingTwo}>7. Reichweitenmessung (Vercel Analytics)</h2>
+      <p className={paragraph}>
+        Wir nutzen Vercel Analytics zur anonymisierten Auswertung der Website-Zugriffe (z. B.
+        Seitenaufrufe, Ladezeiten). Dabei werden <strong>keine Cookies</strong> gesetzt und
+        IP-Adressen vor der Speicherung kryptografisch unkenntlich gemacht (Hashing). Ein
+        Rückschluss auf Ihre Person ist ausgeschlossen. Rechtsgrundlage ist unser berechtigtes
+        Interesse (Art. 6 Abs. 1 lit. f DSGVO) an der Optimierung der Website.
+      </p>
+
+      <h2 className={headingTwo}>8. Ihre Rechte</h2>
       <p className={paragraph}>
         Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
         Datenübertragbarkeit und Widerspruch. Wenden Sie sich dazu an die im Impressum genannten
         Kontaktdaten.
       </p>
 
-      <h2 className={headingTwo}>8. Beschwerderecht</h2>
+      <h2 className={headingTwo}>9. Beschwerderecht</h2>
       <p className={paragraph}>
         Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.
       </p>
