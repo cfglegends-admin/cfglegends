@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import FloatingButton from "@/components/ui/FloatingButton";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -90,7 +91,10 @@ export default function RootLayout({
           <Header />
           <main className="relative flex-1">{children}</main>
           <Footer />
-          <ScrollToTop />
+          <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-center justify-end gap-4 ">
+            <ScrollToTop />
+            <FloatingButton />
+          </div>
         </MotionProvider>
       </body>
     </html>

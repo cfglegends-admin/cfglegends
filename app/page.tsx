@@ -10,6 +10,8 @@ import { News } from "@/components/sections/News";
 import { CalculatorReveal } from "@/components/calculator/CalculatorReveal";
 import { getPublishedNews } from "@/lib/actions/news";
 
+export const revalidate = 60; 
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
