@@ -64,7 +64,7 @@ export function HeroLogo() {
       mouseY.set(y)
     }
 
-    window.addEventListener("mousemove", onMouseMove)
+    window.addEventListener("mousemove", onMouseMove, { passive: true })
     return () => window.removeEventListener("mousemove", onMouseMove)
   }, [canHover, prefersReduced, mouseX, mouseY])
 
@@ -76,7 +76,7 @@ export function HeroLogo() {
           alt="CFG Legends"
           width={640}
           height={640}
-          priority
+          priority={true}
           quality={90}
           sizes={LOGO_SIZES}
           placeholder="blur"
@@ -129,7 +129,7 @@ export function HeroLogo() {
                 src="/assets/logo-icons-left.png"
                 alt=""
                 fill
-                priority
+                loading="eager"
                 quality={90}
                 sizes={LOGO_SIZES}
                 placeholder="blur"
@@ -151,7 +151,7 @@ export function HeroLogo() {
                 src="/assets/logo-icons-right.png"
                 alt=""
                 fill
-                priority
+                loading="eager"
                 quality={90}
                 sizes={LOGO_SIZES}
                 placeholder="blur"
@@ -177,7 +177,7 @@ export function HeroLogo() {
                 src="/assets/logo-main.png"
                 alt="CFG Legends"
                 fill
-                priority
+                priority={true}
                 quality={90}
                 sizes={LOGO_SIZES}
                 placeholder="blur"
@@ -203,7 +203,7 @@ export function HeroLogo() {
                 src="/assets/logo-crown.png"
                 alt=""
                 fill
-                priority
+                loading="eager"
                 quality={90}
                 sizes={LOGO_SIZES}
                 placeholder="blur"

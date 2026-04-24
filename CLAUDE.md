@@ -178,4 +178,20 @@ Backup: public/cards-backup/ (Originale)
 Fix (Cross-Browser): CardDetailModal Desktop-Layout nutzt calc()-basierte Kartenbreite (calc(min(80vh,700px)*59/86)) statt implizite aspect-ratio-Breite — behebt Safari WebKit Flex + aspect-ratio Bug.
 Fix (Animation): Exit-Animationen in Modal getrennt von Enter-Transitions — Delays nur für Enter-Stagger, Exit immer synchron (0.3s ohne Delay).
 Fix (CardTilt): translateZ(30px) entfernt + Gold-Glow-Overlay nach children verschoben — behebt Safari 3D-Rendering und macht Shimmer sichtbar.
-Nächster Schritt: Domain + produktive Blob-Konfiguration
+Performance Optimization Pass:
+- Hero-Logo: priority nur auf logo-main.png (LCP-Element), andere Layer loading="eager"
+- AVIF-Format in next.config.ts aktiviert (20-30% bessere Kompression als WebP)
+- ParallaxBackground: Partikel von React State auf Direct DOM (useRef + Pool von 20 Elementen), eliminiert 60 React State Updates/sec
+- ParallaxBackground: Visibility API — rAF pausiert bei inaktivem Tab
+- ParallaxBackground: Pattern-Drift + Glow von backgroundPosition auf GPU-accelerated transform: translate3d() umgestellt
+- ParallaxBackground: Partikel-Positionierung von left/top auf transform: translate3d() umgestellt
+- CardGrid: layout-Prop von m.ul/m.li entfernt (eliminiert 244 getBoundingClientRect() Calls bei Filter-Wechsel)
+- CardDetailModal: Dynamic Import (ssr: false), wird erst bei Klick geladen
+- canvas-confetti: Dynamic Import in lib/confetti.ts, ~7KB nur bei Victory-Event geladen
+- LazyCardTilt: IntersectionObserver-basiertes Lazy Mounting in Galerie (122 → ~10-15 initiale CardTilt-Instanzen)
+- Header/Footer/ScoreTracker: logo-static-sm.png (24KB, 128x128) statt logo-static.png (14MB, 6144x6144)
+- HeroLogo: mousemove-Listener auf passive: true gesetzt
+- DB: Indexes auf cards.published und (published, type) im Schema definiert
+- Ungenutzter bg-drift CSS-Keyframe entfernt
+Neue Dateien: components/motion/LazyCardTilt.tsx, public/assets/logo-static-sm.png, drizzle/0002_cards_indexes.sql
+Nächster Schritt: DB-Migration ausführen (drizzle/0002_cards_indexes.sql), Domain + produktive Blob-Konfiguration

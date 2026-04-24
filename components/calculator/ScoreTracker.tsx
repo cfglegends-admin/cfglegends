@@ -475,7 +475,7 @@ export function ScoreTracker() {
       >
         <span className="bg-background absolute top-1/2 left-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 px-2 py-2">
           <Image
-            src="/assets/logo.png"
+            src="/assets/logo-static-sm.png"
             alt=""
             width={24}
             height={24}

@@ -106,19 +106,6 @@
   }
 }
 
-@keyframes bg-drift {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 200px 200px;
-  }
-}
-
-.animate-bg-drift {
-  animation: bg-drift 150s linear infinite;
-}
-
 @keyframes button-shine {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(200%); }

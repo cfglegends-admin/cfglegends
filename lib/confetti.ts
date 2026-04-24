@@ -1,8 +1,8 @@
-import confetti from "canvas-confetti"
-
-export function fireVictoryConfetti(origin: "top" | "bottom" = "bottom") {
+export async function fireVictoryConfetti(origin: "top" | "bottom" = "bottom") {
   if (typeof window === "undefined") return
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+  const { default: confetti } = await import("canvas-confetti")
 
   const y = origin === "top" ? 0.15 : 0.85
   const originPoint = { y, x: 0.5 }

@@ -41,7 +41,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3" aria-label="CFG Legends — Startseite">
           <Image
-            src="/assets/logo-static.png"
+            src="/assets/logo-static-sm.png"
             alt=""
             width={56}
             height={56}

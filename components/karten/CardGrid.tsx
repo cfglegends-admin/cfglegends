@@ -2,10 +2,15 @@
 
 import { useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
+import dynamic from "next/dynamic";
 import { type Card } from "@/lib/db/schema";
 import { cn } from "@/lib/utils";
-import { CardDetailModal } from "./CardDetailModal";
-import { CardTilt } from "@/components/motion/CardTilt";
+import { LazyCardTilt } from "@/components/motion/LazyCardTilt";
+
+const CardDetailModal = dynamic(
+  () => import("./CardDetailModal").then(mod => ({ default: mod.CardDetailModal })),
+  { ssr: false }
+);
 import { FadeImage } from "@/components/motion/FadeImage";
 
 const typeLabels: Record<string, string> = {
@@ -46,12 +51,11 @@ export function CardGrid({ cards }: CardGridProps) {
         <strong className="text-foreground">{cards.length}</strong> Karten gefunden
       </div>
 
-      <m.ul layout className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 md:gap-6">
+      <m.ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 md:gap-6">
         <AnimatePresence mode="popLayout">
           {cards.map((card) => (
             <m.li
               key={card.id}
-              layout
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
@@ -62,7 +66,7 @@ export function CardGrid({ cards }: CardGridProps) {
                 onClick={() => setSelectedCard(card)}
                 className="group block w-full cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
               >
-                <CardTilt className="relative">
+                <LazyCardTilt className="relative">
                   <div
                     className="relative w-full overflow-hidden rounded-2xl border border-transparent shadow-lg shadow-black/50 transition-all duration-500 ease-out group-hover:border-gold/40 group-hover:shadow-xl group-hover:shadow-gold/15 group-hover:-translate-y-1"
                     style={{ aspectRatio: "59 / 86" }}
@@ -77,7 +81,7 @@ export function CardGrid({ cards }: CardGridProps) {
                       className="object-cover select-none pointer-events-none"
                     />
                   </div>
-                </CardTilt>
+                </LazyCardTilt>
 
                 <div className="mt-3 px-1">
                   <div className="flex items-start justify-between gap-2 mb-1.5">

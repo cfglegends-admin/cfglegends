@@ -1,7 +1,7 @@
 "use client"
 
 import { useReducedMotion, useScroll, useTransform, m } from "framer-motion"
-import { useEffect, useRef, useState, useCallback } from "react"
+import { useEffect, useRef, useState, useCallback, useMemo } from "react"
 import { usePathname } from "next/navigation"
 
 interface Particle {
@@ -32,7 +32,8 @@ export function ParallaxBackground() {
   const prefersReducedMotion = useReducedMotion()
   const { scrollY, scrollYProgress } = useScroll()
   const [isPointerFine, setIsPointerFine] = useState(true)
-  const [particles, setParticles] = useState<Particle[]>([])
+  const particlesRef = useRef<Particle[]>([])
+  const particlePoolRef = useRef<HTMLDivElement[]>([])
 
   // Track scroll-based parallax offset (written by framer-motion, read by rAF)
   const scrollOffset = useRef({ x: 0, y: 0 })
@@ -67,9 +68,9 @@ export function ParallaxBackground() {
     const drift = prefersReducedMotion ? 0 : ((now - driftStart.current) / 28000) * 200
     const x = scrollOffset.current.x + drift
     const y = scrollOffset.current.y + drift
-    const pos = `${x.toFixed(1)}px ${y.toFixed(1)}px`
-    if (patternRef.current) patternRef.current.style.backgroundPosition = pos
-    if (glowRef.current) glowRef.current.style.backgroundPosition = pos
+    const tx = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
+    if (patternRef.current) patternRef.current.style.transform = tx
+    if (glowRef.current) glowRef.current.style.transform = tx
   }, [prefersReducedMotion])
 
   // Main effect: glow, particles, and pattern drift in one rAF loop
@@ -150,24 +151,37 @@ export function ParallaxBackground() {
         el.style.setProperty("--glowMask", transparentMask)
       }
 
-      // Particle movement and cleanup — particles move continuously
-      setParticles((prev) => {
-        if (prev.length === 0) return prev
-        
-        // Update particle positions continuously
-        const updated = prev.map(p => ({
-          ...p,
-          x: p.x + p.vx * 16.67 / 1000, // ~60fps timestep
-          y: p.y + p.vy * 16.67 / 1000,
-        }))
-        
-        // Cleanup old particles
-        const next = updated.filter((p) => now - p.createdAt <= 1500)
-        if (next.length === prev.length && next.every((p, i) => p.x === prev[i]?.x && p.y === prev[i]?.y)) {
-          return prev // No re-render if positions unchanged
+      // Particle movement and cleanup — direct DOM, no React state
+      const parts = particlesRef.current
+      for (let i = parts.length - 1; i >= 0; i--) {
+        const p = parts[i]
+        if (now - p.createdAt > 1500) {
+          parts.splice(i, 1)
+        } else {
+          p.x += p.vx * 16.67 / 1000
+          p.y += p.vy * 16.67 / 1000
         }
-        return next
-      })
+      }
+
+      // Update pooled DOM elements
+      const pool = particlePoolRef.current
+      for (let i = 0; i < pool.length; i++) {
+        const el = pool[i]
+        const p = parts[i]
+        if (!p) {
+          el.style.display = "none"
+          continue
+        }
+        el.style.display = ""
+        const age = now - p.createdAt
+        const life = age / 1500
+        const pOpacity = Math.sin(life * Math.PI) * 0.7
+        const pScale = 0.6 + Math.sin(life * Math.PI) * 0.4
+        el.style.transform = `translate3d(${p.x - p.size / 2}px, ${p.y - p.size / 2}px, 0) scale(${pScale})`
+        el.style.opacity = String(pOpacity)
+        el.style.width = `${p.size}px`
+        el.style.height = `${p.size}px`
+      }
 
       raf = requestAnimationFrame(tick)
     }
@@ -203,18 +217,17 @@ export function ParallaxBackground() {
           const velocity = 20 + Math.random() * 30
           const size = dampingZone === "tilt" ? 1.5 + Math.random() * 1.5 : 2 + Math.random() * 2
 
-          setParticles((prev) => [
-            ...prev.slice(-19),
-            {
-              id: particleId++,
-              x: event.clientX + (Math.random() - 0.5) * 8,
-              y: event.clientY + (Math.random() - 0.5) * 8,
-              vx: Math.cos(angle) * velocity,
-              vy: Math.sin(angle) * velocity,
-              createdAt: now,
-              size,
-            },
-          ])
+          const parts = particlesRef.current
+          if (parts.length >= 20) parts.shift()
+          parts.push({
+            id: particleId++,
+            x: event.clientX + (Math.random() - 0.5) * 8,
+            y: event.clientY + (Math.random() - 0.5) * 8,
+            vx: Math.cos(angle) * velocity,
+            vy: Math.sin(angle) * velocity,
+            createdAt: now,
+            size,
+          })
           lastSpawnTime = now
         }
       }
@@ -225,16 +238,49 @@ export function ParallaxBackground() {
     if (cursorActive) {
       window.addEventListener("pointermove", onMove, { passive: true })
     }
+
+    // Pause rAF when tab is hidden to save CPU/battery
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(raf)
+      } else {
+        driftStart.current = performance.now() - ((scrollOffset.current.x) / 200 * 28000)
+        raf = requestAnimationFrame(tick)
+      }
+    }
+    document.addEventListener("visibilitychange", onVisibility)
+
     raf = requestAnimationFrame(tick)
 
     return () => {
       alive = false
       cancelAnimationFrame(raf)
       window.removeEventListener("pointermove", onMove)
+      document.removeEventListener("visibilitychange", onVisibility)
       el.style.setProperty("--glowOpacity", "0")
       el.style.setProperty("--glowMask", transparentMask)
     }
   }, [prefersReducedMotion, pathname, isPointerFine, applyPatternPosition])
+
+  const POOL_SIZE = 20
+  const particlePool = useMemo(() =>
+    Array.from({ length: POOL_SIZE }, (_, i) => (
+      <div
+        key={i}
+        ref={(el) => { if (el) particlePoolRef.current[i] = el }}
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          display: 'none',
+          willChange: 'transform, opacity',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(255,235,180,0.95) 0%, rgba(212,175,55,0.6) 60%, transparent 100%)',
+          boxShadow: '0 0 6px rgba(212,175,55,0.5)',
+          pointerEvents: 'none' as const,
+        }}
+      />
+    )), [])
 
   return (
     <div
@@ -255,17 +301,21 @@ export function ParallaxBackground() {
         />
       </m.div>
 
-      {/* Layer 1: Main pattern — drift + scroll parallax via direct DOM writes */}
+      {/* Layer 1: Main pattern — drift + scroll parallax via GPU transform */}
       <m.div
-        ref={patternRef}
-        className="absolute inset-0"
-        style={{
-          opacity,
-          backgroundImage: "url('/assets/patterns/bg.svg')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "200px 200px",
-        }}
-      />
+        className="absolute inset-0 overflow-hidden"
+        style={{ opacity }}
+      >
+        <div
+          ref={patternRef}
+          className="absolute -inset-[600px] will-change-transform"
+          style={{
+            backgroundImage: "url('/assets/patterns/bg.svg')",
+            backgroundRepeat: "repeat",
+            backgroundSize: "200px 200px",
+          }}
+        />
+      </m.div>
 
       {/* Metallic specular sweeps (cinematic light shimmer on gold) */}
       <m.div
@@ -341,12 +391,8 @@ export function ParallaxBackground() {
 
       {/* Cursor glow (pattern only) — keep above vignette so it reads clearly */}
       <div
-        ref={glowRef}
-        className="absolute inset-0"
+        className="absolute inset-0 overflow-hidden"
         style={{
-          backgroundImage: "url('/assets/patterns/bg.svg')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "200px 200px",
           opacity: prefersReducedMotion || !isAllowed(pathname) || !isPointerFine ? 0.12 : "var(--glowOpacity, 0)",
           filter: "brightness(1.25) saturate(1.3) contrast(1.04)",
           mixBlendMode: "screen",
@@ -355,37 +401,22 @@ export function ParallaxBackground() {
           maskImage:
             "var(--glowMask, radial-gradient(1px 1px at 0 0, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%))",
         }}
-      />
+      >
+        <div
+          ref={glowRef}
+          className="absolute -inset-[600px] will-change-transform"
+          style={{
+            backgroundImage: "url('/assets/patterns/bg.svg')",
+            backgroundRepeat: "repeat",
+            backgroundSize: "200px 200px",
+          }}
+        />
+      </div>
 
-      {/* Particles */}
+      {/* Particle pool — pre-created DOM elements, updated via ref in rAF */}
       {!prefersReducedMotion && isAllowed(pathname) && isPointerFine && (
         <div className="pointer-events-none fixed inset-0 z-[9999]">
-          {particles.map((p) => {
-            const now = performance.now()
-            const age = now - p.createdAt
-            const lifeProgress = age / 1500
-            const opacity = Math.sin(lifeProgress * Math.PI) * 0.7
-            const scale = 0.6 + Math.sin(lifeProgress * Math.PI) * 0.4
-
-            return (
-              <div
-                key={p.id}
-                style={{
-                  position: 'fixed',
-                  left: p.x,
-                  top: p.y,
-                  width: p.size,
-                  height: p.size,
-                  transform: `translate(-50%, -50%) scale(${scale})`,
-                  opacity,
-                  borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(255,235,180,0.95) 0%, rgba(212,175,55,0.6) 60%, transparent 100%)',
-                  boxShadow: '0 0 6px rgba(212,175,55,0.5)',
-                  pointerEvents: 'none',
-                }}
-              />
-            )
-          })}
+          {particlePool}
         </div>
       )}
     </div>
