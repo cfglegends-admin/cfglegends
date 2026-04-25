@@ -38,7 +38,7 @@ export function CardFilters() {
     if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
     searchTimeoutRef.current = setTimeout(() => {
       updateParams({ q: value });
-    }, 300);
+    }, 150);
   }, [updateParams]);
 
   return (

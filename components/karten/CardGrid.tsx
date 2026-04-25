@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import dynamic from "next/dynamic";
 import { type Card } from "@/lib/db/schema";
@@ -31,6 +31,11 @@ interface CardGridProps {
 
 export function CardGrid({ cards }: CardGridProps) {
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+
+  // Preload modal chunk on mount so first click opens instantly
+  useEffect(() => {
+    import("./CardDetailModal");
+  }, []);
 
   if (cards.length === 0) {
     return (

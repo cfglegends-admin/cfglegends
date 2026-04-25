@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /admin
-Disallow: /api
-
-Sitemap: https://cfg-legends.vercel.app/sitemap.xml

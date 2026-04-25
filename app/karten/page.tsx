@@ -4,12 +4,9 @@ import { CardFilters } from "@/components/karten/CardFilters";
 import { CardGrid } from "@/components/karten/CardGrid";
 
 export const metadata: Metadata = {
-  title: "Karten-Galerie | CFG Legends",
+  title: "Karten-Galerie",
   description: "Entdecke alle Karten von CFG Legends. Durchsuche Lehrer, Ereignisse und Fallen.",
-  robots: {
-    index: false,
-    follow: false,
-  },
+  alternates: { canonical: "/karten" },
 };
 
 export const revalidate = 300; // Cache für 5 Minuten

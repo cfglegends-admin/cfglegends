@@ -45,10 +45,6 @@ export const metadata: Metadata = {
     template: "%s — CFG Legends",
   },
   description: "Das Kartenspiel für die große Pause. Strategie, Lehrer und Lehrkraft-Punkte.",
-  robots: {
-    index: false,
-    follow: false,
-  },
   manifest: "/manifest.json",
   icons: {
     icon: [

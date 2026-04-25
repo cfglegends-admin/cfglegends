@@ -6,10 +6,7 @@ import Regelwerk from "@/content/regelwerk.mdx";
 export const metadata: Metadata = {
   title: "Regelwerk",
   description: "Die vollständigen Spielregeln für CFG Legends.",
-  robots: {
-    index: false,
-    follow: false,
-  },
+  alternates: { canonical: "/regeln" },
 };
 
 export default function RegelnPage() {

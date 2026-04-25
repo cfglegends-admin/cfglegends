@@ -1,10 +1,12 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { eq } from "drizzle-orm";
 import { getSession } from "./session";
 import { hashPassword, verifyPassword } from "./password";
 import { createAdminUser, getAdminByEmail, getAdminCount } from "./admin-users";
+import { checkRateLimit, recordFailedAttempt, resetRateLimit } from "./rate-limit";
 import { db } from "@/lib/db";
 import { adminUsers } from "@/lib/db/schema";
 import { writeAuditLog } from "@/lib/actions/audit";
@@ -26,6 +28,17 @@ export async function login(_prev: LoginResult, formData: FormData): Promise<Log
     return { error: "Bitte E-Mail und Passwort eingeben" };
   }
 
+  const headersList = await headers();
+  const ip = headersList.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+  const rateLimitKey = `login:${ip}`;
+
+  const rateLimit = checkRateLimit(rateLimitKey);
+  if (!rateLimit.allowed) {
+    return {
+      error: `Zu viele fehlgeschlagene Versuche. Bitte warte ${rateLimit.remainingMinutes} Minute${rateLimit.remainingMinutes === 1 ? "" : "n"}.`,
+    };
+  }
+
   let admin = await getAdminByEmail(email);
 
   if (!admin) {
@@ -36,6 +49,7 @@ export async function login(_prev: LoginResult, formData: FormData): Promise<Log
       adminCount === 0 && email === legacyEmail && !!legacyPassword && password === legacyPassword;
 
     if (!canBootstrap) {
+      recordFailedAttempt(rateLimitKey);
       return { error: "Ungültige E-Mail oder Passwort" };
     }
 
@@ -45,8 +59,11 @@ export async function login(_prev: LoginResult, formData: FormData): Promise<Log
       isMaster: true,
     });
   } else if (!verifyPassword(password, admin.passwordHash)) {
+    recordFailedAttempt(rateLimitKey);
     return { error: "Ungültige E-Mail oder Passwort" };
   }
+
+  resetRateLimit(rateLimitKey);
 
   const session = await getSession();
   session.isAdmin = true;

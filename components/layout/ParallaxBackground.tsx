@@ -103,12 +103,18 @@ export function ParallaxBackground() {
     const TRAIL_MAX_AGE = 800
     const MAX_OPACITY = 0.22
 
+    let driftFrame = 0
+
     const tick = () => {
       if (!alive) return
       const now = performance.now()
 
-      // Pattern drift (always runs, even without cursor)
-      applyPatternPosition(now)
+      // On touch devices the pattern drifts slowly (200px/28s) — throttle to ~15fps,
+      // imperceptible for such a slow animation but saves 75% of JS work per scroll.
+      driftFrame = (driftFrame + 1) % 4
+      if (isPointerFine || driftFrame === 0) {
+        applyPatternPosition(now)
+      }
 
       if (!cursorActive) {
         raf = requestAnimationFrame(tick)

@@ -5,7 +5,7 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { easings } from "@/lib/motion"
 
-const LOGO_SIZES = "(max-width: 768px) 384px, (max-width: 1024px) 520px, 640px"
+const LOGO_SIZES = "(max-width: 640px) 90vw, (max-width: 1024px) 520px, 640px"
 
 const BLUR = {
   static: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAKlBMVEVMaXG5iTq4gymnizeseC6yei+qcyO+hi2oaxvTo0WYXReDURiqcSLJlTpZkZRqAAAADXRSTlMAHTYLjHBk9+iE3YDGqtU5sQAAAAlwSFlzAAAomgAAKJoBFzohsgAAADVJREFUeJxNy7kNACAMBMHz/4D7bxeJBDaZaIEvkQt5lRFAFjNpBNY90coQzZhWAdjXcn7vAR1AAOuyhdrnAAAAAElFTkSuQmCC",
@@ -101,20 +101,8 @@ export function HeroLogo() {
         style={{ rotateX, rotateY }}
         className="relative"
       >
-        {/* Idle-Animation Wrapper */}
-        <m.div
-          animate={{
-            y: [0, -10, 0],
-            rotate: [0, 0.6, 0, -0.6, 0],
-            scale: [1, 1.015, 1],
-          }}
-          transition={{
-            y: { duration: 8, ease: "easeInOut", repeat: Infinity },
-            rotate: { duration: 14, ease: "easeInOut", repeat: Infinity },
-            scale: { duration: 6, ease: "easeInOut", repeat: Infinity },
-          }}
-          className="relative"
-        >
+        {/* Idle-Animation Wrapper — CSS keyframe (compositor, no JS per frame) */}
+        <div className="relative hero-idle-animation">
           <div className="relative h-96 w-96 md:h-[32rem] md:w-[32rem] lg:h-[40rem] lg:w-[40rem]">
 
             {/* Layer 1 (hinterste): Fächersymbole links */}
@@ -230,7 +218,7 @@ export function HeroLogo() {
               />
             </m.div>
           </div>
-        </m.div>
+        </div>
       </m.div>
     </m.div>
   )

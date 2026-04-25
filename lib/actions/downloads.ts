@@ -60,39 +60,54 @@ function revalidate() {
 
 export async function createDownload(formData: FormData): Promise<void> {
   await requireAdmin();
-  const data = parseFormData(formData);
-  const [created] = await db.insert(downloads).values(data).returning();
-  await writeAuditLog({
-    entityType: "downloads",
-    entityId: created.id,
-    action: "create",
-    summary: `Download erstellt: ${created.name}`,
-  });
-  revalidate();
+  try {
+    const data = parseFormData(formData);
+    const [created] = await db.insert(downloads).values(data).returning();
+    await writeAuditLog({
+      entityType: "downloads",
+      entityId: created.id,
+      action: "create",
+      summary: `Download erstellt: ${created.name}`,
+    });
+    revalidate();
+  } catch (error) {
+    if (error instanceof Error) throw error;
+    throw new Error("Ein unerwarteter Fehler ist aufgetreten.");
+  }
 }
 
 export async function updateDownload(id: number, formData: FormData): Promise<void> {
   await requireAdmin();
-  const data = parseFormData(formData);
-  await db.update(downloads).set(data).where(eq(downloads.id, id));
-  await writeAuditLog({
-    entityType: "downloads",
-    entityId: id,
-    action: "update",
-    summary: `Download aktualisiert: ${data.name}`,
-  });
-  revalidate();
+  try {
+    const data = parseFormData(formData);
+    await db.update(downloads).set(data).where(eq(downloads.id, id));
+    await writeAuditLog({
+      entityType: "downloads",
+      entityId: id,
+      action: "update",
+      summary: `Download aktualisiert: ${data.name}`,
+    });
+    revalidate();
+  } catch (error) {
+    if (error instanceof Error) throw error;
+    throw new Error("Ein unerwarteter Fehler ist aufgetreten.");
+  }
 }
 
 export async function deleteDownload(id: number): Promise<void> {
   await requireAdmin();
-  const row = await getDownloadById(id);
-  await db.delete(downloads).where(eq(downloads.id, id));
-  await writeAuditLog({
-    entityType: "downloads",
-    entityId: id,
-    action: "delete",
-    summary: `Download gelöscht: ${row?.name ?? `ID ${id}`}`,
-  });
-  revalidate();
+  try {
+    const row = await getDownloadById(id);
+    await db.delete(downloads).where(eq(downloads.id, id));
+    await writeAuditLog({
+      entityType: "downloads",
+      entityId: id,
+      action: "delete",
+      summary: `Download gelöscht: ${row?.name ?? `ID ${id}`}`,
+    });
+    revalidate();
+  } catch (error) {
+    if (error instanceof Error) throw error;
+    throw new Error("Ein unerwarteter Fehler ist aufgetreten.");
+  }
 }

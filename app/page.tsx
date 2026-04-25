@@ -22,7 +22,11 @@ const SubjectsGrid = dynamic(() => import("@/components/sections/SubjectsGrid").
   ),
 });
 
-export const revalidate = 60; 
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
+export const revalidate = 60;
 
 const jsonLd = {
   "@context": "https://schema.org",

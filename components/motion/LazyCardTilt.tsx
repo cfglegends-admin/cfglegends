@@ -12,10 +12,22 @@ interface LazyCardTiltProps {
 export function LazyCardTilt({ children, className, maxTilt }: LazyCardTiltProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [activated, setActivated] = useState(false)
+  const [canHover, setCanHover] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)")
+    setCanHover(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setCanHover(e.matches)
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
+  }, [])
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    // Smaller margin on mobile — less aggressive pre-loading reduces scroll jank
+    const margin = window.innerWidth < 768 ? "50px" : "200px"
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -24,14 +36,14 @@ export function LazyCardTilt({ children, className, maxTilt }: LazyCardTiltProps
           observer.disconnect()
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: margin }
     )
 
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
 
-  if (activated) {
+  if (activated && canHover) {
     return <CardTilt className={className} maxTilt={maxTilt}>{children}</CardTilt>
   }
 

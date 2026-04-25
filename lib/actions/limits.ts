@@ -40,42 +40,57 @@ function revalidate() {
 
 export async function createLimitedCard(formData: FormData): Promise<void> {
   await requireAdmin();
-  const data = parseFormData(formData);
-  const [created] = await db.insert(limitedCards).values(data).returning();
-  await writeAuditLog({
-    entityType: "limits",
-    entityId: created.id,
-    action: "create",
-    summary: `Limitierung erstellt: ${created.name} (max ${created.maxCopies})`,
-  });
-  revalidate();
+  try {
+    const data = parseFormData(formData);
+    const [created] = await db.insert(limitedCards).values(data).returning();
+    await writeAuditLog({
+      entityType: "limits",
+      entityId: created.id,
+      action: "create",
+      summary: `Limitierung erstellt: ${created.name} (max ${created.maxCopies})`,
+    });
+    revalidate();
+  } catch (error) {
+    if (error instanceof Error) throw error;
+    throw new Error("Ein unerwarteter Fehler ist aufgetreten.");
+  }
 }
 
 export async function updateLimitedCard(id: number, formData: FormData): Promise<void> {
   await requireAdmin();
-  const data = parseFormData(formData);
-  await db
-    .update(limitedCards)
-    .set({ ...data, updatedAt: new Date() })
-    .where(eq(limitedCards.id, id));
-  await writeAuditLog({
-    entityType: "limits",
-    entityId: id,
-    action: "update",
-    summary: `Limitierung aktualisiert: ${data.name} (max ${data.maxCopies})`,
-  });
-  revalidate();
+  try {
+    const data = parseFormData(formData);
+    await db
+      .update(limitedCards)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(limitedCards.id, id));
+    await writeAuditLog({
+      entityType: "limits",
+      entityId: id,
+      action: "update",
+      summary: `Limitierung aktualisiert: ${data.name} (max ${data.maxCopies})`,
+    });
+    revalidate();
+  } catch (error) {
+    if (error instanceof Error) throw error;
+    throw new Error("Ein unerwarteter Fehler ist aufgetreten.");
+  }
 }
 
 export async function deleteLimitedCard(id: number): Promise<void> {
   await requireAdmin();
-  const row = await getLimitedCardById(id);
-  await db.delete(limitedCards).where(eq(limitedCards.id, id));
-  await writeAuditLog({
-    entityType: "limits",
-    entityId: id,
-    action: "delete",
-    summary: `Limitierung gelöscht: ${row?.name ?? `ID ${id}`}`,
-  });
-  revalidate();
+  try {
+    const row = await getLimitedCardById(id);
+    await db.delete(limitedCards).where(eq(limitedCards.id, id));
+    await writeAuditLog({
+      entityType: "limits",
+      entityId: id,
+      action: "delete",
+      summary: `Limitierung gelöscht: ${row?.name ?? `ID ${id}`}`,
+    });
+    revalidate();
+  } catch (error) {
+    if (error instanceof Error) throw error;
+    throw new Error("Ein unerwarteter Fehler ist aufgetreten.");
+  }
 }

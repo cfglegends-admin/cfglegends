@@ -20,7 +20,7 @@ export const sessionOptions: SessionOptions = {
   cookieName: "cfg-legends-admin",
   password: process.env.AUTH_SECRET ?? "",
   cookieOptions: {
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
     httpOnly: true,
     sameSite: "lax" as const,
   },

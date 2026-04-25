@@ -1,20 +1,21 @@
 "use client"
 
 import Image, { type ImageProps } from "next/image"
-import { m } from "framer-motion"
 import { useState } from "react"
 
-export function FadeImage({ alt = "", ...rest }: ImageProps) {
+export function FadeImage({ alt = "", className, style, ...rest }: ImageProps) {
   const [loaded, setLoaded] = useState(false)
 
   return (
-    <m.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: loaded ? 1 : 0 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+    <div
       className="h-full w-full"
+      style={{
+        opacity: loaded ? 1 : 0,
+        transition: "opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+        ...style,
+      }}
     >
-      <Image alt={alt} {...rest} onLoad={() => setLoaded(true)} />
-    </m.div>
+      <Image alt={alt} className={className} {...rest} onLoad={() => setLoaded(true)} />
+    </div>
   )
 }
