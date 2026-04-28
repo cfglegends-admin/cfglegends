@@ -62,7 +62,7 @@ async function prefetchAssets(data: SyncPayload): Promise<void> {
   }
 
   // Card images: grid thumbnail (384/q85) + modal at common DPR/viewport combos (q90)
-  const CARD_SIZES: Array<[number, number]> = [[384, 85], [640, 90], [828, 90], [1080, 90]];
+  const CARD_SIZES: Array<[number, number]> = [[384, 85], [640, 90], [750, 90], [828, 90], [1080, 90]];
   const cardQueue = data.cards.flatMap((card) =>
     CARD_SIZES.map(([w, q]) => async () => {
       try {

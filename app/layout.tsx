@@ -47,12 +47,17 @@ export const metadata: Metadata = {
   },
   description: "Das Kartenspiel für die große Pause. Strategie, Lehrer und Lehrkraft-Punkte.",
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    title: "CFG Legends",
+    statusBarStyle: "black-translucent",
+  },
   icons: {
     icon: [
       { url: "/favicon-32x32.png?v=1", sizes: "32x32", type: "image/png" },
       { url: "/favicon-16x16.png?v=1", sizes: "16x16", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png?v=1", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     title: "CFG Legends",

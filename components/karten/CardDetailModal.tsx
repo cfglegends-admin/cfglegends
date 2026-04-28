@@ -277,7 +277,7 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                     alt={`Karte ${card.name}`}
                     fill
                     sizes="224px"
-                    quality={85}
+                    quality={90}
                     draggable={false}
                     className="object-cover select-none pointer-events-none"
                   />
