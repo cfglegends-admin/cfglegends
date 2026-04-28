@@ -3,9 +3,10 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useScroll, useMotionValueEvent, m } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { MobileNav } from "@/components/layout/MobileNav"
+import { WifiOff } from "lucide-react"
 
 const navItems = [
   { label: "Regeln", href: "/regeln" },
@@ -18,7 +19,17 @@ const navItems = [
 export function Header() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
+  const [offline, setOffline] = useState(false)
   const { scrollY } = useScroll()
+
+  useEffect(() => {
+    setOffline(!navigator.onLine)
+    const on = () => setOffline(false)
+    const off = () => setOffline(true)
+    window.addEventListener("online", on)
+    window.addEventListener("offline", off)
+    return () => { window.removeEventListener("online", on); window.removeEventListener("offline", off) }
+  }, [])
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 20)
@@ -69,7 +80,20 @@ export function Header() {
           </ul>
         </nav>
 
-        <MobileNav />
+        <div className="flex items-center gap-3">
+          {offline && (
+            <span
+              className="font-body text-muted-foreground flex items-center gap-1.5 text-xs"
+              role="status"
+              aria-live="polite"
+              aria-label="Offline-Modus aktiv"
+            >
+              <WifiOff className="h-3.5 w-3.5" aria-hidden="true" />
+              <span className="hidden sm:inline">Offline</span>
+            </span>
+          )}
+          <MobileNav />
+        </div>
       </div>
     </m.header>
   )

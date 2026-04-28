@@ -1,33 +1,13 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { getPublishedCards } from "@/lib/actions/cards";
-import { CardFilters } from "@/components/karten/CardFilters";
-import { CardGrid } from "@/components/karten/CardGrid";
+import { OfflineCardGallery } from "@/components/karten/OfflineCardGallery";
 
 export const metadata: Metadata = {
-  title: "Karten-Galerie",
-  description: "Entdecke alle Karten von CFG Legends. Durchsuche Lehrer, Ereignisse und Fallen.",
-  alternates: { canonical: "/karten" },
+  title: "Offline",
+  robots: { index: false },
 };
 
-export const revalidate = 300; // Cache für 5 Minuten
-
-interface KartenPageProps {
-  searchParams: Promise<{ [key: string]: string | undefined }>;
-}
-
-export default async function KartenPage(props: KartenPageProps) {
-  const searchParams = await props.searchParams;
-
-  const filters = {
-    type: searchParams.type,
-    fach: searchParams.fach,
-    q: searchParams.q,
-    sort: searchParams.sort,
-  };
-
-  const cards = await getPublishedCards(filters);
-
+export default function OfflinePage() {
   return (
     <div className="min-h-screen pt-24 pb-16">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -43,9 +23,8 @@ export default async function KartenPage(props: KartenPageProps) {
 
         <section aria-label="Karten Filter und Liste">
           <Suspense>
-            <CardFilters />
+            <OfflineCardGallery />
           </Suspense>
-          <CardGrid cards={cards} />
         </section>
       </div>
     </div>

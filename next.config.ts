@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
+import withSerwistInit from "@serwist/next";
 
 const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
@@ -59,4 +60,22 @@ const withMDX = createMDX({
   },
 });
 
-export default withMDX(nextConfig);
+const withSerwist = withSerwistInit({
+  swSrc: "app/sw.ts",
+  swDest: "public/sw.js",
+  additionalPrecacheEntries: [{ url: "/offline", revision: "1" }],
+  // Exclude large raw assets — SW caches next/image-optimized versions via runtimeCaching
+  exclude: [
+    ({ asset }: { asset: { name: string } }) => {
+      const n = asset.name;
+      return (
+        n.includes("cards/") ||
+        n.includes("cards-backup/") ||
+        /logo(-wide|-static|-main|-crown|-icons-left|-icons-right)?\.png$/.test(n)
+      );
+    },
+  ],
+  disable: process.env.NODE_ENV === "development",
+});
+
+export default withSerwist(withMDX(nextConfig));
