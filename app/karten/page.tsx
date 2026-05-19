@@ -24,6 +24,7 @@ export default async function KartenPage(props: KartenPageProps) {
     fach: searchParams.fach,
     q: searchParams.q,
     sort: searchParams.sort,
+    auflage: searchParams.auflage,
   };
 
   const cards = await getPublishedCards(filters);

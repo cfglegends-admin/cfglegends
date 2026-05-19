@@ -7,7 +7,6 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { PwaManager } from "@/components/pwa/PwaManager";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import FloatingButton from "@/components/ui/FloatingButton";
@@ -46,12 +45,6 @@ export const metadata: Metadata = {
     template: "%s — CFG Legends",
   },
   description: "Das Kartenspiel für die große Pause. Strategie, Lehrer und Lehrkraft-Punkte.",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    title: "CFG Legends",
-    statusBarStyle: "black-translucent",
-  },
   icons: {
     icon: [
       { url: "/favicon-32x32.png?v=1", sizes: "32x32", type: "image/png" },
@@ -88,7 +81,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={cn("dark", cinzel.variable, inter.variable, geistMono.variable)}>
+    <html lang="de" data-scroll-behavior="smooth" className={cn("dark", cinzel.variable, inter.variable, geistMono.variable)}>
       <body className="bg-background text-foreground font-body flex min-h-screen flex-col antialiased">
         <MotionProvider>
           <ParallaxBackground />
@@ -100,7 +93,6 @@ export default function RootLayout({
             <FloatingButton />
           </div>
         </MotionProvider>
-        <PwaManager />
         <Analytics />
         <SpeedInsights />
       </body>

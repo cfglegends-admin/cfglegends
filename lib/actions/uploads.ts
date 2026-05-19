@@ -1,7 +1,7 @@
 "use server";
 
 import { put } from "@vercel/blob";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { requireAdmin } from "@/lib/auth/session";
 import { writeAuditLog } from "@/lib/actions/audit";
 import { db } from "@/lib/db";
@@ -23,6 +23,11 @@ export async function uploadCardImage(formData: FormData): Promise<UploadResult>
     const file = formData.get("image");
     const cardNumberRaw = String(formData.get("cardNumber") ?? "");
     const cardIdRaw = String(formData.get("cardId") ?? "");
+    const auflageRaw = String(formData.get("auflage") ?? "1");
+    const auflage = (() => {
+      const n = Number(auflageRaw);
+      return Number.isInteger(n) && n >= 1 ? n : 1;
+    })();
 
     if (!(file instanceof File)) {
       return { error: "Keine Datei ausgewählt." };
@@ -37,15 +42,18 @@ export async function uploadCardImage(formData: FormData): Promise<UploadResult>
     }
 
     const editingCardId = Number(cardIdRaw);
-    const [existingCard] = await db.select().from(cards).where(eq(cards.cardNumber, cardNumber));
+    const [existingCard] = await db
+      .select()
+      .from(cards)
+      .where(and(eq(cards.cardNumber, cardNumber), eq(cards.auflage, auflage)));
     if (existingCard && existingCard.id !== editingCardId) {
       return {
-        error: `Kartennummer #${cardNumber} ist bereits vergeben. Bitte andere Nummer wählen.`,
+        error: `Karte #${cardNumber} in Auflage ${auflage} ist bereits vergeben.`,
       };
     }
 
     const ext = file.name.split(".").pop()?.toLowerCase() ?? "png";
-    const fileName = `cards/${cardNumber}.${ext}`;
+    const fileName = `cards/v${auflage}/${cardNumber}.${ext}`;
 
     const uploaded = await put(fileName, file, {
       access: "public",

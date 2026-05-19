@@ -58,7 +58,6 @@ lib/
 └── utils.ts                  cn() helper
 
 public/
-├── manifest.json             PWA Web App Manifest
 └── robots.txt                Crawler-Regeln
 
 content/
@@ -121,7 +120,7 @@ public/
 ❌ Kommentare, die erklären WAS der Code macht (nur WARUM, wenn nicht-offensichtlich)
 
 ## Aktueller Stand
-Phase: Senior Frontend Animation-Pass abgeschlossen
+Phase: Feature-Completeness-Pass abgeschlossen (2026-05-19)
 Erledigt:
 - Fachsymbole auf Inline-SVGs (currentColor) umgestellt
 - Vollständige Karten-Galerie mit Datenbankanbindung, Bulk-Import und öffentlicher Galerie `/karten`
@@ -149,30 +148,30 @@ Admin-Auth: Mehrere Admin-Accounts via E-Mail + Passwort, Master-Admin-Rolle, Se
 Admin-Accounts: Master-Admin kann bestehende Accounts bearbeiten (E-Mail, Rolle, Passwort-Reset) mit Self-Lockout-Schutz
 Admin-Usability: Footer und öffentlicher Header auf `/admin` ausgeblendet, responsive Tab-Navigation mit horizontalem Scroll auf Mobile
 Admin-Audit: Login/Logout + CRUD-Änderungen in Karten, Limits, News, Downloads werden mit Account-Zuordnung geloggt
-Karten-Upload: Direktes Bild-Upload im Admin-Kartenformular via Vercel Blob (ohne GitHub-Zugriff), URL wird automatisch gesetzt
-Karten-Workflow: Nächste Kartennummer wird bei "Neue Karte" automatisch vorgeschlagen; Upload-Dateiname basiert auf Kartennummer (`cards/{nummer}.{ext}`) mit Nummern-Kollision-Check
+Karten-Upload: Direktes Bild-Upload im Admin-Kartenformular via Vercel Blob, URL wird automatisch gesetzt; Blob-Pfad ist `cards/v{auflage}/{cardNumber}.{ext}` (auflage-namespaced, damit 1. und 2. Auflage sich nicht überschreiben); Duplikat-Check prüft (cardNumber, auflage)-Kombination
+Karten-Workflow: Nächste Kartennummer wird bei "Neue Karte" automatisch vorgeschlagen; Auflage-State wird im Form getrackt und beim Upload mitgeschickt
 Layout: Footer zusätzlich auf `/rechner` ausgeblendet
 Mobile/Animation-Pass: Card-Modal mobile spacing verbessert, Rechner-Controls mit größeren Touch-Targets, SectionDivider mit subtiler cinematic Pulse-Animation, Parallax-Layer über gesamte Scroll-Höhe erweitert (inkl. sanfter Opacity/Scale-Atmung)
 Rechner-Polish: Lead-Glow, Ambient Lighting (Score-Farbe), Low-Score-Puls (warn/critical/dead), Name-Badge-Feedback, Victory-Overlay bei 0 Punkten mit Gold-Metallic-Titel, Konfetti-Regen (canvas-confetti), Swipe-Gestures auf Mobile (Swipe-Up/Down ±1/±5). Alle Effekte respektieren prefers-reduced-motion.
 Cursor-Trail: Goldener Schweif + dezente Partikel die bei Cursor-Bewegung erscheinen und nach 1.5s Stillstand gemächlich verblassen. Cursor-Glow zeigt metallisch-helles BG-Pattern im Radius um den Cursor mit kurzem Schweif (10 Trail-Punkte, 800ms max age), gleichgeschaltet mit Partikeln (400ms idle-delay + schneller Fade-Out synchron mit Partikel-Lebensdauer). Einzelner rAF-Loop für Glow + Partikel-Cleanup + Partikel-Position-Updates (erzwingt Re-Render für flüssige Interpolation). Nur auf Landing/Galerie/Regeln/Impressum/Datenschutz aktiv, nicht auf Rechner oder Admin. Gedämpft über CardTilt-Zonen (opacity *0.4), stark reduziert über SubjectsGrid-Items (opacity *0.2) für Lesbarkeit. Respektiert prefers-reduced-motion und Touch-Devices.
 Neue Komponenten: VictoryOverlay, CursorTrail, CursorTrailGate, HeroLogo
-Neue Dependency: canvas-confetti
+Neue Dependencies: canvas-confetti, react-markdown, rehype-raw, remark-gfm
 Hero-Logo: Cinematic 2.5D-Animation mit 4 Layern (logo-icons-left/right hinten, logo-main Mitte, logo-crown vorne). Multi-Layer Mouse-Parallax mit unterschiedlicher Z-Tiefe, Container-Tilt (rotateX/Y ±5°), Depth-Shadow-Stacking, einmaliger Shine-Sweep beim Laden (1.2s Delay), Idle-Animation (Float + Mikro-Rotation + Scale-Puls), Scroll-Reaktion (scale 1→0.88, opacity 1→0.4 über 600px). Respektiert prefers-reduced-motion (zeigt statisches logo-static.png).
 Neue Assets: public/assets/logo-static.png, logo-main.png, logo-crown.png, logo-icons-left.png, logo-icons-right.png
 Error Handling: Custom 404-Seite, globale + Galerie- + Admin-spezifische Error Boundaries, Skeleton Loading für Galerie
 Accessibility: Focus-Trap in CardDetailModal + ConfirmDialog (lib/hooks/use-focus-trap.ts), role="dialog" + aria-modal, aria-expanded auf MobileNav
 SEO: JSON-LD (WebSite) auf Landing Page, XML-Sitemap (app/sitemap.ts), robots.txt (/admin + /api blockiert)
-PWA: Web App Manifest (manifest.json) mit Theme-Color Gold, Standalone-Display
 Performance: BG-Pattern SVG via SVGO optimiert (180KB → 140KB, -22.5%), Pattern-Layer GPU-promoted (translateZ(0) + will-change)
 Öffentliche Seiten: Landing Page, /regeln, /rechner, /karten, /, /datenschutz
 DB-Tabellen: limitedCards, news, downloads, cards, adminUsers, adminAuditLogs
 Karten-Galerie Final:
 - PNGs normalisiert via ImageMagick (trim + resize 1742×2539, keine transparenten Ränder)
-- Grid-Cards: rounded-2xl + aspectRatio 59/86 + object-cover, dezenter gold Hover-Border, shadow-gold/15 Hover-Glow
+- Grid-Cards: rounded-2xl + intrinsische Maße (width=590 height=860, w-full h-auto), dezenter Gold-Border-Hover (border-transparent → group-hover:border-gold/40) + shadow-gold/15 Glow; Safari-Fix via WebkitMaskImage + WebkitBackfaceVisibility auf Image-Wrapper
 - Modal Desktop: Karte links + Liquid-Glass Info-Box rechts, beide aspectRatio 59/86 + width 340px → exakt gleich hoch
 - Info-Box asymmetrisch gerundet (rechts rund, links scharf), backdrop-filter blur(24px) saturate(180%)
 - Conditional Rendering: Stats nur wenn vorhanden, Fächer nur wenn gesetzt, Effect nur wenn nicht leer
 - Mobile: gestapeltes Layout, Info-Box scrollt intern mit maxHeight 60vh
+- Effekt-Text wird via ReactMarkdown (rehype-raw, remark-gfm) gerendert: **Fett** → gold-metallic, <center> zentriert, Zeilenumbrüche via whitespace-pre-wrap
 Neue Dateien: scripts/normalize-cards.sh
 Backup: public/cards-backup/ (Originale)
 Fix (Cross-Browser): CardDetailModal Desktop-Layout nutzt calc()-basierte Kartenbreite (calc(min(80vh,700px)*59/86)) statt implizite aspect-ratio-Breite — behebt Safari WebKit Flex + aspect-ratio Bug.
@@ -194,4 +193,13 @@ Performance Optimization Pass:
 - DB: Indexes auf cards.published und (published, type) im Schema definiert
 - Ungenutzter bg-drift CSS-Keyframe entfernt
 Neue Dateien: components/motion/LazyCardTilt.tsx, public/assets/logo-static-sm.png, drizzle/0002_cards_indexes.sql
-Nächster Schritt: DB-Migration ausführen (drizzle/0002_cards_indexes.sql), Domain + produktive Blob-Konfiguration
+Feature-Pass (2026-05-19):
+- Kartentyp "Sonderkarte" als 4. Typ hinzugefügt (varchar-Feld, kein DB-Constraint nötig); Admin-Formular + bulkImportCards-Cast aktualisiert
+- Auflage-Select im Admin-Kartenformular (controlled, State getrackt); parseFormData liest und validiert auflage
+- parseFormData gehärtet: getNumberOrNull trimmt Strings + nutzt Number.isFinite; auflage-Parser prüft explizit auf null/Leerstring
+- DB: Composite Unique Constraint (card_number, auflage) statt simplem .unique() auf card_number — gleiche Kartennummer kann jetzt in verschiedenen Auflagen existieren; Migration drizzle/0002_old_dagger.sql angewendet
+- Smart Filter: CardFilters.tsx — Wechsel auf "Falle"/"Ereignis" resettet Fach-URL-Param automatisch auf null; Fach-Dropdown bleibt disabled
+- Galerie-Sortierung: Default-Sort sortiert zuerst nach auflage asc, dann cardNumber asc (getSortKeys gibt Array zurück, wird via Spread übergeben)
+- Admin-Karten-Filter: Neue Client-Component AdminCardsFilter (components/admin/AdminCardsFilter.tsx) mit Suchfeld + Auflage-Dropdown; aktualisiert URL-Params live; Admin-Seite filtert per getCards({ auflage })
+- Markdown-Effekt: react-markdown + rehype-raw + remark-gfm installiert; CardDetailModal rendert card.effect via ReactMarkdown mit Styling ([&_strong]:text-gold-metallic, [&_center]:block, whitespace-pre-wrap); Admin-Formular zeigt Formatierungs-Hilfetext unter Effekt-Textarea
+Nächster Schritt: Domain + produktive Blob-Konfiguration, Karten-Asset-Upload für alle v2-Karten

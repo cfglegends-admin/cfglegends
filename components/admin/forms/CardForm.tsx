@@ -24,6 +24,9 @@ export function CardForm({ action, defaultValues, submitLabel }: CardFormProps) 
   const [cardNumber, setCardNumber] = useState<string>(
     defaultValues?.cardNumber ? String(defaultValues.cardNumber) : ""
   );
+  const [auflage, setAuflage] = useState<string>(
+    String(defaultValues?.auflage ?? 1)
+  );
   const [imageUrl, setImageUrl] = useState(defaultValues?.imageUrl ?? "");
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -52,6 +55,7 @@ export function CardForm({ action, defaultValues, submitLabel }: CardFormProps) 
     const formData = new FormData();
     formData.set("image", file);
     formData.set("cardNumber", String(normalizedCardNumber));
+    formData.set("auflage", auflage);
     if (defaultValues?.id) {
       formData.set("cardId", String(defaultValues.id));
     }
@@ -126,6 +130,7 @@ export function CardForm({ action, defaultValues, submitLabel }: CardFormProps) 
             <option value="lehrer">Lehrer</option>
             <option value="ereignis">Ereignis</option>
             <option value="falle">Falle</option>
+            <option value="sonderkarte">Sonderkarte</option>
           </select>
         </div>
 
@@ -148,6 +153,22 @@ export function CardForm({ action, defaultValues, submitLabel }: CardFormProps) 
         </div>
 
         <div>
+          <label htmlFor="auflage" className={fieldLabel}>
+            Auflage
+          </label>
+          <select
+            id="auflage"
+            name="auflage"
+            value={auflage}
+            onChange={(e) => setAuflage(e.target.value)}
+            className={fieldInput}
+          >
+            <option value="1">1. Auflage</option>
+            <option value="2">2. Auflage</option>
+          </select>
+        </div>
+
+        <div>
           <label htmlFor="imageUrl" className={fieldLabel}>
             Bild-Pfad *
           </label>
@@ -157,7 +178,7 @@ export function CardForm({ action, defaultValues, submitLabel }: CardFormProps) 
               name="imageUrl"
               type="text"
               required
-              placeholder="/cards/103.png"
+              placeholder="https://cdn.cfglegends.de/cards/v1/103.webp"
               value={imageUrl}
               onChange={(event) => setImageUrl(event.target.value)}
               className={fieldInput}
@@ -295,6 +316,11 @@ export function CardForm({ action, defaultValues, submitLabel }: CardFormProps) 
             placeholder="Kartenbeschreibung oder Effekt..."
             className={fieldInput}
           />
+          <p className="font-body text-muted-foreground mt-1.5 text-xs">
+            Formatierung: <code className="text-foreground">**Fett**</code>,{" "}
+            <code className="text-foreground">&lt;center&gt;Zentriert&lt;/center&gt;</code>,
+            Enter für Zeilenumbrüche.
+          </p>
         </div>
 
         {/* STATUS */}

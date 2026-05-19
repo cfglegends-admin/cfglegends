@@ -57,6 +57,7 @@ export function Header() {
             width={56}
             height={56}
             quality={80}
+            priority
             sizes="56px"
             className="h-12 w-12 md:h-14 md:w-14"
           />

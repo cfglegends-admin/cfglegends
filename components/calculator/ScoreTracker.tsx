@@ -480,6 +480,7 @@ export function ScoreTracker() {
             width={24}
             height={24}
             quality={80}
+            priority
             sizes="24px"
             className="h-5 w-5 opacity-40"
           />

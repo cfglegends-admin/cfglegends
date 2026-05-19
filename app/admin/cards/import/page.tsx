@@ -50,9 +50,9 @@ export default function BulkImportPage() {
         <div className="p-4">
           <pre className="font-mono text-muted-foreground whitespace-pre overflow-x-auto text-xs">
             Kartennummer;Name;Typ;Seltenheit;Ansage;Chill;Fächer;Effekt;Bild-Pfad{"\n"}
-            103;Mensa-Team;ereignis;normal;;;;&quot;Du bekommst Unterstützung...&quot;;/cards/103.png{"\n"}
-            120;Feueralarm;falle;normal;;;;&quot;Wenn dein Gegner...&quot;;/cards/120.png{"\n"}
-            128;Fächerkarte;lehrer;normal;5;3;Physik,Mathe;&quot;Effekttext hier&quot;;/cards/128.png
+            103;Mensa-Team;ereignis;normal;;;;&quot;Du bekommst Unterstützung...&quot;;https://cdn.cfglegends.de/cards/v1/103.webp{"\n"}
+            120;Feueralarm;falle;normal;;;;&quot;Wenn dein Gegner...&quot;;https://cdn.cfglegends.de/cards/v1/120.webp{"\n"}
+            128;Fächerkarte;lehrer;normal;5;3;Physik,Mathe;&quot;Effekttext hier&quot;;https://cdn.cfglegends.de/cards/v1/128.webp
           </pre>
         </div>
       </div>

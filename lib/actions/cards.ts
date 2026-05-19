@@ -12,6 +12,7 @@ interface CardFilters {
   fach?: string;
   q?: string;
   sort?: string;
+  auflage?: string;
   publishedOnly?: boolean;
 }
 
@@ -41,34 +42,41 @@ function buildFilterQuery(filters?: CardFilters) {
     );
   }
 
+  if (filters?.auflage && filters.auflage !== "all") {
+    const n = Number(filters.auflage);
+    if (Number.isInteger(n)) {
+      conditions.push(eq(cards.auflage, n));
+    }
+  }
+
   return conditions.length > 0 ? sql.join(conditions, sql` AND `) : undefined;
 }
 
-function getSortKey(sort?: string) {
+function getSortKeys(sort?: string): ReturnType<typeof asc>[] {
   switch (sort) {
     case "name_asc":
-      return asc(cards.name);
+      return [asc(cards.name)];
     case "name_desc":
-      return desc(cards.name);
+      return [desc(cards.name)];
     case "ansage_desc":
-      return desc(cards.ansage);
+      return [desc(cards.ansage)];
     case "ansage_asc":
-      return asc(cards.ansage);
+      return [asc(cards.ansage)];
     case "chill_desc":
-      return desc(cards.chill);
+      return [desc(cards.chill)];
     case "chill_asc":
-      return asc(cards.chill);
+      return [asc(cards.chill)];
     case "number":
     default:
-      return asc(cards.cardNumber);
+      return [asc(cards.auflage), asc(cards.cardNumber)];
   }
 }
 
 export async function getCards(filters?: CardFilters): Promise<Card[]> {
   const whereClause = buildFilterQuery(filters);
-  const orderByClause = getSortKey(filters?.sort);
+  const orderByClauses = getSortKeys(filters?.sort);
 
-  const query = db.select().from(cards).orderBy(orderByClause);
+  const query = db.select().from(cards).orderBy(...orderByClauses);
 
   if (whereClause) {
     query.where(whereClause);
@@ -116,12 +124,21 @@ function parseFormData(formData: FormData): NewCard {
 
   const isLehrer = type === "lehrer";
 
+  const auflageRaw = formData.get("auflage");
+  const auflage = (() => {
+    if (auflageRaw === null || auflageRaw === "") return 1;
+    const n = Number(auflageRaw);
+    return Number.isInteger(n) && n >= 1 ? n : 1;
+  })();
+
   const getNumberOrNull = (key: string) => {
     if (!isLehrer) return null;
     const val = formData.get(key);
-    if (!val || val === "") return null;
-    const num = Number(val);
-    return isNaN(num) ? null : num;
+    if (val === null) return null;
+    const str = String(val).trim();
+    if (str === "") return null;
+    const num = Number(str);
+    return Number.isFinite(num) ? num : null;
   };
 
   return {
@@ -137,6 +154,7 @@ function parseFormData(formData: FormData): NewCard {
     chill: getNumberOrNull("chill"),
     dienstjahre: getNumberOrNull("dienstjahre"),
     published: publishedRaw === "on" || publishedRaw === "true",
+    auflage,
   };
 }
 
@@ -265,7 +283,7 @@ export async function bulkImportCards(csvData: string): Promise<BulkImportResult
       const cardData: NewCard = {
         name,
         cardNumber,
-        type: type as "lehrer" | "ereignis" | "falle",
+        type: type as "lehrer" | "ereignis" | "falle" | "sonderkarte",
         rarity,
         imageUrl,
         effect: effectText || null,

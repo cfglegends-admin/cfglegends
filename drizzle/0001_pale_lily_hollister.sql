@@ -1,0 +1,1 @@
+ALTER TABLE "cards" ADD COLUMN "auflage" integer DEFAULT 1 NOT NULL;

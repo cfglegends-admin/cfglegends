@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# serwist — generated at build time
-/public/sw.js
+# local asset backups
+/upload/

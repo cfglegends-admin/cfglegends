@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 import { m, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
@@ -109,8 +112,8 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                     src={card.imageUrl}
                     alt={`Karte ${card.name}`}
                     fill
+                    unoptimized
                     sizes="(max-width: 1280px) 35vw, 480px"
-                    quality={90}
                     draggable={false}
                     className="object-cover select-none pointer-events-none"
                   />
@@ -152,8 +155,13 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
 
               {/* Content */}
               <div className="flex-1 overflow-y-auto p-6 lg:p-8">
-                <div className="mb-2 text-xs font-mono text-muted-foreground/80 uppercase tracking-[0.2em]">
-                  #{card.cardNumber.toString().padStart(3, "0")}
+                <div className="mb-2 flex items-center gap-3 text-xs font-mono uppercase tracking-[0.2em]">
+                  <span className="text-muted-foreground/80">
+                    #{card.cardNumber.toString().padStart(3, "0")}
+                  </span>
+                  <span className="text-gold/70">
+                    {card.auflage}. Auflage
+                  </span>
                 </div>
 
                 <h2 className="font-display text-2xl lg:text-3xl font-semibold text-gold-metallic mb-4 pr-8 leading-tight">
@@ -227,8 +235,13 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                 )}
 
                 {card.effect && card.effect.trim() && (
-                  <div className="rounded-lg bg-white/5 border-l-2 border-gold p-3 text-sm leading-relaxed text-foreground/90 backdrop-blur-sm">
-                    {card.effect}
+                  <div className="rounded-lg bg-white/5 text-center border-l-2 border-gold p-3 text-sm leading-relaxed text-foreground/90 backdrop-blur-sm whitespace-pre-wrap [&_strong]:text-gold-metallic [&_strong]:font-bold [&_center]:block [&_center]:text-center [&_em]:italic [&_em]:text-gold/90">
+                    <ReactMarkdown 
+                      rehypePlugins={[rehypeRaw]}
+                      remarkPlugins={[remarkGfm]}
+                      >
+                      {card.effect || ""}
+                    </ReactMarkdown>
                   </div>
                 )}
               </div>
@@ -276,8 +289,8 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                     src={card.imageUrl}
                     alt={`Karte ${card.name}`}
                     fill
+                    unoptimized
                     sizes="224px"
-                    quality={90}
                     draggable={false}
                     className="object-cover select-none pointer-events-none"
                   />
@@ -305,8 +318,13 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                 <div className="h-px bg-gradient-to-r from-transparent via-gold to-transparent shrink-0" aria-hidden />
 
                 <div className="p-5">
-                  <div className="mb-2 text-xs font-mono text-muted-foreground/80 uppercase tracking-[0.2em]">
-                    #{card.cardNumber.toString().padStart(3, "0")}
+                  <div className="mb-2 flex items-center gap-3 text-xs font-mono uppercase tracking-[0.2em]">
+                    <span className="text-muted-foreground/80">
+                      #{card.cardNumber.toString().padStart(3, "0")}
+                    </span>
+                    <span className="text-gold/70">
+                      {card.auflage}. Auflage
+                    </span>
                   </div>
 
                   <h2 className="font-display text-2xl font-semibold text-gold-metallic mb-4 leading-tight">
@@ -380,8 +398,13 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                   )}
 
                   {card.effect && card.effect.trim() && (
-                    <div className="rounded-lg bg-white/5 border-l-2 border-gold p-3 text-sm leading-relaxed text-foreground/90 backdrop-blur-sm">
-                      {card.effect}
+                    <div className="rounded-lg bg-white/5 border-l-2 text-center border-gold p-3 text-sm leading-relaxed text-foreground/90 backdrop-blur-sm whitespace-pre-wrap [&_strong]:text-gold-metallic [&_strong]:font-bold [&_center]:block [&_center]:text-center [&_em]:italic [&_em]:text-gold/90">
+                      <ReactMarkdown 
+                        rehypePlugins={[rehypeRaw]}
+                        remarkPlugins={[remarkGfm]}
+                      >
+                        {card.effect || ""}
+                      </ReactMarkdown>
                     </div>
                   )}
                 </div>

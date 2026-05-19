@@ -8,7 +8,7 @@ export function FadeImage({ alt = "", className, style, ...rest }: ImageProps) {
 
   return (
     <div
-      className="h-full w-full"
+      className="relative h-full w-full"
       style={{
         opacity: loaded ? 1 : 0,
         transition: "opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1)",

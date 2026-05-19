@@ -6,6 +6,7 @@ import {
   serial,
   text,
   timestamp,
+  unique,
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -50,7 +51,7 @@ export type NewDownload = typeof downloads.$inferInsert;
 export const cards = pgTable("cards", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 200 }).notNull(),
-  cardNumber: integer("card_number").notNull().unique(),
+  cardNumber: integer("card_number").notNull(),
   type: varchar("type", { length: 20 }).notNull(),
   rarity: varchar("rarity", { length: 20 }).notNull().default("normal"),
   ansage: integer("ansage"),
@@ -61,11 +62,13 @@ export const cards = pgTable("cards", {
   effect: text("effect"),
   imageUrl: varchar("image_url", { length: 500 }).notNull(),
   published: boolean("published").notNull().default(true),
+  auflage: integer("auflage").notNull().default(1),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 }, (table) => ({
   publishedIdx: index("cards_published_idx").on(table.published),
   publishedTypeIdx: index("cards_published_type_idx").on(table.published, table.type),
+  cardNumberAuflageUnique: unique("cards_number_auflage_unique").on(table.cardNumber, table.auflage),
 }));
 
 export type Card = typeof cards.$inferSelect;

@@ -16,6 +16,7 @@ export function CardFilters() {
   const currentFach = searchParams.get("fach") || "all";
   const currentSort = searchParams.get("sort") || "number";
   const currentQ = searchParams.get("q") || "";
+  const currentAuflage = searchParams.get("auflage") || "all";
 
   const updateParams = useCallback((updates: Record<string, string | null>) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -63,7 +64,11 @@ export function CardFilters() {
         {/* Type Filter */}
         <select
           value={currentType}
-          onChange={(e) => updateParams({ type: e.target.value })}
+          onChange={(e) => {
+            const nextType = e.target.value;
+            const resetFach = nextType === "ereignis" || nextType === "falle";
+            updateParams(resetFach ? { type: nextType, fach: null } : { type: nextType });
+          }}
           className="bg-background border-border text-foreground focus-visible:border-gold focus-visible:ring-gold rounded-lg border py-2 pl-3 pr-8 text-sm focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
           disabled={isPending}
         >
@@ -89,6 +94,18 @@ export function CardFilters() {
               {s.name}
             </option>
           ))}
+        </select>
+
+        {/* Auflage Filter */}
+        <select
+          value={currentAuflage}
+          onChange={(e) => updateParams({ auflage: e.target.value })}
+          className="bg-background border-border text-foreground focus-visible:border-gold focus-visible:ring-gold rounded-lg border py-2 pl-3 pr-8 text-sm focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
+          disabled={isPending}
+        >
+          <option value="all">Alle Auflagen</option>
+          <option value="1">1. Auflage</option>
+          <option value="2">2. Auflage</option>
         </select>
 
         {/* Sort Filter */}

@@ -49,8 +49,8 @@ export function CardShowcase() {
                   src={card.image}
                   alt={`Karte ${card.name}`}
                   fill
+                  unoptimized
                   draggable={false}
-                  quality={85}
                   sizes="(max-width: 640px) 80vw, (max-width: 1024px) 33vw, 300px"
                   className="object-cover select-none pointer-events-none"
                 />

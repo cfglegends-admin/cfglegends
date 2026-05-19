@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { Plus, Upload } from "lucide-react";
 import { requireAdmin } from "@/lib/auth/session";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
+import { AdminCardsFilter } from "@/components/admin/AdminCardsFilter";
 import { CardDeleteButton } from "@/components/admin/CardDeleteButton";
 import { getCards } from "@/lib/actions/cards";
 import { cn } from "@/lib/utils";
@@ -30,9 +32,10 @@ export default async function AdminCardsPage(props: AdminCardsPageProps) {
   // on a Server Component table without passing all data down to a client wrapper.
   // Given the simplicity and standard NextJS patterns, we use URL params for search,
   // matching the approach for the public gallery.
-  const cards = await getCards({ 
-    sort: "number", // Default sort by card number
-    q: searchParams.q
+  const cards = await getCards({
+    sort: "number",
+    q: searchParams.q,
+    auflage: searchParams.auflage,
   });
 
   return (
@@ -60,18 +63,9 @@ export default async function AdminCardsPage(props: AdminCardsPageProps) {
         }
       />
 
-      {/* Client Search - A simple form that updates the URL to re-trigger server fetch */}
-      <form className="mb-6 max-w-md">
-        <label htmlFor="search" className="sr-only">Karten durchsuchen</label>
-        <input 
-          id="search"
-          name="q"
-          type="search"
-          placeholder="Suchen..."
-          defaultValue={searchParams.q || ""}
-          className="bg-background border-border text-foreground placeholder:text-muted-foreground focus-visible:border-gold focus-visible:ring-gold w-full rounded-lg border px-4 py-2.5 text-sm focus-visible:ring-2 focus-visible:outline-none"
-        />
-      </form>
+      <Suspense>
+        <AdminCardsFilter defaultQ={searchParams.q} defaultAuflage={searchParams.auflage} />
+      </Suspense>
 
       {cards.length === 0 ? (
         <p className="bg-muted border-border text-muted-foreground rounded-xl border px-6 py-12 text-center text-sm">
