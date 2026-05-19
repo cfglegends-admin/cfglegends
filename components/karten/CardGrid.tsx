@@ -93,7 +93,7 @@ export function CardGrid({ cards }: CardGridProps) {
                     }}
                   >
                     <FadeImage
-                      src={card.imageUrl}
+                      src={card.imageUrl.replace(".webp", "-thumb.webp")}
                       alt={`Karte ${card.name}`}
                       width={590}
                       height={860}

@@ -34,11 +34,16 @@ interface CardDetailModalProps {
 
 export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
   const [mounted, setMounted] = useState(false);
+  const [hiResLoaded, setHiResLoaded] = useState(false);
   const focusTrapRef = useFocusTrap(!!card);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    setHiResLoaded(false);
+  }, [card?.id]);
 
   useEffect(() => {
     if (card) {
@@ -56,6 +61,8 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [card, onClose]);
+
+  const thumbUrl = card?.imageUrl.replace(".webp", "-thumb.webp") ?? "";
 
   if (!mounted) return null;
 
@@ -106,8 +113,26 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
               <CardTilt maxTilt={14} className="h-full">
                 <div
                   className="relative h-full w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/60 border border-gold/20"
-                  style={{ aspectRatio: "59 / 86" }}
+                  style={{
+                    aspectRatio: "59 / 86",
+                    WebkitMaskImage: "-webkit-radial-gradient(white, black)",
+                    WebkitBackfaceVisibility: "hidden",
+                  }}
                 >
+                  {!hiResLoaded && (
+                    <div aria-hidden className="absolute inset-0 bg-white/5 animate-pulse pointer-events-none" />
+                  )}
+                  <Image
+                    src={thumbUrl}
+                    alt=""
+                    aria-hidden
+                    fill
+                    unoptimized
+                    sizes="(max-width: 1280px) 35vw, 480px"
+                    draggable={false}
+                    className="object-cover select-none pointer-events-none"
+                    style={{ WebkitBackfaceVisibility: "hidden" }}
+                  />
                   <Image
                     src={card.imageUrl}
                     alt={`Karte ${card.name}`}
@@ -115,7 +140,12 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                     unoptimized
                     sizes="(max-width: 1280px) 35vw, 480px"
                     draggable={false}
-                    className="object-cover select-none pointer-events-none"
+                    onLoad={() => setHiResLoaded(true)}
+                    className={cn(
+                      "object-cover select-none pointer-events-none transition-opacity duration-700 ease-out",
+                      hiResLoaded ? "opacity-100" : "opacity-0"
+                    )}
+                    style={{ WebkitBackfaceVisibility: "hidden" }}
                   />
                 </div>
               </CardTilt>
@@ -283,8 +313,26 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
               >
                 <div
                   className="relative w-full overflow-hidden rounded-2xl shadow-xl shadow-black/50 border border-gold/20"
-                  style={{ aspectRatio: "59 / 86" }}
+                  style={{
+                    aspectRatio: "59 / 86",
+                    WebkitMaskImage: "-webkit-radial-gradient(white, black)",
+                    WebkitBackfaceVisibility: "hidden",
+                  }}
                 >
+                  {!hiResLoaded && (
+                    <div aria-hidden className="absolute inset-0 bg-white/5 animate-pulse pointer-events-none" />
+                  )}
+                  <Image
+                    src={thumbUrl}
+                    alt=""
+                    aria-hidden
+                    fill
+                    unoptimized
+                    sizes="224px"
+                    draggable={false}
+                    className="object-cover select-none pointer-events-none"
+                    style={{ WebkitBackfaceVisibility: "hidden" }}
+                  />
                   <Image
                     src={card.imageUrl}
                     alt={`Karte ${card.name}`}
@@ -292,7 +340,12 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                     unoptimized
                     sizes="224px"
                     draggable={false}
-                    className="object-cover select-none pointer-events-none"
+                    onLoad={() => setHiResLoaded(true)}
+                    className={cn(
+                      "object-cover select-none pointer-events-none transition-opacity duration-700 ease-out",
+                      hiResLoaded ? "opacity-100" : "opacity-0"
+                    )}
+                    style={{ WebkitBackfaceVisibility: "hidden" }}
                   />
                 </div>
               </m.div>

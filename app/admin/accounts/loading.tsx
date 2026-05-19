@@ -1,19 +1,14 @@
 export default function AdminAccountsLoading() {
   return (
     <div className="space-y-8">
-      {/* Header skeleton */}
       <div>
-        <div className="h-10 w-48 animate-pulse rounded-lg bg-muted md:h-14" />
-        <div className="mt-2 h-5 w-96 animate-pulse rounded bg-muted" />
+        <div className="skeleton-luxe-bare h-10 w-48 rounded-lg md:h-14" />
+        <div className="skeleton-luxe-bare mt-2 h-5 w-96 rounded" />
       </div>
-
-      {/* Form skeleton */}
-      <div className="h-48 animate-pulse rounded-xl bg-muted" />
-
-      {/* List skeleton */}
+      <div className="skeleton-luxe h-48 rounded-xl" />
       <div className="space-y-4">
         {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="h-40 animate-pulse rounded-xl bg-muted" />
+          <div key={i} className="skeleton-luxe h-40 rounded-xl" />
         ))}
       </div>
     </div>

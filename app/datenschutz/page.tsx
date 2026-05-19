@@ -19,7 +19,7 @@ const paragraphTight =
 
 export default function DatenschutzPage() {
   return (
-    <article className="mx-auto max-w-4xl px-4 py-16 sm:px-6 md:py-24">
+    <article className="mx-auto max-w-4xl px-4 py-16 sm:px-6 md:py-24 break-words [overflow-wrap:anywhere]">
       <Link
         href="/"
         className="font-body text-muted-foreground hover:text-gold mb-8 inline-flex items-center gap-2 text-sm"
